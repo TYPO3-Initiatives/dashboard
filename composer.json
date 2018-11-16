@@ -1,6 +1,6 @@
 {
   "name": "haassie/dashboard",
-  "type": "typo3-cms-framework",
+  "type": "typo3-cms-extension",
   "description": "Dashboard for TYPO3.",
   "homepage": "https://typo3.org",
   "license": ["GPL-2.0-or-later"],
