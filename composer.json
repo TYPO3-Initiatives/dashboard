@@ -1,0 +1,27 @@
+{
+  "name": "haassie/dashboard",
+  "type": "typo3-cms-framework",
+  "description": "Dashboard for TYPO3.",
+  "homepage": "https://typo3.org",
+  "license": ["GPL-2.0-or-later"],
+  "authors": [{
+    "name": "Richard Haeser",
+    "email": "richardhaeser@gmail.com",
+    "role": "Developer"
+  }],
+  "config": {
+    "sort-packages": true
+  },
+  "require": {
+    "typo3/cms-core": "^9.5",
+  },
+  "replace": {
+    "dashboard": "self.version",
+    "typo3-ter/dashboard": "self.version"
+  },
+  "autoload": {
+    "psr-4": {
+      "Haassie\\Dashboard\\": "Classes/"
+    }
+  }
+}
