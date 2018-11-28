@@ -3,14 +3,11 @@ declare(strict_types = 1);
 
 namespace Haassie\Dashboard\WidgetDataProviders;
 
-class DateWidgetDataProvider implements WidgetDataProviderInterface
+class DateWidgetDataProvider extends AbstractTextWidgetDataProvider
 {
-    public function getData(): array
+    protected function initializeData(): void
     {
-        return [
-            'preheader' => strftime('%A'),
-            'header' => strftime('%e %B %Y'),
-        ];
+        $this->setProperty('preheader', strftime('%A'));
+        $this->setProperty('header', strftime('%e %B %Y'));
     }
-
 }

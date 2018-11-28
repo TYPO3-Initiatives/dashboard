@@ -31,8 +31,9 @@ class WidgetRenderer
         $widgetRenderObject = GeneralUtility::makeInstance($widgetConfig['renderer'], $widgetConfig);
         if ($widgetRenderObject instanceof WidgetTypeInterface) {
             return [
+                'jsSelector' => $widgetRenderObject->getJsSelector(),
                 'label' => $widgetConfig['label'],
-                'html' => $widgetRenderObject->renderHTML()
+                'html' => $widgetRenderObject->renderHTML($settings)
             ];
         } else {
             throw new Exception('Wrong data provider');

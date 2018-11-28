@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace Haassie\Dashboard\Widgets;
 
+use Haassie\Dashboard\Widgets\Types\ChartWidgetType;
 use Haassie\Dashboard\Widgets\Types\TextWidgetType;
 use TYPO3\CMS\Core\Exception;
 use TYPO3\CMS\Core\SingletonInterface;
@@ -16,7 +17,8 @@ class WidgetRegistry implements SingletonInterface
     protected $widgets = [];
 
     protected $availableTypes = [
-        'text' => TextWidgetType::class
+        'text' => TextWidgetType::class,
+        'chart' => ChartWidgetType::class
     ];
 
     /**

@@ -26,3 +26,21 @@ $widgetRegistry->registerWidget(
     'text',
     \Haassie\Dashboard\WidgetDataProviders\DateWidgetDataProvider::class
 );
+$widgetRegistry->registerWidget(
+    'dashboard_pie',
+    'Pie',
+    'chart',
+    \Haassie\Dashboard\WidgetDataProviders\PieChartWidgetDataProvider::class
+);
+$widgetRegistry->registerWidget(
+    'dashboard_bar',
+    'Bar',
+    'chart',
+    \Haassie\Dashboard\WidgetDataProviders\BarChartWidgetDataProvider::class
+);
+$widgetRegistry->registerWidget(
+    'dashboard_line',
+    'Line',
+    'chart',
+    \Haassie\Dashboard\WidgetDataProviders\LineChartWidgetDataProvider::class
+);

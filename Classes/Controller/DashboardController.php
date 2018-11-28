@@ -96,7 +96,6 @@ class DashboardController extends ActionController
         }
 
         $this->view->getModuleTemplate()->getDocHeaderComponent()->getMenuRegistry()->addMenu($dashboardSelector);
-
     }
 
     protected function setModuleHeader()
@@ -124,7 +123,7 @@ class DashboardController extends ActionController
 
     public function initializeAction()
     {
-        if (($savedDashboardLayout = $this->getBackendUser()->getModuleData('web_dashboard/currentDashboard', 'ses')) !== null) {
+        if (($savedDashboardLayout = $this->getBackendUser()->getModuleData('web_dashboard/currentDashboard')) !== null) {
             $this->currentDashboardLayout = $savedDashboardLayout;
         }
 
@@ -161,8 +160,11 @@ class DashboardController extends ActionController
 
     public function mainAction(): void
     {
+        $this->pageRenderer->loadRequireJsModule('Dashboard/Chart.min');
         $this->pageRenderer->loadRequireJsModule('Dashboard/WidgetSelector');
         $this->pageRenderer->loadRequireJsModule('Dashboard/WidgetCloser');
+        $this->pageRenderer->loadRequireJsModule('Dashboard/WidgetDataCollector');
+        $this->pageRenderer->loadRequireJsModule('Dashboard/WidgetChartDataCollector');
 
         $widgets = $this->getWidgets();
 
@@ -192,7 +194,7 @@ class DashboardController extends ActionController
         //@todo add more checks before saving
 
 
-        $widgets = $this->getBackendUser()->getModuleData('web_dashboard/dashboard/' . $this->currentDashboardLayout, 'ses');
+        $widgets = $this->getBackendUser()->getModuleData('web_dashboard/dashboard/' . $this->currentDashboardLayout);
         $widgets[$selectedLocation] = ['widget' => $selectedWidget, 'settings' => []];
         $this->getBackendUser()->pushModuleData('web_dashboard/dashboard/' . $this->currentDashboardLayout, $widgets);
 
@@ -207,7 +209,7 @@ class DashboardController extends ActionController
             throw new Exception('No dashboard selected');
         }
 
-        $widgets = $this->getBackendUser()->getModuleData('web_dashboard/dashboard/' . $this->currentDashboardLayout, 'ses');
+        $widgets = $this->getBackendUser()->getModuleData('web_dashboard/dashboard/' . $this->currentDashboardLayout);
         unset($widgets[$selectedLocation]);
         $this->getBackendUser()->pushModuleData('web_dashboard/dashboard/' . $this->currentDashboardLayout, $widgets);
 
@@ -216,7 +218,7 @@ class DashboardController extends ActionController
 
     protected function getWidgets(): array
     {
-        $widgets = $this->getBackendUser()->getModuleData('web_dashboard/dashboard/' . $this->currentDashboardLayout, 'ses') ?? [];
+        $widgets = $this->getBackendUser()->getModuleData('web_dashboard/dashboard/' . $this->currentDashboardLayout) ?? [];
 
         $widgetRenderer = GeneralUtility::makeInstance(WidgetRenderer::class);
 

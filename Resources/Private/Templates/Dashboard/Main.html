@@ -10,7 +10,7 @@
 
                 <f:if condition="{widgetData.render.html}">
                     <f:then>
-                        <f:render section="widget" arguments="{widgetData: widgetData.render, location: location}" />
+                        <f:render section="widget" arguments="{widgetData: widgetData, location: location}" />
                     </f:then>
                     <f:else>
                         <f:render section="widgetEmpty" arguments="{location: location}" />
@@ -30,7 +30,7 @@
 </div>
 
 <f:section name="widget">
-    <div class="card widget">
+    <div class="card widget {widgetData.render.jsSelector}" data-widget="{widgetData.widget}">
         <div class="card-header">
             <div class="card-header-body">
                 <button type="button"
@@ -41,11 +41,14 @@
                         aria-label="{f:translate(key: 'close', default: 'Close')}">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h1 class="card-title">{widgetData.label}</h1>
+                <h1 class="card-title">{widgetData.render.label}</h1>
             </div>
         </div>
-        <div class="card-content">
-            <f:format.raw>{widgetData.html}</f:format.raw>
+        <div class="card-content hide">
+            <f:format.raw>{widgetData.render.html}</f:format.raw>
+        </div>
+        <div class="card-loading text-center">
+            <div class="lds-css ng-scope"><div style="width:100%;height:100%" class="lds-dual-ring"><div></div></div></div>
         </div>
     </div>
 </f:section>
