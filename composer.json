@@ -13,7 +13,7 @@
     "sort-packages": true
   },
   "require": {
-    "typo3/cms-core": "^9.5"
+    "typo3/cms-core": "^8.7 || ^9.5"
   },
   "replace": {
     "dashboard": "self.version",

@@ -1,0 +1,21 @@
+.widget .card-header {
+    padding: 1em;
+    background-color: #2f2f2f;
+    color: #fff;
+}
+
+.widget .card-header .card-title {
+}
+
+.widget h3.text-widget--header {
+    margin: 10px 0;
+    font-size: 2em;
+}
+
+.widget-empty .card-content {
+    padding: 7em 0;
+}
+
+.widget .close {
+    color: inherit;
+}

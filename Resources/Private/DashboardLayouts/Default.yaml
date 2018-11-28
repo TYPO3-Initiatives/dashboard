@@ -1,0 +1,11 @@
+key: default
+label: LLL:EXT:dashboard/Resources/Private/Language/locallang_mod.xml:default
+rows:
+  -
+    cols:
+        -
+            widgets: *
+            colSpan: 2
+        -
+            widgets: *
+            colSpan: 1

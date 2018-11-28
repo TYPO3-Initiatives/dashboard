@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2018-11-27T22:26:21Z" product-name="dashboard">
+		<header/>
+		<body>
+			<trans-unit id="close" xml:space="preserve">
+				<source>Close</source>
+			</trans-unit>
+			<trans-unit id="widget.add" xml:space="preserve">
+				<source>Add widget</source>
+			</trans-unit>
+			<trans-unit id="widget.remove.confirm.title" xml:space="preserve">
+				<source>Remove widget</source>
+			</trans-unit>
+			<trans-unit id="widget.remove.confirm.text" xml:space="preserve">
+				<source>Are you sure you want to remove this widget?</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

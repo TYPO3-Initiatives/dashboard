@@ -1,0 +1,16 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+<div class="text-widget text-center">
+    <f:if condition="{data.preheader}">
+        <div class="text-widget--preheader">{data.preheader}</div>
+    </f:if>
+    <f:if condition="{data.header}">
+        <h3 class="text-widget--header">{data.header}</h3>
+    </f:if>
+    <f:if condition="{data.subheader}">
+        <h4 class="text-widget--subheader">{data.subheader}</h4>
+    </f:if>
+    <f:if condition="{data.text}">
+        <p class="text-widget--text">{data.text}</p>
+    </f:if>
+</div>
+</html>
