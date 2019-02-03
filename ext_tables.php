@@ -26,21 +26,12 @@ $widgetRegistry->registerWidget(
     'text',
     \Haassie\Dashboard\WidgetDataProviders\DateWidgetDataProvider::class
 );
-$widgetRegistry->registerWidget(
-    'dashboard_pie',
-    'Pie',
-    'chart',
-    \Haassie\Dashboard\WidgetDataProviders\PieChartWidgetDataProvider::class
-);
-$widgetRegistry->registerWidget(
-    'dashboard_bar',
-    'Bar',
-    'chart',
-    \Haassie\Dashboard\WidgetDataProviders\BarChartWidgetDataProvider::class
-);
-$widgetRegistry->registerWidget(
-    'dashboard_line',
-    'Line',
-    'chart',
-    \Haassie\Dashboard\WidgetDataProviders\LineChartWidgetDataProvider::class
-);
+
+if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('core')) {
+    $widgetRegistry->registerWidget(
+        'core_belogins',
+        'Number of backend logins',
+        'chart',
+        \Haassie\Dashboard\WidgetDataProviders\CoreBackendLoginsWidgetDataProvider::class
+    );
+}
