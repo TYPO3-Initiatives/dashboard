@@ -31,7 +31,7 @@ define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity'], func
             Modal.advanced({
                 type: Modal.types.default,
                 title: $element.data('modal-title'),
-                content: $('#widgetSelector').html(),
+                content: $($('#widgetSelector').html()),
                 severity: Severity.notice,
                 buttons: buttons,
                 size: 'default'
