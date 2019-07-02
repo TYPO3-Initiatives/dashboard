@@ -1,7 +1,7 @@
 ---
 name: "⛑ Support"
 about: Ask the community for help.
-labels:
+labels: help wanted
 
 ---
 

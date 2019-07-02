@@ -1,11 +1,11 @@
 ---
 name: "\U0001F680 Widget request"
 about: Suggest an idea for a new widget.
-labels:
+labels: widget
 
 ---
 
-# Feature Request
+# Widget Request
 
 **Is your widget a widget that should be shipped with TYPO3?.**
 Why should this widget be integrated in this core-extension and not in a 3rd party extension.
