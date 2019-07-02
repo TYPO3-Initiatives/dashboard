@@ -15,6 +15,9 @@
 			<trans-unit id="dashboardSelector_label">
 				<source>Dashboard</source>
 			</trans-unit>
+			<trans-unit id="layout.default">
+				<source>Default</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

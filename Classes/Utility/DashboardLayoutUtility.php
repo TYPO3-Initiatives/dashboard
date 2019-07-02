@@ -7,7 +7,7 @@ class DashboardLayoutUtility
 {
     protected $layouts = [
         'default' => [
-            'label' => 'LLL:EXT:dashboard/Resources/Private/Language/locallang_mod.xml:default',
+            'label' => 'LLL:EXT:dashboard/Resources/Private/Language/locallang_mod.xml:layout.default',
             'rows' => [
                 [
                     'cols' => [
