@@ -1,5 +1,10 @@
-.idea
-composer.lock
+/.idea
+/composer.lock
+/.vscode
+/.DS_Store
+/.ddev
 
 /public
 /vendor
+/.php_cs.cache
+/.build
