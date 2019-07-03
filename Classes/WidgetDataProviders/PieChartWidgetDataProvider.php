@@ -11,8 +11,8 @@ class PieChartWidgetDataProvider extends AbstractChartWidgetDataProvider
             'labels' => ['Red', 'Blue', 'Yellow'],
             'datasets' => [
                 [
-                    'data' => [rand(0,30), rand(0,30), rand(0,30)],
-                    'backgroundColor' => ['rgb(255, 99, 132)','rgb(54, 162, 235)','rgb(255, 205, 86)']
+                    'data' => [rand(0, 30), rand(0, 30), rand(0, 30)],
+                    'backgroundColor' => ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)']
                 ]
             ]
         ];

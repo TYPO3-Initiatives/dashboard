@@ -3,14 +3,32 @@
   "type": "typo3-cms-extension",
   "description": "Dashboard for TYPO3.",
   "homepage": "https://typo3.org",
-  "license": ["GPL-2.0-or-later"],
-  "authors": [{
-    "name": "Richard Haeser",
-    "email": "richardhaeser@gmail.com",
-    "role": "Developer"
-  }],
+  "license": [
+    "GPL-2.0-or-later"
+  ],
+  "authors": [
+    {
+      "name": "Richard Haeser",
+      "role": "Developer"
+    },
+    {
+      "name": "Simon Schmidt",
+      "role": "Developer"
+    },
+    {
+      "name": "Richard Vollebregt",
+      "role": "Developer"
+    },
+    {
+      "name": "Sanjay Chauhan",
+      "role": "Developer"
+    }
+  ],
   "config": {
-    "sort-packages": true
+    "sort-packages": true,
+    "optimize-autoloader": true,
+    "vendor-dir": ".build/vendor",
+    "bin-dir": ".build/bin"
   },
   "require": {
     "typo3/cms-core": "^8.7 || ^9.5 || 10.0.*@dev"
@@ -23,5 +41,13 @@
     "psr-4": {
       "Haassie\\Dashboard\\": "Classes/"
     }
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.15"
+  },
+  "scripts": {
+    "cgl": [
+      "php-cs-fixer fix -v --using-cache false"
+    ]
   }
 }

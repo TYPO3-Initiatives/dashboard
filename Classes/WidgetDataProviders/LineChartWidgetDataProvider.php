@@ -12,7 +12,7 @@ class LineChartWidgetDataProvider extends AbstractChartWidgetDataProvider
             'datasets' => [
                 [
                     'label' => 'Dataset #1',
-                    'data' => [rand(0,30), rand(0,30), rand(0,30), rand(0,30), rand(0,30), rand(0,30), rand(0,30), rand(0,30), rand(0,30), rand(0,30), rand(0,30), rand(0,30)],
+                    'data' => [rand(0, 30), rand(0, 30), rand(0, 30), rand(0, 30), rand(0, 30), rand(0, 30), rand(0, 30), rand(0, 30), rand(0, 30), rand(0, 30), rand(0, 30), rand(0, 30)],
                     'fill' => false,
                     'borderColor' => 'rgb(70,130,180)',
                     'lineTension' => 0.1

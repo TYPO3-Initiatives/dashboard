@@ -84,10 +84,10 @@ class CoreBackendLoginsWidgetDataProvider extends AbstractChartWidgetDataProvide
      */
     protected function getStartStopTimeOfDateTimeObject(\DateTime $date): array
     {
-        $date->setTime(0,0,0);
+        $date->setTime(0, 0, 0);
         $startTime = $date->getTimestamp();
 
-        $date->setTime(23,59,59);
+        $date->setTime(23, 59, 59);
         $endTime = $date->getTimestamp();
 
         return ['start' => (int)$startTime, 'end' => (int)$endTime];
