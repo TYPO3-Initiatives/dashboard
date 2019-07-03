@@ -6,7 +6,7 @@ In this repository the [TYPO3 Dashboard initiative](https://typo3.org/community/
 Please check the page of the [TYPO3 Dashboard initiative](https://typo3.org/community/teams/typo3-development/initiatives/typo3-dashboard-initiative/) to see the goals of the initiative.
 
 
-##Work in progress!
+## Work in progress!
 
 **PLEASE TRY THE EXTENSION, BUT BE AWARE THAT THIS EXTENSION IS NOT PROVEN TO BE STABLE ENOUGH FOR PRODUCTION ENVIRONMENTS**
 
