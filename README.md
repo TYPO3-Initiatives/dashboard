@@ -7,6 +7,7 @@ Please check the page of the [TYPO3 Dashboard initiative](https://typo3.org/comm
 
 
 ##Work in progress!
+
 **PLEASE TRY THE EXTENSION, BUT BE AWARE THAT THIS EXTENSION IS NOT PROVEN TO BE STABLE ENOUGH FOR PRODUCTION ENVIRONMENTS**
 
 ## Contribution
