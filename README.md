@@ -16,5 +16,3 @@ Any contributor is welcome to join our team. All you need is an GitHub account.
 If you already have an account, visit the: [github.com/TYPO3-Initiatives/dashboard](https://github.com/TYPO3-Initiatives/dashboard).
 
 It is also highly recommended to join our [Slack Channel: #cig-dashboard](https://typo3.slack.com/archives/cig-dashboard).
-
-When you do pull requests, please be aware to use the [TYPO3 Coding Guidelines](https://docs.typo3.org/m/typo3/guide-contributionworkflow/master/en-us/Appendix/Cgl.html).
