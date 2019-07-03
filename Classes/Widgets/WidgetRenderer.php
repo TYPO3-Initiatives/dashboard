@@ -3,7 +3,6 @@ declare(strict_types = 1);
 
 namespace Haassie\Dashboard\Widgets;
 
-use Haassie\Dashboard\WidgetDataProviders\WidgetDataProviderInterface;
 use Haassie\Dashboard\Widgets\Types\WidgetTypeInterface;
 use TYPO3\CMS\Core\Exception;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

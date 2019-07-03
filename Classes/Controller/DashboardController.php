@@ -18,7 +18,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class DashboardController extends ActionController
 {
@@ -146,9 +145,9 @@ class DashboardController extends ActionController
 
         $this->pageRenderer->addRequireJsConfiguration(
             [
-                'paths' => array(
+                'paths' => [
                     'Dashboard' => $publicResourcesPath . 'JavaScript/'
-                )
+                ]
             ]
         );
     }
@@ -192,7 +191,6 @@ class DashboardController extends ActionController
         }
 
         //@todo add more checks before saving
-
 
         $widgets = $this->getBackendUser()->getModuleData('web_dashboard/dashboard/' . $this->currentDashboardLayout);
         $widgets[$selectedLocation] = ['widget' => $selectedWidget, 'settings' => []];

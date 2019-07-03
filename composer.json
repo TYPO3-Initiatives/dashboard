@@ -47,7 +47,7 @@
   },
   "scripts": {
     "cgl": [
-      "php-cs-fixer fix --diff -v"
+      "php-cs-fixer fix -v --using-cache false"
     ]
   }
 }

@@ -7,7 +7,6 @@ use Haassie\Dashboard\Widgets\Types\ChartWidgetType;
 use Haassie\Dashboard\Widgets\Types\TextWidgetType;
 use TYPO3\CMS\Core\Exception;
 use TYPO3\CMS\Core\SingletonInterface;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class WidgetRegistry implements SingletonInterface
 {
