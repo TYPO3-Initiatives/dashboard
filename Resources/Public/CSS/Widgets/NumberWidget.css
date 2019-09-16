@@ -1,0 +1,19 @@
+.dashboard-widget-number--icon {
+    float: left;
+    width: 50px;
+    display: inline-block;
+}
+
+.dashboard-widget-number--content {
+    float: left;
+    display: inline-block;
+}
+
+.dashboard-widget-number--title {
+    font-size: 1.2em;
+}
+
+.dashboard-widget-number--number {
+    font-size: 1.8em;
+    font-weight: bold;
+}
