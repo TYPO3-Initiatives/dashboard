@@ -130,7 +130,7 @@ class DashboardController
     {
         $widgets = [];
 
-        $tmpWidgets = $this->getBackendUser()->getModuleData('web_dashboard/dashboard/');
+        $tmpWidgets = $this->getBackendUser()->getModuleData('web_dashboard/dashboard/' . $this->getCurrentDashboard() . '/widgets');
         if (!empty($tmpWidgets)) {
             foreach ($tmpWidgets as $tmpWidget) {
                 $widgets[] = $this->prepareWidgetElement($tmpWidget['key'], $tmpWidget['config']);
@@ -166,8 +166,6 @@ class DashboardController
 
     protected function addDashboardSelector(): void
     {
-        $currentDashboard = $this->getBackendUser()->getModuleData('web_dashboard/current_dashboard/') ?: 'default';
-
         $availableDashboards = [
             'default' => [
                 'label' => 'Default dashboard'
@@ -179,7 +177,7 @@ class DashboardController
 
         $dashboardSelector = $this->moduleTemplate->getDocHeaderComponent()->getMenuRegistry()->makeMenu();
         $dashboardSelector->setIdentifier('currentDashboard');
-        $dashboardSelector->setLabel('test');
+        $dashboardSelector->setLabel('Dashboard');
 
         foreach ($availableDashboards as $dashboardKey => $dashboardConfig) {
             $parameters = [
@@ -193,7 +191,7 @@ class DashboardController
                     $this->getLanguageService()->sL($dashboardConfig['label']) ?: $dashboardKey
                 )
                 ->setHref($url);
-            if ($currentDashboard === $dashboardKey) {
+            if ($this->getCurrentDashboard() === $dashboardKey) {
                 $menuItem->setActive(true);
             }
             $dashboardSelector->addMenuItem($menuItem);
@@ -217,4 +215,11 @@ class DashboardController
         return $GLOBALS['LANG'];
     }
 
+    /**
+     * @return string
+     */
+    protected function getCurrentDashboard(): string
+    {
+        return $this->getBackendUser()->getModuleData('web_dashboard/current_dashboard/') ?: 'default';
+    }
 }

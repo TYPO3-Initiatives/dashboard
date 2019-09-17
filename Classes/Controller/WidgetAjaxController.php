@@ -42,7 +42,7 @@ class WidgetAjaxController
             $widgets[] = ['key' => $widget[0], 'config' => json_decode($widget[1])];
         }
 
-        $this->getBackendUser()->pushModuleData('web_dashboard/dashboard/', $widgets);
+        $this->getBackendUser()->pushModuleData('web_dashboard/dashboard/' . $this->getCurrentDashboard() . '/widgets', $widgets);
         return new JsonResponse(['status' => 'saved']);
     }
 
@@ -52,5 +52,13 @@ class WidgetAjaxController
     protected function getBackendUser(): BackendUserAuthentication
     {
         return $GLOBALS['BE_USER'];
+    }
+
+    /**
+     * @return string
+     */
+    protected function getCurrentDashboard(): string
+    {
+        return $this->getBackendUser()->getModuleData('web_dashboard/current_dashboard/') ?: 'default';
     }
 }
