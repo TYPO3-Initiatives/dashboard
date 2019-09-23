@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Dashboard\Controller;
 
+use FriendsOfTYPO3\Dashboard\Registry\DashboardRegistry;
 use FriendsOfTYPO3\Dashboard\Registry\WidgetRegistry;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -40,6 +41,9 @@ class DashboardController
     /** @var ViewInterface */
     protected $view;
 
+    /** @var DashboardRegistry */
+    protected $dashboardRegistry;
+
     /**
      * @var array
      */
@@ -50,7 +54,7 @@ class DashboardController
         $this->moduleTemplate = GeneralUtility::makeInstance(ModuleTemplate::class);
         $this->widgetRegistry = GeneralUtility::makeInstance(WidgetRegistry::class);
         $this->uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
-
+        $this->dashboardRegistry = GeneralUtility::makeInstance(DashboardRegistry::class);
     }
 
     /**
@@ -75,6 +79,7 @@ class DashboardController
         $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('muuri');
         $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('dashboard/Grid');
         $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('dashboard/WidgetContentCollector');
+        $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('dashboard/WidgetSelector');
         $this->moduleTemplate->getPageRenderer()->addCssFile($publicResourcesPath . 'CSS/Dashboard.css');
 
         $action = $request->getQueryParams()['action'] ?? $request->getParsedBody()['action'] ?? 'main';
@@ -96,8 +101,16 @@ class DashboardController
     public function mainAction(ServerRequestInterface $request): void
     {
         $widgets = $this->getWidgetsForCurrentUser();
+        $availableWidget = $this->widgetRegistry->getWidgets();
 
         $this->view->assign('widgets', $widgets);
+        $this->view->assign('availableWidgets', $availableWidget);
+
+        $parameters = [
+            'widget' => '@widget',
+            'action' => 'addWidget'
+        ];
+        $this->view->assign('addWidgetUri', (string)$this->uriBuilder->buildUriFromRoute('dashboard', $parameters));
     }
 
     public function setActiveDashboardAction(ServerRequestInterface $request): ResponseInterface
@@ -108,6 +121,21 @@ class DashboardController
         $route = $this->uriBuilder->buildUriFromRoute('dashboard', ['action' => 'main']);
         return new RedirectResponse($route);
 
+    }
+
+    public function addWidgetAction(ServerRequestInterface $request): ResponseInterface
+    {
+        $parameters = $request->getQueryParams();
+
+        if ($parameters['widget']) {
+            $widgets = $this->getBackendUser()->getModuleData('web_dashboard/dashboard/' . $this->getCurrentDashboard() . '/widgets');
+            $widgets[] = $this->prepareWidgetElement($parameters['widget']);
+
+            $this->getBackendUser()->pushModuleData('web_dashboard/dashboard/' . $this->getCurrentDashboard() . '/widgets', $widgets);
+        }
+
+        $route = $this->uriBuilder->buildUriFromRoute('dashboard', ['action' => 'main']);
+        return new RedirectResponse($route);
     }
 
     /**
@@ -140,10 +168,13 @@ class DashboardController
             $widgets[] = $this->prepareWidgetElement('numberOfBackendUsers');
             $widgets[] = $this->prepareWidgetElement('numberOfAdminBackendUsers');
             $widgets[] = $this->prepareWidgetElement('lastLogins');
+
+            $this->getBackendUser()->pushModuleData('web_dashboard/dashboard/' . $this->getCurrentDashboard() . '/widgets', $widgets);
         }
 
         return $widgets;
     }
+
 
     public function prepareWidgetElement($widgetKey, $config = []): array
     {
@@ -166,14 +197,7 @@ class DashboardController
 
     protected function addDashboardSelector(): void
     {
-        $availableDashboards = [
-            'default' => [
-                'label' => 'Default dashboard'
-            ],
-            'test' => [
-                'label' => 'Test dashboard'
-            ],
-        ];
+        $availableDashboards = $this->dashboardRegistry->getDashboards();
 
         $dashboardSelector = $this->moduleTemplate->getDocHeaderComponent()->getMenuRegistry()->makeMenu();
         $dashboardSelector->setIdentifier('currentDashboard');

@@ -15,6 +15,9 @@
 			<trans-unit id="widget.remove.confirm.text" xml:space="preserve">
 				<source>Are you sure you want to remove this widget?</source>
 			</trans-unit>
+			<trans-unit id="dashboard.default" xml:space="preserve">
+				<source>Default</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

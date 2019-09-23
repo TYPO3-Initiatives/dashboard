@@ -14,5 +14,19 @@
         </div>
     </f:for>
 </div>
+<div class="dashboard-add-item">
+    <a href="{addWidgetUri}" class="btn btn-default dashboard-add-widget" data-modal-title="{f:translate(key: 'widget.add')}">
+        <i class="fa fa-plus fa-fw"></i> <f:translate key="widget.add" />
+    </a>
+</div>
 
+<div id="widgetSelector" class="hide">
+    <div>
+        <select name="widget">
+            <f:for each="{availableWidgets}" as="availableWidgetConfig" key="availableWidgetKey">
+                <option value="{availableWidgetKey}"><f:translate key="{availableWidgetConfig.title}" default="{availableWidgetConfig.title}" /></option>
+            </f:for>
+        </select>
+    </div>
+</div>
 </html>
