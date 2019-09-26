@@ -6,14 +6,8 @@ module.exports = {
             src: '<%= sassDirectory %>/Base/**/!(*_tmp*).scss',
             dest: '<%= sassDirectory %>/_temp_base.scss'
         }, {
-            src: '<%= sassDirectory %>/Layout/**/!(*_tmp*).scss',
-            dest: '<%= sassDirectory %>/_temp_layout.scss'
-        }, {
-            src: '<%= sassDirectory %>/Modules/**/!(*_tmp*).scss',
-            dest: '<%= sassDirectory %>/_temp_modules.scss'
-        }, {
-            src: '<%= sassDirectory %>/Utilities/**/!(*_tmp*).scss',
-            dest: '<%= sassDirectory %>/_temp_utilities.scss'
+            src: '<%= sassDirectory %>/Widgets/**/!(*_tmp*).scss',
+            dest: '<%= sassDirectory %>/_temp_widgets.scss'
         }],
         options: {
             useSingleQuotes: false,

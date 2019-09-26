@@ -1,0 +1,75 @@
+.widget {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: #fff;
+	box-shadow: 4px 4px 10px -3px rgba(240, 240, 240, 1);
+	color: #333;
+
+	&:hover {
+		> .widget-remove,
+		> .widget-move {
+			display: block;
+		}
+	}
+}
+
+.widget-waiting {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	line-height: 300px;
+	margin-right: -50%;
+	transform: translate(-50%, -50%);
+}
+
+.widget-id {
+	position: absolute;
+	top: 0;
+	left: 7px;
+	height: 30px;
+	line-height: 30px;
+	font-weight: 400;
+	font-size: 16px;
+	text-align: left;
+}
+
+.widget-remove {
+	position: absolute;
+	top: 0;
+	right: 0;
+	display: none;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	font-weight: 400;
+	font-size: 20px;
+	color: rgb(239, 239, 239);
+	text-align: center;
+	cursor: pointer;
+
+	&:hover {
+		color: rgb(135, 142, 148);
+	}
+}
+
+.widget-move {
+	position: absolute;
+	top: 0;
+	right: 30px;
+	display: none;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	font-weight: 400;
+	font-size: 20px;
+	color: rgb(239, 239, 239);
+	text-align: center;
+	cursor: move;
+
+	&:hover {
+		color: rgb(135, 142, 148);
+	}
+}

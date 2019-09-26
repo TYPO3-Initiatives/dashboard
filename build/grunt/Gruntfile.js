@@ -29,7 +29,6 @@ module.exports = function (grunt) {
 
     };
 
-    console.log(projectDirectory);
     grunt.initConfig(config);
 
     // Autoload all config files
