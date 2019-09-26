@@ -6,6 +6,9 @@
 			<trans-unit id="close" xml:space="preserve">
 				<source>Close</source>
 			</trans-unit>
+			<trans-unit id="title" xml:space="preserve">
+				<source>Dashboard</source>
+			</trans-unit>
 			<trans-unit id="widget.add" xml:space="preserve">
 				<source>Add widget</source>
 			</trans-unit>

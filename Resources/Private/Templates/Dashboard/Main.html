@@ -1,4 +1,16 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
+<h1><f:translate key="title" extensionName="dashboard" /></h1>
+
+<f:for each="{availableDashboards}" as="dashboardConfig" key="dashboardKey">
+    <f:if condition="{dashboardKey} == {currentDashboard}">
+        <f:then><f:variable name="activeClass" value="active" /></f:then>
+        <f:else><f:variable name="activeClass" value="nope" /></f:else>
+    </f:if>
+    <f:be.link route="dashboard" parameters="{action: 'setActiveDashboard', currentDashboard: dashboardKey}" class="{activeClass}">
+        <f:translate key="{dashboardConfig.label}" />
+    </f:be.link>
+</f:for>
+
 <div class="dashboard-grid">
     <f:for each="{widgets}" as="widget" iteration="widgetIterator" key="widgetHash">
         <div class="dashboard-item dashboard-item--w{widget.width} dashboard-item--h{widget.height}" data-widget-id="{widget.id}" data-widget-hash="{widgetHash}" data-widget-key="{widget.key}" data-widget-config="{widget.config -> f:format.json()}">
