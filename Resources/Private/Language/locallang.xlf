@@ -9,6 +9,12 @@
 			<trans-unit id="widget.add" xml:space="preserve">
 				<source>Add widget</source>
 			</trans-unit>
+			<trans-unit id="widget.add.button.close" xml:space="preserve">
+				<source>Close</source>
+			</trans-unit>
+			<trans-unit id="widget.add.button.ok" xml:space="preserve">
+				<source>Add widget</source>
+			</trans-unit>
 			<trans-unit id="widget.remove.confirm.title" xml:space="preserve">
 				<source>Remove widget</source>
 			</trans-unit>

@@ -1,6 +1,6 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
 <div class="dashboard-grid">
-    <f:for each="{widgets}" as="widget">
+    <f:for each="{widgets}" as="widget" iteration="widgetIterator">
         <div class="dashboard-item dashboard-item--w{widget.width} dashboard-item--h{widget.height}" data-widget-id="{widget.id}" data-widget-key="{widget.key}" data-widget-config="{widget.config -> f:format.json()}">
             <div class="dashboard-item-content">
                 <div class="widget">
@@ -8,15 +8,16 @@
                         <core:icon identifier="spinner-circle" size="large" />
                     </div>
                     <div class="widget-content hide"></div>
-                    <div class="widget-remove"><i class="fa fa-times"></i></div>
+                    <div class="widget-move"><core:icon identifier="dragdrop"></core:icon></div>
+                    <f:be.link class="widget-remove" route="dashboard" parameters="{action: 'removeWidget', widgetPosition: widgetIterator.index}"><i class="fa fa-times"></i></f:be.link>
                 </div>
             </div>
         </div>
     </f:for>
 </div>
 <div class="dashboard-add-item">
-    <a href="{addWidgetUri}" class="btn btn-default dashboard-add-widget" data-modal-title="{f:translate(key: 'widget.add')}">
-        <i class="fa fa-plus fa-fw"></i> <f:translate key="widget.add" />
+    <a href="{addWidgetUri}" class="btn btn-default dashboard-add-widget" data-modal-title="{f:translate(key: 'widget.add', extensionName: 'dashboard')}" data-button-close-text="{f:translate(key: 'widget.add.button.close', extensionName: 'dashboard')}" data-button-ok-text="{f:translate(key: 'widget.add.button.ok', extensionName: 'dashboard')}">
+        <i class="fa fa-plus fa-fw"></i> <f:translate key="widget.add" extensionName="dashboard" />
     </a>
 </div>
 

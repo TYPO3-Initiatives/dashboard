@@ -80,6 +80,7 @@ class DashboardController
         $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('dashboard/Grid');
         $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('dashboard/WidgetContentCollector');
         $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('dashboard/WidgetSelector');
+        $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('dashboard/WidgetRemover');
         $this->moduleTemplate->getPageRenderer()->addCssFile($publicResourcesPath . 'CSS/Dashboard.css');
 
         $action = $request->getQueryParams()['action'] ?? $request->getParsedBody()['action'] ?? 'main';
@@ -123,13 +124,22 @@ class DashboardController
 
     }
 
+    public function removeWidgetAction(ServerRequestInterface $request): ResponseInterface
+    {
+        $parameters = $request->getQueryParams();
+
+        DebuggerUtility::var_dump($parameters);
+    }
+
     public function addWidgetAction(ServerRequestInterface $request): ResponseInterface
     {
         $parameters = $request->getQueryParams();
 
         if ($parameters['widget']) {
             $widgets = $this->getBackendUser()->getModuleData('web_dashboard/dashboard/' . $this->getCurrentDashboard() . '/widgets');
-            $widgets[] = $this->prepareWidgetElement($parameters['widget']);
+
+            $key = sha1($parameters['widget'] . '-' . time());
+            $widgets[$key] = $this->prepareWidgetElement($parameters['widget']);
 
             $this->getBackendUser()->pushModuleData('web_dashboard/dashboard/' . $this->getCurrentDashboard() . '/widgets', $widgets);
         }
@@ -160,14 +170,15 @@ class DashboardController
 
         $tmpWidgets = $this->getBackendUser()->getModuleData('web_dashboard/dashboard/' . $this->getCurrentDashboard() . '/widgets');
         if (!empty($tmpWidgets)) {
-            foreach ($tmpWidgets as $tmpWidget) {
-                $widgets[] = $this->prepareWidgetElement($tmpWidget['key'], $tmpWidget['config']);
+            foreach ($tmpWidgets as $hash => $tmpWidget) {
+                $widgets[$hash] = $this->prepareWidgetElement($tmpWidget['key'], $tmpWidget['config']);
             }
         } else {
             // TODO: default widgets when no user settings are found
-            $widgets[] = $this->prepareWidgetElement('numberOfBackendUsers');
-            $widgets[] = $this->prepareWidgetElement('numberOfAdminBackendUsers');
-            $widgets[] = $this->prepareWidgetElement('lastLogins');
+            $defaultWidgets = ['numberOfBackendUsers', 'numberOfAdminBackendUsers', 'lastLogins'];
+            foreach ($defaultWidgets as $defaultWidget) {
+                $widgets[$this->getWidgetKey($defaultWidget)] = $this->prepareWidgetElement($defaultWidget);
+            }
 
             $this->getBackendUser()->pushModuleData('web_dashboard/dashboard/' . $this->getCurrentDashboard() . '/widgets', $widgets);
         }
@@ -245,5 +256,15 @@ class DashboardController
     protected function getCurrentDashboard(): string
     {
         return $this->getBackendUser()->getModuleData('web_dashboard/current_dashboard/') ?: 'default';
+    }
+
+    /**
+     * @param string $key
+     * @param array $config
+     * @return string
+     */
+    protected function getWidgetKey(string $key, array $config = [])
+    {
+        return sha1(implode('|', [$key, serialize($config)]));
     }
 }

@@ -39,7 +39,6 @@ define(['jquery', 'muuri'], function ($, Muuri) {
     };
 
     Grid.saveItems = function(dashboard) {
-        console.log('saveItems');
         var widgets = dashboard.getItems().map(function (item) {
             return [
                 item.getElement().getAttribute('data-widget-key'),
@@ -55,7 +54,6 @@ define(['jquery', 'muuri'], function ($, Muuri) {
             'json'
         )
             .done(function( response ) {
-                console.log(response);
             });
 
         // return JSON.stringify(itemIds);

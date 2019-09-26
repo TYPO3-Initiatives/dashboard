@@ -8,3 +8,12 @@ $widgetRegistry->registerWidget('lastLogins', \FriendsOfTYPO3\Dashboard\Widgets\
 
 $dashboardRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\FriendsOfTYPO3\Dashboard\Registry\DashboardRegistry::class);
 $dashboardRegistry->registerDashboard('default', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default');
+
+$iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+    \TYPO3\CMS\Core\Imaging\IconRegistry::class
+);
+$iconRegistry->registerIcon(
+    'dragdrop', // Icon-Identifier, z.B. tx-myext-action-preview
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/grip-vertical.svg']
+);

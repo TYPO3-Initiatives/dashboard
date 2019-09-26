@@ -9,6 +9,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class WidgetAjaxController
 {
@@ -39,7 +40,7 @@ class WidgetAjaxController
         $body = $request->getParsedBody();
         $widgets = [];
         foreach ($body['widgets'] as $widget) {
-            $widgets[] = ['key' => $widget[0], 'config' => json_decode($widget[1])];
+            $widgets[$this->getWidgetKey($widget[0], json_decode($widget[1]))] = ['key' => $widget[0], 'config' => json_decode($widget[1])];
         }
 
         $this->getBackendUser()->pushModuleData('web_dashboard/dashboard/' . $this->getCurrentDashboard() . '/widgets', $widgets);
@@ -60,5 +61,15 @@ class WidgetAjaxController
     protected function getCurrentDashboard(): string
     {
         return $this->getBackendUser()->getModuleData('web_dashboard/current_dashboard/') ?: 'default';
+    }
+
+    /**
+     * @param string $key
+     * @param array $config
+     * @return string
+     */
+    protected function getWidgetKey(string $key, array $config = [])
+    {
+        return sha1(implode('|', [$key, serialize($config)]));
     }
 }
