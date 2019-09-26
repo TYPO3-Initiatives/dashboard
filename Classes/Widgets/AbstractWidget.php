@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Dashboard\Widgets;
 
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3Fluid\Fluid\View\ViewInterface;
 
@@ -13,8 +15,19 @@ use TYPO3Fluid\Fluid\View\ViewInterface;
  */
 abstract class AbstractWidget implements WidgetInterface
 {
+    /**
+     * @var string
+     */
     protected $title;
+
+    /**
+     * @var int
+     */
     protected $height;
+
+    /**
+     * @var int
+     */
     protected $width;
 
     /**
@@ -36,6 +49,20 @@ abstract class AbstractWidget implements WidgetInterface
      * @var ViewInterface
      */
     protected $view;
+
+    /**
+     * @var string
+     */
+    protected $publicResourcesPath;
+
+    /**
+     * AbstractWidget constructor.
+     */
+    public function __construct()
+    {
+        $this->publicResourcesPath =
+            PathUtility::getAbsoluteWebPath(ExtensionManagementUtility::extPath('dashboard')) . 'Resources/Public/';
+    }
 
     /**
      * Sets up the Fluid View.

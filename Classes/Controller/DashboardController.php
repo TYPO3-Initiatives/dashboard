@@ -49,6 +49,11 @@ class DashboardController
      */
     protected $cssFiles = [];
 
+    /**
+     * @var array
+     */
+    protected $jsFiles = [];
+
     public function __construct()
     {
         $this->moduleTemplate = GeneralUtility::makeInstance(ModuleTemplate::class);
@@ -68,12 +73,12 @@ class DashboardController
         $publicResourcesPath = PathUtility::getAbsoluteWebPath(ExtensionManagementUtility::extPath('dashboard')) . 'Resources/Public/';
 
         $this->moduleTemplate->getPageRenderer()->addRequireJsConfiguration(
-            array(
-                'paths' => array(
+            [
+                'paths' => [
                     'dashboard' => $publicResourcesPath . 'JavaScript',
                     'muuri' => $publicResourcesPath . 'JavaScript/Dist/Muuri',
-                ),
-            )
+                ],
+            ]
         );
 
         $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('muuri');
@@ -93,6 +98,16 @@ class DashboardController
 
         foreach ($this->cssFiles as $cssFile) {
             $this->moduleTemplate->getPageRenderer()->addCssFile($cssFile);
+        }
+
+        foreach ($this->jsFiles as $key => $jsFile) {
+            $this->moduleTemplate->getPageRenderer()->addRequireJsConfiguration([
+                'paths' => [
+                    $key => $jsFile
+                ]
+            ]);
+
+            $this->moduleTemplate->getPageRenderer()->loadRequireJsModule($key);
         }
 
         $this->moduleTemplate->setContent($this->view->render());
@@ -127,8 +142,6 @@ class DashboardController
     public function removeWidgetAction(ServerRequestInterface $request): ResponseInterface
     {
         $parameters = $request->getQueryParams();
-
-        DebuggerUtility::var_dump($parameters);
     }
 
     public function addWidgetAction(ServerRequestInterface $request): ResponseInterface
@@ -186,14 +199,25 @@ class DashboardController
         return $widgets;
     }
 
-
+    /**
+     * @param $widgetKey
+     * @param array $config
+     * @return array
+     * @throws \Exception
+     */
     public function prepareWidgetElement($widgetKey, $config = []): array
     {
         $widgetObject = $this->widgetRegistry->getWidgetObject($widgetKey);
 
-        foreach($widgetObject->getCssFiles() as $cssFile) {
+        foreach ($widgetObject->getCssFiles() as $cssFile) {
             if (!in_array($cssFile, $this->cssFiles, true)) {
                 $this->cssFiles[] = $cssFile;
+            }
+        }
+
+        foreach ($widgetObject->getJsFiles() as $jsFile) {
+            if (!in_array($jsFile, $this->jsFiles, true)) {
+                $this->jsFiles[] = $jsFile;
             }
         }
 
