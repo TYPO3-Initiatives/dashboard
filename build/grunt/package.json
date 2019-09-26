@@ -1,0 +1,22 @@
+{
+  "name": "TYPO3-Dashboard",
+  "version": "1.0.0",
+  "description": "Grunt package.json for the TYPO3 dashboard project",
+  "main": "Gruntfile.js",
+  "author": "Koen Wouters <koen@maxserv.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^6.7.0",
+    "grunt": "^1.0.1",
+    "grunt-contrib-cssmin": "^1.0.2",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-postcss": "^0.8.0",
+    "grunt-sass": "^2.0.0",
+    "grunt-sass-globbing": "^1.5.1",
+    "jit-grunt": "^0.10.0",
+    "postcss-pxtorem": "^4.0.1"
+  },
+  "dependencies": {
+    "grunt-sass-lint": "^0.2.2"
+  }
+}

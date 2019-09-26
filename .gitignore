@@ -8,3 +8,7 @@
 /vendor
 /.php_cs.cache
 /.build
+
+*.css.map
+**/*temp_*
+**/node_modules

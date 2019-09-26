@@ -1,0 +1,244 @@
+options:
+  formatter: stylish
+  merge-default-rules: false
+rules:
+  border-zero:
+  - 2
+  - convention: '0'
+  brace-style:
+  - 2
+  - allow-single-line: false
+  clean-import-paths:
+  - 2
+  - leading-underscore: false
+  - filename-extension: false
+  empty-line-between-blocks:
+  - 2
+  - allow-single-line-rulesets: false
+  extends-before-declarations: 2
+  extends-before-mixins: 2
+  hex-length:
+  - 2
+  - style: short
+  hex-notation:
+  - 2
+  - style: lowercase
+  indentation:
+  - 2
+  - size: 'tab'
+  leading-zero:
+  - 2
+  - include: true
+  mixins-before-declarations:
+  - 2
+  - exclude: ['breakpoint']
+  nesting-depth:
+  - 2
+  - max-depth: 4
+  no-color-keywords: 2
+  no-debug: 2
+  no-duplicate-properties:
+  - 2
+  - exclude: ['src']
+  no-empty-rulesets: 2
+  no-invalid-hex: 2
+  no-mergeable-selectors:
+  - 2
+  - whitelist: []
+  no-misspelled-properties:
+  - 2
+  - extra-properties:
+    - max-sprite
+    - font-display
+  no-trailing-whitespace: 2
+  no-trailing-zero: 2
+  no-transition-all: 2
+  no-url-protocols: 2
+  no-vendor-prefixes: 0
+  no-warn: 2
+  one-declaration-per-line: 2
+  placeholder-in-extend: 2
+  property-sort-order:
+  - 2
+  - ignore-custom-properties: false
+    order:
+    - max-sprite
+    - content
+    - counter-reset
+    - counter-increment
+    - position
+    - top
+    - right
+    - bottom
+    - left
+    - z-index
+    - display
+    - flex-direction
+    - flex-wrap
+    - flex-flow
+    - justify-content
+    - align-items
+    - align-content
+    - order
+    - flex-grow
+    - flex-shrink
+    - flex-basis
+    - flex
+    - align-self
+    - columns
+    - column-width
+    - column-count
+    - column-gap
+    - column-rule
+    - column-rule-width
+    - column-rule-style
+    - column-rule-color
+    - column-span
+    - column-fill
+    - break-before
+    - break-after
+    - break-inside
+    - overflow
+    - overflow-x
+    - overflow-y
+    - overflow-wrap
+    - overflow-style
+    - clear
+    - float
+    - box-sizing
+    - width
+    - min-width
+    - max-width
+    - height
+    - min-height
+    - max-height
+    - line-height
+    - resize
+    - padding
+    - padding-top
+    - padding-right
+    - padding-bottom
+    - padding-left
+    - border
+    - border-top
+    - border-right
+    - border-bottom
+    - border-left
+    - border-width
+    - border-top-width
+    - border-right-width
+    - border-bottom-width
+    - border-left-width
+    - border-image
+    - border-style
+    - border-top-style
+    - border-right-style
+    - border-bottom-style
+    - border-left-style
+    - border-color
+    - border-top-color
+    - border-right-color
+    - border-bottom-color
+    - border-left-color
+    - border-radius
+    - border-top-left-radius
+    - border-top-right-radius
+    - border-bottom-right-radius
+    - border-bottom-left-radius
+    - margin
+    - margin-top
+    - margin-right
+    - margin-bottom
+    - margin-left
+    - vertical-align
+    - visibility
+    - opacity
+    - filter
+    - list-style
+    - list-style-type
+    - list-style-position
+    - list-style-image
+    - background
+    - background-size
+    - background-clip
+    - background-image
+    - background-position
+    - background-position-x
+    - background-position-y
+    - background-attachment
+    - background-repeat
+    - background-repeat-x
+    - background-repeat-y
+    - background-color
+    - background-blend-mode
+    - background-origin
+    - outline
+    - outline-width
+    - outline-offset
+    - outline-style
+    - outline-color
+    - box-shadow
+    - font-family
+    - src
+    - font-weight
+    - font-style
+    - font-size
+    - color
+    - text-transform
+    - text-align
+    - text-shadow
+    - word-spacing
+    - letter-spacing
+    - white-space
+    - word-wrap
+    - word-break
+    - transform
+    - transform-origin
+    - transform-origin-x
+    - transform-origin-y
+    - transform-origin-z
+    - transition
+    - transition-property
+    - transition-duration
+    - transition-timing-function
+    - transition-delay
+    - will-change
+    - cursor
+    - backface-visibility
+  quotes:
+  - 2
+  - style: double
+  shorthand-values: 2
+  single-line-per-selector: 2
+  space-after-bang:
+  - 2
+  - include: false
+  space-after-colon:
+  - 2
+  - include: true
+  space-after-comma:
+  - 2
+  - include: true
+  space-around-operator:
+  - 2
+  - include: true
+  space-before-bang:
+  - 2
+  - include: true
+  space-before-brace:
+  - 2
+  - include: true
+  space-before-colon:
+  - 2
+  - include: false
+  space-between-parens:
+  - 2
+  - include: false
+  trailing-semicolon:
+  - 2
+  - include: true
+  url-quotes:
+  - 2
+  zero-unit:
+  - 2
+  - include: false
