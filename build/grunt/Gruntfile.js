@@ -71,7 +71,7 @@ module.exports = function (grunt) {
     });
 
     for (var stylePart in config.styleParts) {
-        grunt.registerTask(stylePart, ['browserSync:' + stylePart, 'sass_globbing:generate', 'sass:' + stylePart, 'postcss:' + stylePart, 'watch:' + stylePart]);
+        grunt.registerTask(stylePart, ['sass_globbing:generate', 'sass:' + stylePart, 'postcss:' + stylePart, 'watch:' + stylePart]);
     }
     grunt.registerTask('lint', ['sasslint:dev']);
     grunt.registerTask('build', ['sasslint:build', 'sass_globbing:generate', 'sass:build', 'postcss:build', 'cssmin:build']);
