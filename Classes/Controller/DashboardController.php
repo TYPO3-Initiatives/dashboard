@@ -128,7 +128,15 @@ class DashboardController
     {
         $parameters = $request->getQueryParams();
 
-        DebuggerUtility::var_dump($parameters);
+        $widgets = $this->getBackendUser()->getModuleData('web_dashboard/dashboard/' . $this->getCurrentDashboard() . '/widgets');
+
+        if (array_key_exists($parameters['widgetHash'], $widgets)) {
+            unset($widgets[$parameters['widgetHash']]);
+            $this->getBackendUser()->pushModuleData('web_dashboard/dashboard/' . $this->getCurrentDashboard() . '/widgets', $widgets);
+        }
+
+        $route = $this->uriBuilder->buildUriFromRoute('dashboard', ['action' => 'main']);
+        return new RedirectResponse($route);
     }
 
     public function addWidgetAction(ServerRequestInterface $request): ResponseInterface
@@ -173,14 +181,6 @@ class DashboardController
             foreach ($tmpWidgets as $hash => $tmpWidget) {
                 $widgets[$hash] = $this->prepareWidgetElement($tmpWidget['key'], $tmpWidget['config']);
             }
-        } else {
-            // TODO: default widgets when no user settings are found
-            $defaultWidgets = ['numberOfBackendUsers', 'numberOfAdminBackendUsers', 'lastLogins'];
-            foreach ($defaultWidgets as $defaultWidget) {
-                $widgets[$this->getWidgetKey($defaultWidget)] = $this->prepareWidgetElement($defaultWidget);
-            }
-
-            $this->getBackendUser()->pushModuleData('web_dashboard/dashboard/' . $this->getCurrentDashboard() . '/widgets', $widgets);
         }
 
         return $widgets;

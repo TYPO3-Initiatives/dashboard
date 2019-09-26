@@ -9,7 +9,7 @@
                     </div>
                     <div class="widget-content hide"></div>
                     <div class="widget-move"><core:icon identifier="dragdrop"></core:icon></div>
-                    <f:be.link class="widget-remove" route="dashboard" parameters="{action: 'removeWidget', widgetPosition: widgetIterator.index}"><i class="fa fa-times"></i></f:be.link>
+                    <f:be.link class="widget-remove" route="dashboard" parameters="{action: 'removeWidget', widgetHash: widgetHash}" data="{title: '{f:translate(key: \'widget.remove.confirm.title\', extensionName: \'dashboard\')}', message: '{f:translate(key: \'widget.remove.confirm.message\', extensionName: \'dashboard\')}', button-ok-text: '{f:translate(key: \'widget.remove.button.ok\', extensionName: \'dashboard\')}', button-close-text: '{f:translate(key: \'widget.remove.button.close\', extensionName: \'dashboard\')}'}"><i class="fa fa-times"></i></f:be.link>
                 </div>
             </div>
         </div>
