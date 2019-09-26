@@ -106,7 +106,8 @@ class DashboardController
 
         $this->view->assign('widgets', $widgets);
         $this->view->assign('availableWidgets', $availableWidget);
-
+        $this->view->assign('availableDashboards', $this->dashboardRegistry->getDashboards());
+        $this->view->assign('currentDashboard', $this->getCurrentDashboard());
         $parameters = [
             'widget' => '@widget',
             'action' => 'addWidget'
@@ -161,7 +162,7 @@ class DashboardController
         $this->view->setPartialRootPaths(['EXT:dashboard/Resources/Private/Partials']);
         $this->view->setLayoutRootPaths(['EXT:dashboard/Resources/Private/Layouts']);
 
-        $this->addDashboardSelector();
+        $this->moduleTemplate->getDocHeaderComponent()->disable();
     }
 
     protected function getWidgetsForCurrentUser(): array
@@ -204,34 +205,6 @@ class DashboardController
             'title' => $widgetObject->getTitle(),
             'config' => $config
         ];
-    }
-
-    protected function addDashboardSelector(): void
-    {
-        $availableDashboards = $this->dashboardRegistry->getDashboards();
-
-        $dashboardSelector = $this->moduleTemplate->getDocHeaderComponent()->getMenuRegistry()->makeMenu();
-        $dashboardSelector->setIdentifier('currentDashboard');
-        $dashboardSelector->setLabel('Dashboard');
-
-        foreach ($availableDashboards as $dashboardKey => $dashboardConfig) {
-            $parameters = [
-                'currentDashboard' => $dashboardKey,
-                'action' => 'setActiveDashboard'
-            ];
-            $url = (string)$this->uriBuilder->buildUriFromRoute('dashboard', $parameters);
-            $menuItem = $dashboardSelector
-                ->makeMenuItem()
-                ->setTitle(
-                    $this->getLanguageService()->sL($dashboardConfig['label']) ?: $dashboardKey
-                )
-                ->setHref($url);
-            if ($this->getCurrentDashboard() === $dashboardKey) {
-                $menuItem->setActive(true);
-            }
-            $dashboardSelector->addMenuItem($menuItem);
-        }
-        $this->moduleTemplate->getDocHeaderComponent()->getMenuRegistry()->addMenu($dashboardSelector);
     }
 
     /**
