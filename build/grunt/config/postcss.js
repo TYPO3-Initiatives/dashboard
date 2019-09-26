@@ -1,37 +1,55 @@
-var path = require('path');
+var path = require('path'),
+  sass = require('node-sass');
 
-module.exports = {
-    options: {
-        map: true,
-        processors: [
+module.exports = function (grunt) {
+  var styleParts = grunt.config.get('styleParts'),
+    cssFilePaths = [],
+    postCssTasks = {};
+
+  for (let stylePart in grunt.config.get('styleParts')) {
+    if (styleParts.hasOwnProperty(stylePart)) {
+      styleParts[stylePart].stylesheets.forEach(function (fileName) {
+        // The SCSS-file has a upperCamelCase filename, but for the CSS-file we want a lowerCamelCase filename
+        // So take the first char, make it lowercase and keep the rest the same
+        var css = grunt.config.get('cssDirectory') + '/' + (fileName.charAt(0).toLowerCase() + fileName.substr(1)) + '.css';
+
+        styleParts[stylePart].cssFilePaths.push({
+          src: css,
+          dest: css
+        });
+      });
+
+      cssFilePaths = cssFilePaths.concat(styleParts[stylePart].cssFilePaths);
+
+      postCssTasks[stylePart] = {
+        options: {
+          map: true,
+          processors: [
             require('autoprefixer')({
-                browsers: ['> 1% in NL', 'last 2 versions', 'IE >= 9', 'Android >= 4', 'Safari >= 7', 'iOS >= 7'],
-                cascade: false,
-                remove: false
-            }),
-            require('postcss-pxtorem')({
-                rootValue: 16,
-                unitPrecision: 5,
-                propList: ['*', '!letter-spacing', '!*box*', '!line-height', '!border*', '!background*'],
-                selectorBlackList: [],
-                replace: true,
-                mediaQuery: true,
+              browsers: ['> 1%', 'last 2 versions', 'firefox 24', 'opera 12.1', 'IE 8'],
+              cascade: false,
+              remove: false
             })
-        ]
-    },
-    dev: {
-        files: [{
-            src: '<%= cssDirectory %>/<%= cssFileName %>',
-            dest: '<%= cssDirectory %>/<%= cssFileName %>'
-        }]
-    },
-    build: {
-        files: [{
-            src: '<%= cssDirectory %>/<%= cssFileName %>',
-            dest: '<%= cssDirectory %>/<%= cssFileName %>'
-        }, {
-            src: '<%= cssDirectory %>/GridFallback.css',
-            dest: '<%= cssDirectory %>/GridFallback.css'
-        }]
+          ]
+        },
+        files: styleParts[stylePart].cssFilePaths
+      };
     }
+  }
+
+  postCssTasks['build'] = {
+    options: {
+      map: false,
+      processors: [
+        require('autoprefixer')({
+          browsers: ['> 1%', 'last 2 versions', 'firefox 24', 'opera 12.1', 'IE 8'],
+          cascade: false,
+          remove: false
+        })
+      ]
+    },
+    files: cssFilePaths
+  };
+
+  return postCssTasks;
 };

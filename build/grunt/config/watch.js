@@ -1,38 +1,23 @@
-const path = require('path');
+var path = require('path'),
+  sass = require('node-sass');
 
 module.exports = function (grunt) {
+  var styleParts = grunt.config.get('styleParts'),
+    watchTask = {};
 
-    const extDirectory = grunt.config.get('extDirectory');
-    const svgsToWatch = [];
+  for (let stylePart in grunt.config.get('styleParts')) {
+    if (styleParts.hasOwnProperty(stylePart)) {
 
-    return {
-        css: {
-            files: '<%= sassDirectory %>/**/*.scss',
-            tasks: ['sass:dev', 'postcss:dev'],
-            options: {
-                spawn: false,
-                event: 'changed'
-            }
-        },
-        sassImports: {
-            files: [
-                '<%= sassDirectory %>/Layout/**/!(*_tmp*).scss',
-                '<%= sassDirectory %>/Modules/**/!(*_tmp*).scss',
-                '<%= sassDirectory %>/Utilities/**/!(*_tmp*).scss'
-            ],
-            tasks: ['sass_globbing:generate'],
-            options: {
-                spawn: false,
-                event: ['added', 'deleted']
-            }
-        },
-        svg: {
-            files: svgsToWatch,
-            tasks: ['svgstore'],
-            options: {
-                spawn: true,
-                event: 'all'
-            }
+      watchTask[stylePart] = {
+        files: grunt.config.get('sassDirectory') + '/**/*.scss',
+        tasks: ['sass:' + stylePart, 'postcss:' + stylePart, 'bsReload:css'],
+        options: {
+          spawn: false,
+          event: 'changed'
         }
+      };
     }
+  }
+
+  return watchTask;
 };

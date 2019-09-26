@@ -11,7 +11,8 @@ module.exports = function (grunt) {
         path = require('path'),
         url = require('url'),
         extDirectory = path.normalize('../..'),
-        projectDirectory = extDirectory;
+        projectDirectory = extDirectory,
+        cssFilePaths = [];
 
     require('jit-grunt')(grunt, {
         sasslint: 'grunt-sass-lint'
@@ -22,12 +23,39 @@ module.exports = function (grunt) {
         extDirectory: extDirectory,
         projectDirectory: projectDirectory,
         sassDirectory: path.join(projectDirectory, 'Resources/Private/Styles'),
-        cssDirectory: path.join(projectDirectory, 'Resources/public/CSS'),
-        scssFileName: 'Dashboard.scss',
-        cssFileName: 'Dashboard.css',
-        cssJsonFiles: grunt.file.expand([path.join(projectDirectory, 'css-bundle.dashboard.json')]),
-
+        cssDirectory: path.join(projectDirectory, 'Resources/Public/CSS'),
+        styleParts: {
+            'dashboard': {
+                stylesheets: ['Dashboard'],
+                scssFilePaths: [],
+                cssFilePaths: []
+            },
+            'numberWidget': {
+                stylesheets: ['NumberWidget'],
+                scssFilePaths: [],
+                cssFilePaths: []
+            },
+        },
+        cssJsonFiles: grunt.file.expand([path.join(projectDirectory, 'css-bundle.*.json')]),
+        scssFilePaths: [],
     };
+
+    for (var stylePart in config.styleParts) {
+        if (config.styleParts.hasOwnProperty(stylePart)) {
+            config.styleParts[stylePart].stylesheets.forEach(function (fileName) {
+                // The SCSS-file has a upperCamelCase filename, but for the CSS-file we want a lowerCamelCase filename
+                // So take the first char, make it lowercase and keep the rest the same
+                var css = config.cssDirectory + '/' + (fileName.charAt(0).toLowerCase() + fileName.substr(1)) + '.css';
+
+                config.styleParts[stylePart].cssFilePaths.push({
+                    src: css,
+                    dest: css
+                });
+            });
+
+            cssFilePaths = cssFilePaths.concat(config.styleParts[stylePart].cssFilePaths);
+        }
+    }
 
     grunt.initConfig(config);
 
@@ -42,7 +70,9 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('default', ['sass_globbing:generate', 'sass:dev', 'postcss:dev', 'watch']);
+    for (var stylePart in config.styleParts) {
+        grunt.registerTask(stylePart, ['browserSync:' + stylePart, 'sass_globbing:generate', 'sass:' + stylePart, 'postcss:' + stylePart, 'watch:' + stylePart]);
+    }
     grunt.registerTask('lint', ['sasslint:dev']);
     grunt.registerTask('build', ['sasslint:build', 'sass_globbing:generate', 'sass:build', 'postcss:build', 'cssmin:build']);
 };

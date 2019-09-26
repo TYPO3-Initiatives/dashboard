@@ -9,9 +9,7 @@
 /.php_cs.cache
 /.build
 
-*.css
+*.min.css
 *.css.map
 **/*temp_*
 **/node_modules
-
-!*.min.css
