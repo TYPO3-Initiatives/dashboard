@@ -42,7 +42,8 @@ define(['jquery', 'muuri'], function ($, Muuri) {
         var widgets = dashboard.getItems().map(function (item) {
             return [
                 item.getElement().getAttribute('data-widget-key'),
-                item.getElement().getAttribute('data-widget-config')
+                item.getElement().getAttribute('data-widget-config'),
+                item.getElement().getAttribute('data-widget-hash')
             ];
         });
 
