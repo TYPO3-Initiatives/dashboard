@@ -1,12 +1,12 @@
 define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity'], function ($, Modal, Severity) {
     'use strict';
 
-    var WidgetSelector = {
-        triggerSelector: '.dashboard-add-widget'
+    var WidgetRemover = {
+        triggerSelector: '.widget-remove'
     };
 
-    WidgetSelector.initialize = function() {
-        $(document).on('click', WidgetSelector.triggerSelector, function(e) {
+    WidgetRemover.initialize = function() {
+        $(document).on('click', WidgetRemover.triggerSelector, function(e) {
             e.preventDefault();
             var $element = $(this);
             var buttons = [
@@ -23,22 +23,14 @@ define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity'], func
                     btnClass: 'btn-primary',
                     trigger: function(evt) {
                         Modal.currentModal.trigger('modal-dismiss');
-                        self.location.href = $element.attr('href')
-                            .replace('%40widget', Modal.currentModal.find('select[name="widget"]').val())
+                        self.location.href = $element.attr('href');
                     }
                 }
             ];
-            Modal.advanced({
-                type: Modal.types.default,
-                title: $element.data('modal-title'),
-                content: $($('#widgetSelector').html()),
-                severity: Severity.notice,
-                buttons: buttons,
-                size: 'default'
-            });
+            Modal.confirm('Warning', 'content', Severity.warning, buttons);
         });
     };
 
-    WidgetSelector.initialize();
-    return WidgetSelector;
+    WidgetRemover.initialize();
+    return WidgetRemover;
 });

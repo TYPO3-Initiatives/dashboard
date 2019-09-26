@@ -1,67 +1,33 @@
-<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
-<h1><f:translate key="{currentDashboardLayoutConfiguration.label}" default="{currentDashboardLayout}" /></h1>
-
-<f:for each="{currentDashboardLayoutConfiguration.rows}" as="row" iteration="rowIterator">
-    <div class="row">
-        <f:for each="{row.cols}" as="col" iteration="colIterator">
-            <div class="col-sm-{col.colspan}">
-                <f:variable name="location">{rowIterator.index}-{colIterator.index}</f:variable>
-                <f:variable name="widgetData">{widgets.{location}}</f:variable>
-
-                <f:if condition="{widgetData.render.html}">
-                    <f:then>
-                        <f:render section="widget" arguments="{widgetData: widgetData, location: location}" />
-                    </f:then>
-                    <f:else>
-                        <f:render section="widgetEmpty" arguments="{location: location}" />
-                    </f:else>
-                </f:if>
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
+<div class="dashboard-grid">
+    <f:for each="{widgets}" as="widget" iteration="widgetIterator">
+        <div class="dashboard-item dashboard-item--w{widget.width} dashboard-item--h{widget.height}" data-widget-id="{widget.id}" data-widget-key="{widget.key}" data-widget-config="{widget.config -> f:format.json()}">
+            <div class="dashboard-item-content">
+                <div class="widget">
+                    <div class="widget-waiting">
+                        <core:icon identifier="spinner-circle" size="large" />
+                    </div>
+                    <div class="widget-content hide"></div>
+                    <div class="widget-move"><core:icon identifier="dragdrop"></core:icon></div>
+                    <f:be.link class="widget-remove" route="dashboard" parameters="{action: 'removeWidget', widgetPosition: widgetIterator.index}"><i class="fa fa-times"></i></f:be.link>
+                </div>
             </div>
-        </f:for>
-    </div>
-</f:for>
-
-<div id="widgetSelector" class="hide">
-    <select name="widget">
-        <f:for each="{availableWidgets}" as="widget" key="widgetKey">
-            <option value="{widgetKey}">{widget.label}</option>
-        </f:for>
-    </select>
+        </div>
+    </f:for>
+</div>
+<div class="dashboard-add-item">
+    <a href="{addWidgetUri}" class="btn btn-default dashboard-add-widget" data-modal-title="{f:translate(key: 'widget.add', extensionName: 'dashboard')}" data-button-close-text="{f:translate(key: 'widget.add.button.close', extensionName: 'dashboard')}" data-button-ok-text="{f:translate(key: 'widget.add.button.ok', extensionName: 'dashboard')}">
+        <i class="fa fa-plus fa-fw"></i> <f:translate key="widget.add" extensionName="dashboard" />
+    </a>
 </div>
 
-<f:section name="widget">
-    <div class="card widget {widgetData.render.jsSelector}" data-widget="{widgetData.widget}">
-        <div class="card-header">
-            <div class="card-header-body">
-                <button type="button"
-                        data-confirm-title="{f:translate(key: 'widget.remove.confirm.title')}"
-                        data-confirm-text="{f:translate(key: 'widget.remove.confirm.text')}"
-                        data-url="{f:uri.action(action: 'removeWidget', arguments: '{data: {location: location}}')}"
-                        class="close text-light t3js-dashboard-close-widget"
-                        aria-label="{f:translate(key: 'close', default: 'Close')}">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <h1 class="card-title">{widgetData.render.label}</h1>
-            </div>
-        </div>
-        <div class="card-content hide">
-            <f:format.raw>{widgetData.render.html}</f:format.raw>
-        </div>
-        <div class="card-loading text-center">
-            <div class="lds-css ng-scope"><div style="width:100%;height:100%" class="lds-dual-ring"><div></div></div></div>
-        </div>
+<div id="widgetSelector" class="hide">
+    <div>
+        <select name="widget">
+            <f:for each="{availableWidgets}" as="availableWidgetConfig" key="availableWidgetKey">
+                <option value="{availableWidgetKey}"><f:translate key="{availableWidgetConfig.title}" default="{availableWidgetConfig.title}" /></option>
+            </f:for>
+        </select>
     </div>
-</f:section>
-
-<f:section name="widgetEmpty">
-    <div class="card widget-empty">
-        <div class="card-content">
-            <p class="card-text text-center">
-                <f:link.action action="addWidget" arguments="{data: {location: location, widget: '@widget'}}" class="btn btn-default t3js-dashboard-add-widget" data="{modal-title: '{f:translate(key: \'widget.add\')}'}">
-                    <i class="fa fa-plus fa-fw"></i> <f:translate key="widget.add" />
-                </f:link.action>
-            </p>
-        </div>
-    </div>
-</f:section>
+</div>
 </html>

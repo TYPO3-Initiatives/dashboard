@@ -1,37 +1,18 @@
 <?php
 defined('TYPO3_MODE') or die();
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-    'Haassie.Dashboard',
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addModule(
     'web',
     'dashboard',
     'top',
+    '',
     [
-        'Dashboard' => 'main,addWidget,removeWidget',
-    ],
-    [
+        'routeTarget' => \FriendsOfTYPO3\Dashboard\Controller\DashboardController::class . '::handleRequest',
         'access' => 'user,group',
+        'name' => 'web_dashboard',
         'icon' => 'EXT:dashboard/Resources/Public/Icons/module-dashboard.svg',
         'navigationComponentId' => '',
         'inheritNavigationComponentFromMainModule' => false,
         'labels' => 'LLL:EXT:dashboard/Resources/Private/Language/locallang_mod.xlf'
     ]
 );
-
-/** @var \Haassie\Dashboard\Widgets\WidgetRegistry $widgetRegistry */
-$widgetRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\Haassie\Dashboard\Widgets\WidgetRegistry::class);
-$widgetRegistry->registerWidget(
-    'dashboard_date',
-    'Today',
-    'text',
-    \Haassie\Dashboard\WidgetDataProviders\DateWidgetDataProvider::class
-);
-
-if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('core')) {
-    $widgetRegistry->registerWidget(
-        'core_belogins',
-        'Number of backend logins',
-        'chart',
-        \Haassie\Dashboard\WidgetDataProviders\CoreBackendLoginsWidgetDataProvider::class
-    );
-}

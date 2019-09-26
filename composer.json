@@ -1,5 +1,5 @@
 {
-  "name": "haassie/dashboard",
+  "name": "friendsoftypo3/dashboard",
   "type": "typo3-cms-extension",
   "description": "Dashboard for TYPO3.",
   "homepage": "https://typo3.org",
@@ -22,6 +22,10 @@
     {
       "name": "Sanjay Chauhan",
       "role": "Developer"
+    },
+    {
+      "name": "Irene Sacchi",
+      "role": "UX"
     }
   ],
   "config": {
@@ -31,7 +35,7 @@
     "bin-dir": ".build/bin"
   },
   "require": {
-    "typo3/cms-core": "^8.7 || ^9.5 || 10.0.*@dev"
+    "typo3/cms-core": "^9.5 || 10.0.*@dev"
   },
   "replace": {
     "dashboard": "self.version",
@@ -39,7 +43,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Haassie\\Dashboard\\": "Classes/"
+      "FriendsOfTYPO3\\Dashboard\\": "Classes/"
     }
   },
   "require-dev": {
