@@ -1,7 +1,7 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
 <div class="dashboard-grid">
-    <f:for each="{widgets}" as="widget" iteration="widgetIterator">
-        <div class="dashboard-item dashboard-item--w{widget.width} dashboard-item--h{widget.height}" data-widget-id="{widget.id}" data-widget-key="{widget.key}" data-widget-config="{widget.config -> f:format.json()}">
+    <f:for each="{widgets}" as="widget" iteration="widgetIterator" key="widgetHash">
+        <div class="dashboard-item dashboard-item--w{widget.width} dashboard-item--h{widget.height}" data-widget-id="{widget.id}" data-widget-hash="{widgetHash}" data-widget-key="{widget.key}" data-widget-config="{widget.config -> f:format.json()}">
             <div class="dashboard-item-content">
                 <div class="widget">
                     <div class="widget-waiting">

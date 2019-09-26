@@ -40,7 +40,7 @@ class WidgetAjaxController
         $body = $request->getParsedBody();
         $widgets = [];
         foreach ($body['widgets'] as $widget) {
-            $widgets[$this->getWidgetKey($widget[0], json_decode($widget[1]))] = ['key' => $widget[0], 'config' => json_decode($widget[1])];
+            $widgets[$widget[2]] = ['key' => $widget[0], 'config' => json_decode($widget[1])];
         }
 
         $this->getBackendUser()->pushModuleData('web_dashboard/dashboard/' . $this->getCurrentDashboard() . '/widgets', $widgets);
