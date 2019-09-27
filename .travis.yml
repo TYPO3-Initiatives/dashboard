@@ -22,6 +22,11 @@ install:
 script:
   - >
     echo;
+    echo 'Unit tests';
+    composer test:php:unit
+
+  - >
+    echo;
     echo "PHP lint";
     find . -name \*.php ! -path "./.build/*" | parallel --gnu php -d display_errors=stderr -l {} > /dev/null \;
 jobs:

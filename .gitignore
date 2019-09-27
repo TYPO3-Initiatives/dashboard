@@ -8,6 +8,7 @@
 /vendor
 /.php_cs.cache
 /.build
+/build/.phpunit.result.cache
 
 *.min.css
 *.css.map
