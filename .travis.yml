@@ -38,3 +38,6 @@ jobs:
 cache:
   directories:
     - $HOME/.composer/cache
+
+notifications:
+  slack: typo3:xfFILau4vDOjiS1X8kBZLo20
