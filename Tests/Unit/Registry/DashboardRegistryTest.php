@@ -11,11 +11,18 @@ class DashboardRegistryTest extends UnitTestCase
     /**
      * @test
      */
-    public function checkInitialStateOfRegistry()
+    public function checkStateOfRegistry(): void
     {
         $registry = new DashboardRegistry();
-        $expected = [];
-        $expected[] = 'default';
-        $this->assertEquals($expected, array_keys($registry->getDashboards()));
+        $expectedDashboards = ['default'];
+        $this->assertEquals($expectedDashboards, array_keys($registry->getDashboards()));
+
+        $registry->registerDashboard('key1', 'label 1', []);
+        $expectedDashboards = ['key1'];
+        $this->assertEquals($expectedDashboards, array_keys($registry->getDashboards()));
+
+        $registry->registerDashboard('key2', 'label 2', []);
+        $expectedDashboards = ['key1', 'key2'];
+        $this->assertEquals($expectedDashboards, array_keys($registry->getDashboards()));
     }
 }
