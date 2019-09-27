@@ -51,7 +51,7 @@
   },
   "scripts": {
     "cgl": [
-      "php-cs-fixer fix -v --using-cache false"
+      "php-cs-fixer fix -v --dry-run --using-cache false"
     ]
   }
 }

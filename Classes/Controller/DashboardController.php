@@ -13,7 +13,6 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
@@ -68,12 +67,12 @@ class DashboardController
         $publicResourcesPath = PathUtility::getAbsoluteWebPath(ExtensionManagementUtility::extPath('dashboard')) . 'Resources/Public/';
 
         $this->moduleTemplate->getPageRenderer()->addRequireJsConfiguration(
-            array(
-                'paths' => array(
+            [
+                'paths' => [
                     'dashboard' => $publicResourcesPath . 'JavaScript',
                     'muuri' => $publicResourcesPath . 'JavaScript/Dist/Muuri',
-                ),
-            )
+                ],
+            ]
         );
 
         $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('muuri');
@@ -122,7 +121,6 @@ class DashboardController
 
         $route = $this->uriBuilder->buildUriFromRoute('dashboard', ['action' => 'main']);
         return new RedirectResponse($route);
-
     }
 
     public function removeWidgetAction(ServerRequestInterface $request): ResponseInterface
@@ -187,12 +185,11 @@ class DashboardController
         return $widgets;
     }
 
-
     public function prepareWidgetElement($widgetKey, $config = []): array
     {
         $widgetObject = $this->widgetRegistry->getWidgetObject($widgetKey);
 
-        foreach($widgetObject->getCssFiles() as $cssFile) {
+        foreach ($widgetObject->getCssFiles() as $cssFile) {
             if (!in_array($cssFile, $this->cssFiles, true)) {
                 $this->cssFiles[] = $cssFile;
             }

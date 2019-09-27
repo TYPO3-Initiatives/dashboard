@@ -8,7 +8,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class NumberOfBackendUsersWidget
- * @package FriendsOfTYPO3\Dashboard\Widgets
  */
 class NumberOfBackendUsersWidget extends AbstractNumberWidget
 {
