@@ -4,10 +4,8 @@ declare(strict_types=1);
 namespace FriendsOfTYPO3\Dashboard\Registry;
 
 use FriendsOfTYPO3\Dashboard\Widgets\WidgetInterface;
-use TYPO3\CMS\Core\Exception;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 class WidgetRegistry implements SingletonInterface
 {

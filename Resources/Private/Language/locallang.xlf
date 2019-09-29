@@ -6,6 +6,9 @@
 			<trans-unit id="close" xml:space="preserve">
 				<source>Close</source>
 			</trans-unit>
+			<trans-unit id="title" xml:space="preserve">
+				<source>Dashboard</source>
+			</trans-unit>
 			<trans-unit id="widget.add" xml:space="preserve">
 				<source>Add widget</source>
 			</trans-unit>
@@ -15,10 +18,16 @@
 			<trans-unit id="widget.add.button.ok" xml:space="preserve">
 				<source>Add widget</source>
 			</trans-unit>
+			<trans-unit id="widget.remove.button.close" xml:space="preserve">
+				<source>Close</source>
+			</trans-unit>
+			<trans-unit id="widget.remove.button.ok" xml:space="preserve">
+				<source>Remove</source>
+			</trans-unit>
 			<trans-unit id="widget.remove.confirm.title" xml:space="preserve">
 				<source>Remove widget</source>
 			</trans-unit>
-			<trans-unit id="widget.remove.confirm.text" xml:space="preserve">
+			<trans-unit id="widget.remove.confirm.message" xml:space="preserve">
 				<source>Are you sure you want to remove this widget?</source>
 			</trans-unit>
 			<trans-unit id="dashboard.default" xml:space="preserve">

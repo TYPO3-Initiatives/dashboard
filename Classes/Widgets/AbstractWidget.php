@@ -9,7 +9,6 @@ use TYPO3Fluid\Fluid\View\ViewInterface;
 
 /**
  * Class AbstractWidget
- * @package FriendsOfTYPO3\Dashboard\Widgets
  */
 abstract class AbstractWidget implements WidgetInterface
 {
