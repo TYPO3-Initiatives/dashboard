@@ -1,0 +1,18 @@
+.dashboardTab {
+	display: inline-block;
+	padding: 10px 13px;
+	margin: 0 15px 20px 0;
+	background-color: #868e96;
+	font-size: 14px;
+	color: #fff;
+
+	&:hover,
+	&:focus {
+		background-color: #fbb037;
+	}
+}
+
+.dashboardTab--active {
+	background-color: #f49702;
+	pointer-events: none;
+}
