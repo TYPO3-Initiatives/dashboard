@@ -1,3 +1,11 @@
+.dashBoardButton-addItem {
+  padding: 20px;
+  background-color: #868e96;
+  color: #fff; }
+  .dashBoardButton-addItem:hover, .dashBoardButton-addItem:focus {
+    background-color: #f49702;
+    color: #fff; }
+
 .dashboard-item {
   position: absolute;
   z-index: 1;
@@ -56,8 +64,8 @@
 .dashboard-widget {
   display: -ms-flexbox;
   display: flex;
-  padding: 30px;
-  height: 100%; }
+  height: 100%;
+  padding: 30px; }
 
 .module.module {
   background-color: #f8f8f8; }

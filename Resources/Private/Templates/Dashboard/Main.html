@@ -28,9 +28,10 @@
         </div>
     </f:for>
 </div>
+
 <div class="dashboard-add-item">
-    <a href="{addWidgetUri}" class="btn btn-default dashboard-add-widget" data-modal-title="{f:translate(key: 'widget.add', extensionName: 'dashboard')}" data-button-close-text="{f:translate(key: 'widget.add.button.close', extensionName: 'dashboard')}" data-button-ok-text="{f:translate(key: 'widget.add.button.ok', extensionName: 'dashboard')}">
-        <i class="fa fa-plus fa-fw"></i> <f:translate key="widget.add" extensionName="dashboard" />
+    <a href="{addWidgetUri}" class="js-dashboard-addWidget dashBoardButton-addItem" data-modal-title="{f:translate(key: 'widget.add', extensionName: 'dashboard')}" data-button-close-text="{f:translate(key: 'widget.add.button.close', extensionName: 'dashboard')}" data-button-ok-text="{f:translate(key: 'widget.add.button.ok', extensionName: 'dashboard')}">
+        <i class="fa fa-plus fa-fw"></i><span class="sr-only"><f:translate key="widget.add" extensionName="dashboard" /></span>
     </a>
 </div>
 
