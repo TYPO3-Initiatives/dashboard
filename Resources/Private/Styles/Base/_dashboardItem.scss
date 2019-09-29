@@ -1,10 +1,10 @@
 .dashboard-item {
 	position: absolute;
 	z-index: 1;
-	width: 300px;
+	width: 320px;
 	height: 150px;
 	line-height: 30px;
-	margin: 10px;
+	margin: 0 45px 40px 0;
 
 	&.muuri-item-positioning {
 		z-index: 2;

@@ -1,20 +1,26 @@
 .dashboard-widget-number--icon {
-	display: inline-block;
-	float: left;
-	width: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 32px;
+	margin-right: 20px;
 }
 
 .dashboard-widget-number--content {
-	display: inline-block;
-	float: left;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .dashboard-widget-number--title {
-	font-size: 18px;
+	line-height: 48 / 16;
+	margin-bottom: 5px;
+	font-size: 16px;
 	color: #7f7f7f;
 }
 
 .dashboard-widget-number--number {
+	line-height: 48 / 24;
 	font-weight: 900;
 	font-size: 24px;
 }

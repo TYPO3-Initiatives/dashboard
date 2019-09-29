@@ -1,10 +1,10 @@
 .dashboard-item {
   position: absolute;
   z-index: 1;
-  width: 300px;
+  width: 320px;
   height: 150px;
   line-height: 30px;
-  margin: 10px; }
+  margin: 0 45px 40px 0; }
   .dashboard-item.muuri-item-positioning {
     z-index: 2; }
     .dashboard-item.muuri-item-positioning .widget-remove {
@@ -40,9 +40,12 @@
   height: 100%; }
 
 .dashboard-widget {
-  padding: 20px 30px; }
+  display: -ms-flexbox;
+  display: flex;
+  padding: 30px;
+  height: 100%; }
 
-.module {
+.module.module {
   background-color: #f8f8f8; }
 
 .dashboard-grid {
@@ -113,4 +116,7 @@
   cursor: move; }
   .widget-move:hover {
     color: #878e94; }
+
+.widget-content {
+  height: 100%; }
 /*# sourceMappingURL=dashboard.css.map */
