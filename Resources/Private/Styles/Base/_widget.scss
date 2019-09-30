@@ -46,12 +46,13 @@
 	line-height: 30px;
 	font-weight: 400;
 	font-size: 20px;
-	color: rgb(239, 239, 239);
+	color: #868e96;
 	text-align: center;
 	cursor: pointer;
 
-	&:hover {
-		color: rgb(135, 142, 148);
+	&:hover,
+	&:focus {
+		color: #f49702;
 	}
 }
 
@@ -65,12 +66,13 @@
 	line-height: 30px;
 	font-weight: 400;
 	font-size: 20px;
-	color: rgb(239, 239, 239);
+	color: #868e96;
 	text-align: center;
 	cursor: move;
 
-	&:hover {
-		color: rgb(135, 142, 148);
+	&:hover,
+	&:focus {
+		color: #f49702;
 	}
 }
 
