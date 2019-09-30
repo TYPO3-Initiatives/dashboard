@@ -33,6 +33,16 @@
 			<trans-unit id="dashboard.default" xml:space="preserve">
 				<source>Default</source>
 			</trans-unit>
+
+			<trans-unit id="widgets.pagesWithoutDescription.title" xml:space="preserve">
+				<source>Pages without a meta description</source>
+			</trans-unit>
+			<trans-unit id="widgets.pagesWithoutDescription.page" xml:space="preserve">
+				<source>Page</source>
+			</trans-unit>
+			<trans-unit id="widgets.pagesWithoutDescription.slug" xml:space="preserve">
+				<source>Slug</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
