@@ -5,6 +5,7 @@ $widgetRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\FriendsO
 $widgetRegistry->registerWidget('numberOfBackendUsers', \FriendsOfTYPO3\Dashboard\Widgets\NumberOfBackendUsersWidget::class);
 $widgetRegistry->registerWidget('numberOfAdminBackendUsers', \FriendsOfTYPO3\Dashboard\Widgets\NumberOfAdminBackendUsersWidget::class);
 $widgetRegistry->registerWidget('lastLogins', \FriendsOfTYPO3\Dashboard\Widgets\LastLoginsWidget::class);
+$widgetRegistry->registerWidget('pagesWithoutDescription', \FriendsOfTYPO3\Dashboard\Widgets\PagesWithoutDescriptionWidget::class);
 
 $dashboardRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\FriendsOfTYPO3\Dashboard\Registry\DashboardRegistry::class);
 $dashboardRegistry->registerDashboard('default', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default');

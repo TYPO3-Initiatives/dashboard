@@ -47,9 +47,16 @@
     }
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^2.15"
+    "friendsofphp/php-cs-fixer": "^2.15",
+    "typo3/testing-framework": "^4.9 || ^5.0"
   },
   "scripts": {
+    "test:php:unit": [
+      "phpunit -c build/phpunit.xml"
+    ],
+    "test": [
+      "@test:php:unit"
+    ],
     "cgl": [
       "php-cs-fixer fix -v --dry-run --using-cache false"
     ],
