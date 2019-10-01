@@ -80,3 +80,28 @@
 .widget-content {
 	height: 100%;
 }
+
+.widget-content-title {
+	margin-bottom: 20px;
+	font-weight: 900;
+	font-size: 16px;
+}
+
+.widget-table {
+	width: 100%;
+
+	tr {
+		&:nth-child(even) {
+			background-color: #ededed;
+		}
+	}
+
+	th,
+	td {
+		padding: 6px 10px;
+	}
+
+	th {
+		background-color: #ededed;
+	}
+}

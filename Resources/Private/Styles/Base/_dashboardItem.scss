@@ -1,4 +1,4 @@
-$dashboardItem-height: 150px;
+$dashboardItem-height: 180px;
 $dashboardItem-paddingSide: 22px;
 $dashboardItem-paddingBottom: 40px;
 
@@ -50,13 +50,17 @@ $dashboardItem-paddingBottom: 40px;
 	&.muuri-item-hidden {
 		z-index: 0;
 	}
+
+	&.widget-waiting {
+		line-height: $dashboardItem-height;
+	}
 }
 
 .dashboard-item--h2 {
-	height: ($dashboardItem-height * 2) + $dashboardItem-paddingBottom;
+	height: $dashboardItem-height * 2;
 
 	&.widget-waiting {
-		line-height: 620px;
+		line-height: $dashboardItem-height * 2;
 	}
 }
 
