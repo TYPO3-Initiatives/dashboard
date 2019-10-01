@@ -28,6 +28,7 @@ define(['jquery', 'muuri'], function ($, Muuri) {
             dragReleaseEasing: 'ease',
             layout: {
                 fillGaps: false,
+                rounding: false,
             }
         };
 

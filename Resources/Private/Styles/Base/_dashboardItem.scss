@@ -1,10 +1,14 @@
+$dashboardItem-height: 150px;
+$dashboardItem-paddingSide: 22px;
+$dashboardItem-paddingBottom: 40px;
+
 .dashboard-item {
 	position: absolute;
 	z-index: 1;
-	width: 320px;
-	height: 150px;
-	line-height: 30px;
-	margin: 0 23px 40px;
+	width: 25%;
+	min-width: 320px;
+	height: $dashboardItem-height;
+	padding: 0 $dashboardItem-paddingSide $dashboardItem-paddingBottom;
 
 	&.muuri-item-positioning {
 		z-index: 2;
@@ -49,7 +53,7 @@
 }
 
 .dashboard-item--h2 {
-	height: 320px;
+	height: ($dashboardItem-height * 2) + $dashboardItem-paddingBottom;
 
 	&.widget-waiting {
 		line-height: 620px;
@@ -57,7 +61,8 @@
 }
 
 .dashboard-item--w2 {
-	width: 620px;
+	width: 50%;
+	min-width: 620px;
 }
 
 .dashboard-item-content {

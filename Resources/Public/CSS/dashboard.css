@@ -10,10 +10,10 @@
 .dashboard-item {
   position: absolute;
   z-index: 1;
-  width: 320px;
+  width: 25%;
+  min-width: 320px;
   height: 150px;
-  line-height: 30px;
-  margin: 0 23px 40px; }
+  padding: 0 22px 40px; }
   .dashboard-item.muuri-item-positioning {
     z-index: 2; }
     .dashboard-item.muuri-item-positioning .widget-remove {
@@ -36,12 +36,13 @@
     z-index: 0; }
 
 .dashboard-item--h2 {
-  height: 320px; }
+  height: 340px; }
   .dashboard-item--h2.widget-waiting {
     line-height: 620px; }
 
 .dashboard-item--w2 {
-  width: 620px; }
+  width: 50%;
+  min-width: 620px; }
 
 .dashboard-item-content {
   position: relative;
@@ -65,8 +66,7 @@
 .dashboard-widget {
   display: -ms-flexbox;
   display: flex;
-  height: 100%;
-  padding: 30px; }
+  height: 100%; }
 
 .module.module {
   background-color: #f8f8f8; }
@@ -88,6 +88,7 @@
   right: 0;
   bottom: 0;
   left: 0;
+  padding: 30px;
   background-color: #fff;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05);
   color: #333; }
