@@ -56,6 +56,14 @@
 	}
 }
 
+.dashboard-item--h3 {
+	height: 490px;
+
+	&.widget-waiting {
+		line-height: 620px;
+	}
+}
+
 .dashboard-item--w2 {
 	width: 620px;
 }

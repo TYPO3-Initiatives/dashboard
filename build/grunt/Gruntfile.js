@@ -35,6 +35,11 @@ module.exports = function (grunt) {
                 scssFilePaths: [],
                 cssFilePaths: []
             },
+            'rssWidget': {
+                stylesheets: ['RssWidget'],
+                scssFilePaths: [],
+                cssFilePaths: []
+            },
         },
         cssJsonFiles: grunt.file.expand([path.join(projectDirectory, 'css-bundle.*.json')]),
         scssFilePaths: [],

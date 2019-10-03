@@ -1,0 +1,21 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="WidgetWithTitle" />
+
+<f:section name="main">
+    <table class="dashboard-widget-rss">
+        <f:for each="{items}" as="item">
+            <tr class="dashboard-widget-rss-item">
+                <td class="dashboard-widget-rss-item--title">
+                    <h3><f:link.external uri="{item.link}" target="_blank">{item.title}</f:link.external></h3>
+                    <p>{item.description -> f:format.crop(maxCharacters: 150)}</p>
+                </td>
+                <td class="dashboard-widget-rss-item--meta">
+                    <div class="dashboard-widget-rss-item--date">{item.pubDate -> f:format.date(format: 'd-m-Y')}</div>
+                    <div class="dashboard-widget-rss-item--time">{item.pubDate -> f:format.date(format: '%H:%M')}</div>
+                </td>
+            </tr>
+        </f:for>
+    </table>
+</f:section>
+
+</html>
