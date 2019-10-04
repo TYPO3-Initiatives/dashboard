@@ -1,1 +1,29 @@
-.dashboard-widget-number--icon{display:inline-block;float:left;width:50px}.dashboard-widget-number--content{display:inline-block;float:left}.dashboard-widget-number--title{font-size:1.2em}.dashboard-widget-number--number{font-weight:bold;font-size:1.8em}
+.dashboard-widget-number--icon {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  align-items: center;
+  width: 32px;
+  margin-right: 20px; }
+
+.dashboard-widget-number--content {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-pack: center;
+  justify-content: center; }
+
+.dashboard-widget-number--title {
+  line-height: 1.3;
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: #7f7f7f; }
+
+.dashboard-widget-number--number {
+  line-height: 1.3;
+  font-weight: 900;
+  font-size: 24px; }
+/*# sourceMappingURL=numberWidget.css.map */

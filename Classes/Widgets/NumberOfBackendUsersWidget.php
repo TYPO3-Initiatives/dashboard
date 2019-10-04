@@ -15,7 +15,7 @@ class NumberOfBackendUsersWidget extends AbstractNumberWidget
     {
         AbstractNumberWidget::__construct();
         $this->title = 'Number of backend users';
-        $this->icon = 'status-user-backend';
+        $this->icon = 'dashboard-user';
     }
 
     public function prepareData(): void

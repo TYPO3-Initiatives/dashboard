@@ -4,8 +4,9 @@
 	right: 0;
 	bottom: 0;
 	left: 0;
+	padding: 30px;
 	background-color: #fff;
-	box-shadow: 4px 4px 10px -3px rgba(240, 240, 240, 1);
+	box-shadow: 0 5px 10px 0 rgba(#000, 0.05);
 	color: #333;
 
 	&:hover {
@@ -38,38 +39,69 @@
 
 .widget-remove {
 	position: absolute;
-	top: 0;
-	right: 0;
+	top: 5px;
+	right: 5px;
 	display: none;
 	width: 30px;
 	height: 30px;
 	line-height: 30px;
 	font-weight: 400;
 	font-size: 20px;
-	color: rgb(239, 239, 239);
+	color: #868e96;
 	text-align: center;
 	cursor: pointer;
 
-	&:hover {
-		color: rgb(135, 142, 148);
+	&:hover,
+	&:focus {
+		color: #f49702;
 	}
 }
 
 .widget-move {
 	position: absolute;
-	top: 0;
-	right: 30px;
+	top: 5px;
+	right: 35px;
 	display: none;
 	width: 30px;
 	height: 30px;
 	line-height: 30px;
 	font-weight: 400;
 	font-size: 20px;
-	color: rgb(239, 239, 239);
+	color: #868e96;
 	text-align: center;
 	cursor: move;
 
-	&:hover {
-		color: rgb(135, 142, 148);
+	&:hover,
+	&:focus {
+		color: #f49702;
+	}
+}
+
+.widget-content {
+	height: 100%;
+}
+
+.widget-content-title {
+	margin-bottom: 20px;
+	font-weight: 900;
+	font-size: 16px;
+}
+
+.widget-table {
+	width: 100%;
+
+	tr {
+		&:nth-child(even) {
+			background-color: #ededed;
+		}
+	}
+
+	th,
+	td {
+		padding: 6px 10px;
+	}
+
+	th {
+		background-color: #ededed;
 	}
 }

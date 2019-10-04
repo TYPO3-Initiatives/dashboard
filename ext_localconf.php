@@ -18,3 +18,13 @@ $iconRegistry->registerIcon(
     \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
     ['source' => 'EXT:dashboard/Resources/Public/Icons/grip-vertical.svg']
 );
+$iconRegistry->registerIcon(
+    'dashboard-admin',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/AdminUser.svg']
+);
+$iconRegistry->registerIcon(
+    'dashboard-user',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/User.svg']
+);

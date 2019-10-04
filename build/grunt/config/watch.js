@@ -10,7 +10,7 @@ module.exports = function (grunt) {
 
       watchTask[stylePart] = {
         files: grunt.config.get('sassDirectory') + '/**/*.scss',
-        tasks: ['sass:' + stylePart, 'postcss:' + stylePart, 'bsReload:css'],
+        tasks: ['sass:' + stylePart, 'postcss:' + stylePart],
         options: {
           spawn: false,
           event: 'changed'
