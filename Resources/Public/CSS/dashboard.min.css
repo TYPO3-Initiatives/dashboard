@@ -121,7 +121,7 @@
 .widget-actions {
   position: absolute;
   top: 2rem;
-  right: 2rem;
+  right: 3rem;
   display: flex; }
 
 .widget-remove,
