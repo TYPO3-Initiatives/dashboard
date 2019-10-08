@@ -18,7 +18,7 @@ abstract class AbstractNumberWidget extends AbstractWidget
         $this->width = 1;
 
         $publicResourcesPath = PathUtility::getAbsoluteWebPath(ExtensionManagementUtility::extPath('dashboard')) . 'Resources/Public/';
-        $this->cssFiles[] = $publicResourcesPath . 'CSS/numberWidget.css';
+        $this->cssFiles[] = $publicResourcesPath . 'CSS/numberWidget.min.css';
     }
 
     /**

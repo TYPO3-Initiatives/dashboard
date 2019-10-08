@@ -10,7 +10,6 @@
 /.build
 /build/.phpunit.result.cache
 
-*.min.css
 *.css.map
 **/*temp_*
 **/node_modules
