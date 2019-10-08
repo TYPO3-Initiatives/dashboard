@@ -1,9 +1,19 @@
-var getFileArray = require('../util/getFileArray');
+const path = require('path');
 
 module.exports = function (grunt) {
-  return {
+    const files = {};
+
+    grunt.config('extensions')
+        .filter(extension => extension.cssOutputFile !== '')
+        .forEach(extension => {
+            const cssFilePath = path.join(grunt.config('extDirectory'), extension.name, grunt.config('cssDirectory'), extension.cssOutputFile);
+
+            files[cssFilePath] = cssFilePath
+        });
+
+    return {
         build: {
-            files: getFileArray(grunt, grunt.config.get('cssJsonFiles'), 'css', grunt.config.get('cssDirectory'))
+            files: files
         }
-    };
+    }
 };

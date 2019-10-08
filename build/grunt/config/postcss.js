@@ -1,55 +1,56 @@
-var path = require('path'),
-  sass = require('node-sass');
+const path = require('path');
 
 module.exports = function (grunt) {
-  var styleParts = grunt.config.get('styleParts'),
-    cssFilePaths = [],
-    postCssTasks = {};
-
-  for (let stylePart in grunt.config.get('styleParts')) {
-    if (styleParts.hasOwnProperty(stylePart)) {
-      styleParts[stylePart].stylesheets.forEach(function (fileName) {
-        // The SCSS-file has a upperCamelCase filename, but for the CSS-file we want a lowerCamelCase filename
-        // So take the first char, make it lowercase and keep the rest the same
-        var css = grunt.config.get('cssDirectory') + '/' + (fileName.charAt(0).toLowerCase() + fileName.substr(1)) + '.css';
-
-        styleParts[stylePart].cssFilePaths.push({
-          src: css,
-          dest: css
-        });
-      });
-
-      cssFilePaths = cssFilePaths.concat(styleParts[stylePart].cssFilePaths);
-
-      postCssTasks[stylePart] = {
-        options: {
-          map: true,
-          processors: [
+    const files = [],
+        processors = [
             require('autoprefixer')({
-              browsers: ['> 1%', 'last 2 versions', 'firefox 24', 'opera 12.1', 'IE 8'],
-              cascade: false,
-              remove: false
+                cascade: false,
+                remove: false
+            }),
+            require('postcss-pxtorem')({
+                rootValue: 10,
+                unitPrecision: 5,
+                propList: ['*', '!letter-spacing', '!*box*', '!line-height', '!border*', '!background*'],
+                selectorBlackList: [],
+                replace: true,
+                mediaQuery: true,
             })
-          ]
+        ],
+        configObject = {
+            options: {
+                map: true,
+                processors: processors
+            }
+        };
+
+    grunt.config('extensions')
+        .filter(extension => extension.cssOutputFile !== '')
+        .forEach(extension => {
+            const cssFiles = {
+                src: path.join(grunt.config('extDirectory'), extension.name, grunt.config('cssDirectory'), extension.cssOutputFile),
+                dest: path.join(grunt.config('extDirectory'), extension.name, grunt.config('cssDirectory'), extension.cssOutputFile)
+            };
+
+            // Add the src+dest object to the list of all items that should be processed
+            files.push(cssFiles);
+
+            // But also create a separate sass task for this extension only, which will be triggered by the watcher
+            configObject[extension.name] = {
+                files: [cssFiles]
+            }
+        });
+
+    configObject.dev = {
+        files: files
+    };
+
+    configObject.build = {
+        options: {
+            map: false,
+            processors: processors
         },
-        files: styleParts[stylePart].cssFilePaths
-      };
-    }
-  }
+        files: files
+    };
 
-  postCssTasks['build'] = {
-    options: {
-      map: false,
-      processors: [
-        require('autoprefixer')({
-          browsers: ['> 1%', 'last 2 versions', 'firefox 24', 'opera 12.1', 'IE 8'],
-          cascade: false,
-          remove: false
-        })
-      ]
-    },
-    files: cssFilePaths
-  };
-
-  return postCssTasks;
+    return configObject
 };

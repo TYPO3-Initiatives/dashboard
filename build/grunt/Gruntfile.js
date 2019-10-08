@@ -1,61 +1,56 @@
-/*global module, require, process, console */
-
-// USAGE
-// Install the latest LTS version of node
-// `npm install` in this folder
-// Create an environment variable 'HTTPS_KEY', which points to server.key
-// Create an environment variable 'HTTPS_CERT', which points to server.crt
-// Start the default task with `grunt`, or set a custom project url with `grunt --url=https://example.org`
 module.exports = function (grunt) {
-    var fs = require('fs'),
+    const fs = require('fs'),
         path = require('path'),
         url = require('url'),
-        extDirectory = path.normalize('../..'),
-        projectDirectory = extDirectory,
-        cssFilePaths = [];
+        extDirectory = path.normalize('../../../');
 
     require('jit-grunt')(grunt, {
         sasslint: 'grunt-sass-lint'
     });
 
-    var config = {
+    const config = {
         pkg: grunt.file.readJSON('package.json'),
         extDirectory: extDirectory,
-        projectDirectory: projectDirectory,
-        sassDirectory: path.join(projectDirectory, 'Resources/Private/Styles'),
-        cssDirectory: path.join(projectDirectory, 'Resources/Public/CSS'),
-        styleParts: {
-            'dashboard': {
-                stylesheets: ['Dashboard'],
-                scssFilePaths: [],
-                cssFilePaths: []
-            },
-            'numberWidget': {
-                stylesheets: ['NumberWidget'],
-                scssFilePaths: [],
-                cssFilePaths: []
-            },
-        },
-        cssJsonFiles: grunt.file.expand([path.join(projectDirectory, 'css-bundle.*.json')]),
-        scssFilePaths: [],
+        scssDirectory: 'Resources/Private/Styles',
+        cssDirectory: 'Resources/Public/CSS',
+        jsDirectory: 'Resources/Public/JavaScript',
+        globPattern: '**/!(*_tmp*).scss'
     };
 
-    for (var stylePart in config.styleParts) {
-        if (config.styleParts.hasOwnProperty(stylePart)) {
-            config.styleParts[stylePart].stylesheets.forEach(function (fileName) {
-                // The SCSS-file has a upperCamelCase filename, but for the CSS-file we want a lowerCamelCase filename
-                // So take the first char, make it lowercase and keep the rest the same
-                var css = config.cssDirectory + '/' + (fileName.charAt(0).toLowerCase() + fileName.substr(1)) + '.css';
+    /**
+     * The `defaultExtConfig` object contains all possible keys to configure an extension. All those settings can be
+     * overridden with Object.assign(). When a setting is not overriden, the default value will be used.
+     * For example see the `sassLinting` item, which is true by default. For some extensions this config item is
+     * overriden by false, since those extensions aren't lint valid.
+     *
+     * @namespace
+     * @property {string} name - The name of the extension (same as the folder name in typo3conf/ext/)
+     * @property {string} sassFile - Name of the main sass file for the extension (usually Style.scss)
+     * @property {string} cssOutputFile - Name of the file where the CSS has to be exported to (usually Style.min.css)
+     * @property {array} globbingFolderNames - Array of folder names that are used in sass globbing
+     * @property {boolean} sassLinting - Indicates whether the SCSS-files should be linted by sasslint
+     */
+    var defaultExtConfig = {
+        name: 'dashboard',
+        sassFile: 'Style.scss',
+        cssOutputFile: 'style.min.css',
+        globbingFolderNames: [],
+        sassLinting: true
+    };
 
-                config.styleParts[stylePart].cssFilePaths.push({
-                    src: css,
-                    dest: css
-                });
-            });
-
-            cssFilePaths = cssFilePaths.concat(config.styleParts[stylePart].cssFilePaths);
-        }
-    }
+    // The list of sass files that is used in the grunt tasks
+    // Each sass file has to extend the defaultExtConfig with own config (since the name is required)
+    config.extensions = [
+        Object.assign({}, defaultExtConfig, {
+            sassFile: 'Dashboard.scss',
+            cssOutputFile: 'dashboard.min.css',
+            globbingFolderNames: ['base'],
+        }),
+        Object.assign({}, defaultExtConfig, {
+            sassFile: 'NumberWidget.scss',
+            cssOutputFile: 'numberWidget.min.css',
+        })
+    ];
 
     grunt.initConfig(config);
 
@@ -70,9 +65,7 @@ module.exports = function (grunt) {
         }
     });
 
-    for (var stylePart in config.styleParts) {
-        grunt.registerTask(stylePart, ['sass_globbing:generate', 'sass:' + stylePart, 'postcss:' + stylePart, 'watch:' + stylePart]);
-    }
+    grunt.registerTask('default', ['sass_globbing:generate', 'sass:dev', 'postcss:dev', 'watch']);
     grunt.registerTask('lint', ['sasslint:dev']);
     grunt.registerTask('build', ['sasslint:build', 'sass_globbing:generate', 'sass:build', 'postcss:build', 'cssmin:build']);
 };
