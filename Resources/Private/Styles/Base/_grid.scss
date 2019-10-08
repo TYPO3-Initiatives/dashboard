@@ -2,7 +2,7 @@
 	background-color: #f8f8f8;
 
 	h1 {
-		line-height: 48 / 32;
+		line-height: calc(48 / 32);
 		font-weight: 900;
 		font-size: 32px;
 	}

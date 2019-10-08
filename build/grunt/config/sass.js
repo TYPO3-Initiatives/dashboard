@@ -1,46 +1,46 @@
-var path = require('path'),
+const path = require('path'),
     sass = require('node-sass');
 
 module.exports = function (grunt) {
-  var styleParts = grunt.config.get('styleParts'),
-    scssFilePaths = [],
-    sassTasks = {};
+    const configObject = {},
+        files = [],
+        devOptions = {
+            implementation: sass,
+            outputStyle: 'nested',
+            sourceMap: true
+        };
 
-  for (let stylePart in grunt.config.get('styleParts')) {
-    if (styleParts.hasOwnProperty(stylePart)) {
-      styleParts[stylePart].stylesheets.forEach(function (fileName) {
-        // The SCSS-file has a upperCamelCase filename, but for the CSS-file we want a lowerCamelCase filename
-        // So take the first char, make it lowercase and keep the rest the same
-        var scss = grunt.config.get('sassDirectory') + '/' + fileName + '.scss',
-          css = grunt.config.get('cssDirectory') + '/' + (fileName.charAt(0).toLowerCase() + fileName.substr(1)) + '.css';
+    grunt.config('extensions')
+        .filter(extension => extension.sassFile !== '' && extension.cssOutputFile !== '')
+        .forEach(extension => {
+            const extFiles = {
+                src: path.join(grunt.config('extDirectory'), extension.name, grunt.config('scssDirectory'), extension.sassFile),
+                dest: path.join(grunt.config('extDirectory'), extension.name, grunt.config('cssDirectory'), extension.cssOutputFile)
+            };
 
-        styleParts[stylePart].scssFilePaths.push({
-          src: scss,
-          dest: css
+            // Add the src+dest object to the list of all items that should be processed
+            files.push(extFiles);
+
+            // But also create a separate sass task for this extension only, which will be triggered by the watcher
+            configObject[extension.name] = {
+                options: devOptions,
+                files: [extFiles]
+            }
         });
-      });
 
-      scssFilePaths = scssFilePaths.concat(styleParts[stylePart].scssFilePaths);
+    configObject.dev = {
+        options: devOptions,
+        files: files
+    };
 
-      sassTasks[stylePart] = {
+    configObject.build = {
         options: {
-          implementation: sass,
-          outputStyle: 'nested',
-          sourceMap: true
+            implementation: sass,
+            outputStyle: 'compressed',
+            sourceMap: false
         },
-        files: styleParts[stylePart].scssFilePaths
-      };
-    }
-  }
+        files: files
+    };
 
-  sassTasks['build'] = {
-    options: {
-      implementation: sass,
-      outputStyle: 'compressed',
-      sourceMap: false
-    },
-    files: scssFilePaths
-  };
-
-  return sassTasks;
+    return configObject
 };
