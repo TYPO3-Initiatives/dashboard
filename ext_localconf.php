@@ -16,7 +16,12 @@ $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
 $iconRegistry->registerIcon(
     'dragdrop', // Icon-Identifier, z.B. tx-myext-action-preview
     \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-    ['source' => 'EXT:dashboard/Resources/Public/Icons/grip-vertical.svg']
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/Drag.svg']
+);
+$iconRegistry->registerIcon(
+    'timesCircle', // Icon-Identifier, z.B. tx-myext-action-preview
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/Times-circle.svg']
 );
 $iconRegistry->registerIcon(
     'dashboard-admin',
