@@ -43,6 +43,19 @@
 			<trans-unit id="widgets.pagesWithoutDescription.slug" xml:space="preserve">
 				<source>Slug</source>
 			</trans-unit>
+
+			<trans-unit id="widgets.lastLogins.title" xml:space="preserve">
+				<source>Last 5 logins</source>
+			</trans-unit>
+			<trans-unit id="widgets.lastLogins.date" xml:space="preserve">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="widgets.lastLogins.user" xml:space="preserve">
+				<source>User</source>
+			</trans-unit>
+			<trans-unit id="widgets.lastLogins.ip" xml:space="preserve">
+				<source>IP-address</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
