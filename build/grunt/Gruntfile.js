@@ -13,7 +13,6 @@ module.exports = function (grunt) {
         extDirectory: extDirectory,
         scssDirectory: 'Resources/Private/Styles',
         cssDirectory: 'Resources/Public/CSS',
-        jsDirectory: 'Resources/Public/JavaScript',
         globPattern: '**/!(*_tmp*).scss'
     };
 
