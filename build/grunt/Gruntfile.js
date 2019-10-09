@@ -43,7 +43,7 @@ module.exports = function (grunt) {
         Object.assign({}, defaultExtConfig, {
             sassFile: 'Dashboard.scss',
             cssOutputFile: 'dashboard.min.css',
-            globbingFolderNames: ['base'],
+            globbingFolderNames: ['base', 'utilities'],
         }),
         Object.assign({}, defaultExtConfig, {
             sassFile: 'NumberWidget.scss',
