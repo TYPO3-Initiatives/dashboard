@@ -10,6 +10,10 @@ abstract class AbstractListWidget extends AbstractWidget
      */
     protected $items = [];
 
+    protected $limit = 5;
+
+    protected $totalItems = 0;
+
     /**
      * @var string
      */
@@ -31,6 +35,7 @@ abstract class AbstractListWidget extends AbstractWidget
 
         $this->view->assign('title', $this->title);
         $this->view->assign('items', $this->items);
+        $this->view->assign('totalNumberOfItems', $this->totalItems);
 
         return $this->view->render();
     }

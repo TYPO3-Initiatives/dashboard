@@ -22,6 +22,20 @@
         </f:for>
         </tbody>
     </table>
+
+    <f:if condition="{items -> f:count()} == {totalNumberOfItems}">
+        <f:then>
+            <div class="widget-table-comment">
+                <f:translate key="widgets.pagesWithoutDescription.allresults" extensionName="dashboard" arguments="{0: '{items -> f:count()}'}" default="no translation" />
+            </div>
+        </f:then>
+        <f:else>
+            <div class="widget-table-comment">
+                <f:translate key="widgets.pagesWithoutDescription.onlyxofyresults" extensionName="dashboard" arguments="{0: '{items -> f:count()}', 1: '{totalNumberOfItems}'}" default="no translation" />
+            </div>
+        </f:else>
+    </f:if>
+
 </f:section>
 
 </html>
