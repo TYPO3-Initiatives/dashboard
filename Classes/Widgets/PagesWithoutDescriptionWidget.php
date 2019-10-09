@@ -18,21 +18,29 @@ class PagesWithoutDescriptionWidget extends AbstractListWidget
         AbstractListWidget::__construct();
         $this->width = 2;
         $this->height = 2;
+        $this->limit = 5;
         $this->title = 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widgets.pagesWithoutDescription.title';
     }
 
     public function prepareData(): void
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('pages');
-        $statement = $queryBuilder
+        $queryBuilder
             ->select('*')
             ->from('pages')
             ->where(
-                $queryBuilder->expr()->eq('description', $queryBuilder->createNamedParameter(''))
+                $queryBuilder->expr()->orX(
+                    $queryBuilder->expr()->eq('description', $queryBuilder->createNamedParameter('')),
+                    $queryBuilder->expr()->isNull('description')
+                ),
+                $queryBuilder->expr()->eq('no_index', 0)
             )
-            ->setMaxResults(5)
-            ->execute();
+            ->orderBy('tstamp', 'DESC');
 
+        $statementAll = $queryBuilder->execute();
+        $this->totalItems = $statementAll->rowCount();
+
+        $statement = $queryBuilder->setMaxResults($this->limit)->execute();
         while ($row = $statement->fetch()) {
             $this->items[] = ['id' => $row['uid'], 'page' => $row['title'], 'slug' => $row['slug']];
         }

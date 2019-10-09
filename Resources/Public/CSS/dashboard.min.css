@@ -165,6 +165,11 @@
   .widget-table th {
     background-color: #ededed; }
 
+.widget-table-comment {
+  margin-top: 2rem;
+  font-style: italic;
+  color: #868e96; }
+
 .u-flex {
   display: flex; }
 /*# sourceMappingURL=dashboard.min.css.map */
