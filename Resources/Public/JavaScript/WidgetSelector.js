@@ -33,7 +33,7 @@ define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity'], func
                 title: $element.data('modal-title'),
                 content: $($('#widgetSelector').html()),
                 severity: Severity.notice,
-                size: 'default'
+                size: 'medium'
             });
         });
     };
