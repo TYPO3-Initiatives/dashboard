@@ -100,7 +100,12 @@
 	}
 
 	thead tr {
-		background-color: $grey;
+		background-color: $primary-color-light;
+	}
+
+	th {
+		font-weight: 400;
+		color: #fff;
 	}
 }
 
@@ -108,4 +113,18 @@
 	margin-top: 20px;
 	font-style: italic;
 	color: $secondary-color;
+}
+
+.widget-edit {
+	width: 45px;
+	text-align: center;
+}
+
+.widget-editIcon {
+	color: #000;
+
+	&:hover,
+	&:focus {
+		color: #f49702;
+	}
 }
