@@ -21,13 +21,14 @@ define(['jquery', 'muuri'], function ($, Muuri) {
                 }
             },
             dragSortPredicate: {
-                action:'swap',
+                action:'move',
                 threshold: 30
             },
             dragReleaseDuration: 400,
             dragReleaseEasing: 'ease',
             layout: {
-                fillGaps: true,
+                fillGaps: false,
+                rounding: false,
             }
         };
 
@@ -42,7 +43,8 @@ define(['jquery', 'muuri'], function ($, Muuri) {
         var widgets = dashboard.getItems().map(function (item) {
             return [
                 item.getElement().getAttribute('data-widget-key'),
-                item.getElement().getAttribute('data-widget-config')
+                item.getElement().getAttribute('data-widget-config'),
+                item.getElement().getAttribute('data-widget-hash')
             ];
         });
 

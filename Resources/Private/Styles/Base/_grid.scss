@@ -1,0 +1,16 @@
+.module.module {
+	background-color: #f8f8f8;
+
+	h1 {
+		line-height: calc(48 / 32);
+		font-weight: 900;
+		font-size: 32px;
+	}
+}
+
+.dashboard-grid {
+	position: relative;
+	box-sizing: content-box;
+	margin-right: -23px;
+	margin-left: -23px;
+}

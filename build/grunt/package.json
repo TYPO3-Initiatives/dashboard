@@ -1,0 +1,26 @@
+{
+  "name": "friendsoftypo3-dashboard",
+  "version": "1.0.0",
+  "description": "Grunt package for friendsoftypo3 dashboard project",
+  "main": "Gruntfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Koen Wouters <koen@maxserv.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^9.5.1",
+    "grunt": "^1.0.4",
+    "grunt-browser-sync": "^2.2.0",
+    "grunt-contrib-cssmin": "^3.0.0",
+    "grunt-contrib-uglify": "^4.0.1",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-postcss": "^0.9.0",
+    "grunt-sass": "^3.0.2",
+    "grunt-sass-globbing": "^1.5.1",
+    "grunt-sass-lint": "^0.2.4",
+    "jit-grunt": "^0.10.0",
+    "node-sass": "^4.12.0",
+    "postcss-pxtorem": "^4.0.1"
+  }
+}

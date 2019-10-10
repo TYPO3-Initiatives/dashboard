@@ -8,7 +8,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class NumberOfBackendUsersWidget
- * @package FriendsOfTYPO3\Dashboard\Widgets
  */
 class NumberOfBackendUsersWidget extends AbstractNumberWidget
 {
@@ -16,7 +15,7 @@ class NumberOfBackendUsersWidget extends AbstractNumberWidget
     {
         AbstractNumberWidget::__construct();
         $this->title = 'Number of backend users';
-        $this->icon = 'status-user-backend';
+        $this->icon = 'dashboard-user';
     }
 
     public function prepareData(): void

@@ -2,6 +2,7 @@
   "name": "friendsoftypo3/dashboard",
   "type": "typo3-cms-extension",
   "description": "Dashboard for TYPO3.",
+  "minimum-stability": "dev",
   "homepage": "https://typo3.org",
   "license": [
     "GPL-2.0-or-later"
@@ -26,6 +27,10 @@
     {
       "name": "Irene Sacchi",
       "role": "UX"
+    },
+    {
+      "name": "Koen Wouters",
+      "role": "Developer"
     }
   ],
   "config": {
@@ -35,7 +40,7 @@
     "bin-dir": ".build/bin"
   },
   "require": {
-    "typo3/cms-core": "^9.5 || 10.0.*@dev"
+    "typo3/cms-core": "^9.5 || 10.*@dev"
   },
   "replace": {
     "dashboard": "self.version",
@@ -47,10 +52,20 @@
     }
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^2.15"
+    "friendsofphp/php-cs-fixer": "^2.15",
+    "typo3/testing-framework": "^4.9 || ^5.0"
   },
   "scripts": {
+    "test:php:unit": [
+      "phpunit -c build/phpunit.xml"
+    ],
+    "test": [
+      "@test:php:unit"
+    ],
     "cgl": [
+      "php-cs-fixer fix -v --dry-run --using-cache false"
+    ],
+    "cgl-fix": [
       "php-cs-fixer fix -v --using-cache false"
     ]
   }

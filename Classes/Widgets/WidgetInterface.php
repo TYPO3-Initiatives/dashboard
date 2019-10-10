@@ -5,7 +5,6 @@ namespace FriendsOfTYPO3\Dashboard\Widgets;
 
 /**
  * Interface WidgetInterface
- * @package FriendsOfTYPO3\Dashboard\Widgets
  */
 interface WidgetInterface
 {

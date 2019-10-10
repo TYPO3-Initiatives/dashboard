@@ -11,7 +11,6 @@ use TYPO3Fluid\Fluid\View\ViewInterface;
 
 /**
  * Class AbstractWidget
- * @package FriendsOfTYPO3\Dashboard\Widgets
  */
 abstract class AbstractWidget implements WidgetInterface
 {
@@ -74,8 +73,8 @@ abstract class AbstractWidget implements WidgetInterface
         $this->view = GeneralUtility::makeInstance(StandaloneView::class);
         $this->view->setTemplate($this->templateName);
         $this->view->setTemplateRootPaths(['EXT:dashboard/Resources/Private/Templates/Widgets']);
-        $this->view->setPartialRootPaths(['EXT:dashboard/Resources/Private/Partials']);
-        $this->view->setLayoutRootPaths(['EXT:dashboard/Resources/Private/Layouts']);
+        $this->view->setPartialRootPaths(['EXT:dashboard/Resources/Private/Partials/Widgets']);
+        $this->view->setLayoutRootPaths(['EXT:dashboard/Resources/Private/Layouts/Widgets']);
     }
     /**
      * @return string

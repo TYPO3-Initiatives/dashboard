@@ -2,7 +2,7 @@ define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity'], func
     'use strict';
 
     var WidgetSelector = {
-        triggerSelector: '.dashboard-add-widget'
+        triggerSelector: '.js-dashboard-addWidget'
     };
 
     WidgetSelector.initialize = function() {

@@ -5,6 +5,7 @@ $widgetRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\FriendsO
 $widgetRegistry->registerWidget('numberOfBackendUsers', \FriendsOfTYPO3\Dashboard\Widgets\NumberOfBackendUsersWidget::class);
 $widgetRegistry->registerWidget('numberOfAdminBackendUsers', \FriendsOfTYPO3\Dashboard\Widgets\NumberOfAdminBackendUsersWidget::class);
 $widgetRegistry->registerWidget('lastLogins', \FriendsOfTYPO3\Dashboard\Widgets\LastLoginsWidget::class);
+$widgetRegistry->registerWidget('pagesWithoutDescription', \FriendsOfTYPO3\Dashboard\Widgets\PagesWithoutDescriptionWidget::class);
 $widgetRegistry->registerWidget('sysLogErrors', \FriendsOfTYPO3\Dashboard\Widgets\SysLogErrorsWidget::class);
 
 $dashboardRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\FriendsOfTYPO3\Dashboard\Registry\DashboardRegistry::class);
@@ -16,5 +17,20 @@ $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
 $iconRegistry->registerIcon(
     'dragdrop', // Icon-Identifier, z.B. tx-myext-action-preview
     \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
-    ['source' => 'EXT:dashboard/Resources/Public/Icons/grip-vertical.svg']
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/Drag.svg']
+);
+$iconRegistry->registerIcon(
+    'timesCircle', // Icon-Identifier, z.B. tx-myext-action-preview
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/Times-circle.svg']
+);
+$iconRegistry->registerIcon(
+    'dashboard-admin',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/AdminUser.svg']
+);
+$iconRegistry->registerIcon(
+    'dashboard-user',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/User.svg']
 );

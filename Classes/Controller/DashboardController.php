@@ -18,7 +18,6 @@ use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
 class DashboardController
@@ -86,7 +85,7 @@ class DashboardController
         $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('dashboard/WidgetContentCollector');
         $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('dashboard/WidgetSelector');
         $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('dashboard/WidgetRemover');
-        $this->moduleTemplate->getPageRenderer()->addCssFile($publicResourcesPath . 'CSS/Dashboard.css');
+        $this->moduleTemplate->getPageRenderer()->addCssFile($publicResourcesPath . 'CSS/dashboard.min.css');
 
         $action = $request->getQueryParams()['action'] ?? $request->getParsedBody()['action'] ?? 'main';
         $this->initializeView($action);
@@ -121,7 +120,8 @@ class DashboardController
 
         $this->view->assign('widgets', $widgets);
         $this->view->assign('availableWidgets', $availableWidget);
-
+        $this->view->assign('availableDashboards', $this->dashboardRegistry->getDashboards());
+        $this->view->assign('currentDashboard', $this->getCurrentDashboard());
         $parameters = [
             'widget' => '@widget',
             'action' => 'addWidget'
@@ -136,12 +136,21 @@ class DashboardController
 
         $route = $this->uriBuilder->buildUriFromRoute('dashboard', ['action' => 'main']);
         return new RedirectResponse($route);
-
     }
 
     public function removeWidgetAction(ServerRequestInterface $request): ResponseInterface
     {
         $parameters = $request->getQueryParams();
+
+        $widgets = $this->getBackendUser()->getModuleData('web_dashboard/dashboard/' . $this->getCurrentDashboard() . '/widgets');
+
+        if (array_key_exists($parameters['widgetHash'], $widgets)) {
+            unset($widgets[$parameters['widgetHash']]);
+            $this->getBackendUser()->pushModuleData('web_dashboard/dashboard/' . $this->getCurrentDashboard() . '/widgets', $widgets);
+        }
+
+        $route = $this->uriBuilder->buildUriFromRoute('dashboard', ['action' => 'main']);
+        return new RedirectResponse($route);
     }
 
     public function addWidgetAction(ServerRequestInterface $request): ResponseInterface
@@ -174,7 +183,7 @@ class DashboardController
         $this->view->setPartialRootPaths(['EXT:dashboard/Resources/Private/Partials']);
         $this->view->setLayoutRootPaths(['EXT:dashboard/Resources/Private/Layouts']);
 
-        $this->addDashboardSelector();
+        $this->moduleTemplate->getDocHeaderComponent()->disable();
     }
 
     protected function getWidgetsForCurrentUser(): array
@@ -186,14 +195,6 @@ class DashboardController
             foreach ($tmpWidgets as $hash => $tmpWidget) {
                 $widgets[$hash] = $this->prepareWidgetElement($tmpWidget['key'], $tmpWidget['config']);
             }
-        } else {
-            // TODO: default widgets when no user settings are found
-            $defaultWidgets = ['numberOfBackendUsers', 'numberOfAdminBackendUsers', 'lastLogins'];
-            foreach ($defaultWidgets as $defaultWidget) {
-                $widgets[$this->getWidgetKey($defaultWidget)] = $this->prepareWidgetElement($defaultWidget);
-            }
-
-            $this->getBackendUser()->pushModuleData('web_dashboard/dashboard/' . $this->getCurrentDashboard() . '/widgets', $widgets);
         }
 
         return $widgets;
@@ -228,34 +229,6 @@ class DashboardController
             'title' => $widgetObject->getTitle(),
             'config' => $config
         ];
-    }
-
-    protected function addDashboardSelector(): void
-    {
-        $availableDashboards = $this->dashboardRegistry->getDashboards();
-
-        $dashboardSelector = $this->moduleTemplate->getDocHeaderComponent()->getMenuRegistry()->makeMenu();
-        $dashboardSelector->setIdentifier('currentDashboard');
-        $dashboardSelector->setLabel('Dashboard');
-
-        foreach ($availableDashboards as $dashboardKey => $dashboardConfig) {
-            $parameters = [
-                'currentDashboard' => $dashboardKey,
-                'action' => 'setActiveDashboard'
-            ];
-            $url = (string)$this->uriBuilder->buildUriFromRoute('dashboard', $parameters);
-            $menuItem = $dashboardSelector
-                ->makeMenuItem()
-                ->setTitle(
-                    $this->getLanguageService()->sL($dashboardConfig['label']) ?: $dashboardKey
-                )
-                ->setHref($url);
-            if ($this->getCurrentDashboard() === $dashboardKey) {
-                $menuItem->setActive(true);
-            }
-            $dashboardSelector->addMenuItem($menuItem);
-        }
-        $this->moduleTemplate->getDocHeaderComponent()->getMenuRegistry()->addMenu($dashboardSelector);
     }
 
     /**
