@@ -23,9 +23,11 @@ class WidgetAjaxController
 
         $widgetRegistry = GeneralUtility::makeInstance(WidgetRegistry::class);
         $widgetObject = $widgetRegistry->getWidgetObject($queryParams['widget']);
-        $data = [];
-        $data['widget'] = $queryParams['widget'];
-        $data['content'] = $widgetObject->renderWidgetContent();
+        $data = [
+            'widget' => $queryParams['widget'],
+            'content' => $widgetObject->renderWidgetContent(),
+            'callbacks' => $widgetObject->retrieveJavaScriptCallbacks()
+        ];
 
         return new JsonResponse($data);
     }

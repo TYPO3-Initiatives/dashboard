@@ -16,5 +16,6 @@ abstract class AbstractChartWidget extends AbstractWidget
         parent::__construct();
         $this->cssFiles[] = $this->publicResourcesPath . 'CSS/Dist/Chart.min.css';
         $this->jsFiles['chartjs'] = $this->publicResourcesPath . 'JavaScript/Dist/Chart.min';
+        $this->jsFiles['chartinitializer'] = $this->publicResourcesPath . 'JavaScript/ChartInitializer';
     }
 }

@@ -55,6 +55,11 @@ abstract class AbstractWidget implements WidgetInterface
     protected $publicResourcesPath;
 
     /**
+     * @var array
+     */
+    protected $javaScriptCallbacks = [];
+
+    /**
      * AbstractWidget constructor.
      */
     public function __construct()
@@ -111,6 +116,14 @@ abstract class AbstractWidget implements WidgetInterface
         $this->view->assign('title', $this->title);
 
         return $this->view->render();
+    }
+
+    /**
+     * @return array
+     */
+    public function retrieveJavaScriptCallbacks(): array
+    {
+        return $this->javaScriptCallbacks;
     }
 
     /**

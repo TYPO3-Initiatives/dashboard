@@ -1,4 +1,4 @@
-define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity'], function ($, Modal, Severity) {
+define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity', 'chartinitializer'], function ($, Modal, Severity, ChartInitializer) {
     'use strict';
 
     var WidgetContentCollector = {
@@ -11,7 +11,7 @@ define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity'], func
             $.get(
                 TYPO3.settings.ajaxUrls['ext-dashboard-get-widget-content'],
                 {
-                    widget: $(this).data('widget-key')
+                    widget: _this.data('widget-key')
                 },
                 'json'
             )
@@ -19,6 +19,12 @@ define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity'], func
                     _this.find('.widget-content').html(response.content);
                     _this.find('.widget-content').removeClass('hide');
                     _this.find('.widget-waiting').addClass('hide');
+
+                    if (Object.keys(response.callbacks).length > 0) {
+                        for (const [callbackName, callbackArguments] of Object.entries(response.callbacks)) {
+                            ChartInitializer.init(callbackArguments.type, _this.data('widget-hash'));
+                        }
+                    }
                 });
         });
     };

@@ -216,9 +216,9 @@ class DashboardController
             }
         }
 
-        foreach ($widgetObject->getJsFiles() as $jsFile) {
+        foreach ($widgetObject->getJsFiles() as $key => $jsFile) {
             if (!in_array($jsFile, $this->jsFiles, true)) {
-                $this->jsFiles[] = $jsFile;
+                $this->jsFiles[$key] = $jsFile;
             }
         }
 

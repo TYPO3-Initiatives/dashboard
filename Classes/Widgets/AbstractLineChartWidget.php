@@ -10,6 +10,15 @@ namespace FriendsOfTYPO3\Dashboard\Widgets;
 abstract class AbstractLineChartWidget extends AbstractChartWidget
 {
     /**
+     * @var array
+     */
+    protected $javaScriptCallbacks = [
+        'ChartInitializer.init' => [
+            'type' => 'line',
+        ]
+    ];
+
+    /**
      * @var string
      */
     protected $templateName = 'LineChartWidget';

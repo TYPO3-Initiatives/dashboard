@@ -12,6 +12,7 @@ interface WidgetInterface
     public function getHeight(): int;
     public function getWidth(): int;
     public function renderWidgetContent(): string;
+    public function retrieveJavaScriptCallbacks(): array;
     public function prepareData(): void;
     public function getCssFiles(): array;
     public function getJsFiles(): array;
