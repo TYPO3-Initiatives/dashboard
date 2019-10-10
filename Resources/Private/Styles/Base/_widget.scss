@@ -19,7 +19,7 @@
 .widget-content-main {
 	width: 100%;
 	height: 100%;
-	padding: 20px 30px;
+	padding: $block-gutter;
 }
 
 .widget-waiting {
@@ -55,12 +55,12 @@
 	display: none;
 	width: 15px;
 	height: 15px;
-	color: #868e96;
+	color: $secondary-color;
 	text-align: center;
 
 	&:hover,
 	&:focus {
-		color: #f49702;
+		color: $primary-color;
 	}
 
 	.icon {
@@ -79,8 +79,8 @@
 }
 
 .widget-content-title {
-	padding: 15px 30px;
-	border-bottom: 1px solid #ededed;
+	padding: ($block-gutter / 2) $block-gutter;
+	border-bottom: 1px solid $grey;
 	font-weight: 900;
 	font-size: 16px;
 }
@@ -90,7 +90,7 @@
 
 	tr {
 		&:nth-child(even) {
-			background-color: #ededed;
+			background-color: $grey;
 		}
 	}
 
@@ -99,13 +99,13 @@
 		padding: 6px 10px;
 	}
 
-	th {
-		background-color: #ededed;
+	thead tr {
+		background-color: $grey;
 	}
 }
 
 .widget-table-comment {
 	margin-top: 20px;
 	font-style: italic;
-	color: #868e96;
+	color: $secondary-color;
 }

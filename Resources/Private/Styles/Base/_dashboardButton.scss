@@ -1,13 +1,16 @@
 .dashBoardButton-addItem {
+	position: fixed;
+	right: $column-gutter + ($block-gutter / 2);
+	bottom: $column-gutter + ($block-gutter / 2);
+	z-index: 2;
 	display: inline-block;
-	float: right;
 	padding: 20px;
-	background-color: #868e96;
+	background-color: $secondary-color;
 	color: #fff;
 
 	&:hover,
 	&:focus {
-		background-color: #f49702;
+		background-color: $primary-color;
 		color: #fff;
 	}
 }
