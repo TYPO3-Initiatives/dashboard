@@ -12,9 +12,11 @@ use TYPO3Fluid\Fluid\View\ViewInterface;
  */
 abstract class AbstractWidget implements WidgetInterface
 {
-    protected $title;
-    protected $height;
-    protected $width;
+    protected $title = '';
+    protected $description = '';
+    protected $iconIdentifier = '';
+    protected $height = 1;
+    protected $width = 1;
 
     /**
      * @var array
@@ -49,6 +51,7 @@ abstract class AbstractWidget implements WidgetInterface
         $this->view->setPartialRootPaths(['EXT:dashboard/Resources/Private/Partials/Widgets']);
         $this->view->setLayoutRootPaths(['EXT:dashboard/Resources/Private/Layouts/Widgets']);
     }
+
     /**
      * @return string
      */
@@ -57,6 +60,21 @@ abstract class AbstractWidget implements WidgetInterface
         return $this->title;
     }
 
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIconIdentifier(): string
+    {
+        return $this->iconIdentifier;
+    }
     /**
      * @return int  Returns height of widget in rows (1-4)
      */
