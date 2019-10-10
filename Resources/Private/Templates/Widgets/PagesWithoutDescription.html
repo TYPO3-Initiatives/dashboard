@@ -15,8 +15,8 @@
             <tr>
                 <td>{item.page}</td>
                 <td>{item.slug}</td>
-                <td>
-                    <f:be.link route="web_layout" parameters="{id: item.id}"><core:icon identifier="actions-open" /></f:be.link>
+                <td class="widget-edit">
+                    <f:be.link class="widget-editIcon" route="web_layout" parameters="{id: item.id}"><core:icon identifier="actions-open" alternativeMarkupIdentifier="inline" /></f:be.link>
                 </td>
             </tr>
         </f:for>
