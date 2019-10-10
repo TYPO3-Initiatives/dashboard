@@ -163,12 +163,23 @@
   .widget-table td {
     padding: 0.6rem 1rem; }
   .widget-table th {
-    background-color: #ededed; }
+    background-color: #f7a831;
+    font-weight: 400;
+    color: #fff; }
 
 .widget-table-comment {
   margin-top: 2rem;
   font-style: italic;
   color: #868e96; }
+
+.widget-edit {
+  width: 4.5rem;
+  text-align: center; }
+
+.widget-editIcon {
+  color: #000; }
+  .widget-editIcon:hover, .widget-editIcon:focus {
+    color: #f49702; }
 
 .u-flex {
   display: flex; }
