@@ -20,7 +20,10 @@ define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity'], func
                     currentModal.find('a.widgetSelector-widget').on('click', function(e) {
                         currentModal.trigger('modal-dismiss');
                     });
-                }
+                },
+                additionalCssClasses: [
+                    'dashboard-modal'
+                ]
             });
         });
     };
