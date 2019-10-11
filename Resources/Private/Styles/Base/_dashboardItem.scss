@@ -61,10 +61,10 @@
 }
 
 .dashboard-item--h3 {
-	height: 490px;
+	height: $dashboard-item-height * 3;
 
 	&.widget-waiting {
-		line-height: 620px;
+		line-height: $dashboard-item-height * 3;
 	}
 }
 

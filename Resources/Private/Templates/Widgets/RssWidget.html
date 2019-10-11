@@ -6,7 +6,7 @@
         <f:for each="{items}" as="item">
             <tr class="dashboard-widget-rss-item">
                 <td class="dashboard-widget-rss-item--title">
-                    <h3><f:link.external uri="{item.link}" target="_blank">{item.title}</f:link.external></h3>
+                    <div><strong><f:link.external uri="{item.link}" target="_blank">{item.title}</f:link.external></strong></div>
                     <p>{item.description -> f:format.crop(maxCharacters: 150)}</p>
                 </td>
                 <td class="dashboard-widget-rss-item--meta">
