@@ -9,39 +9,22 @@ define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity'], func
         $(document).on('click', WidgetSelector.triggerSelector, function(e) {
             e.preventDefault();
             var $element = $(this);
-            // var buttons = [
-            //     {
-            //         text: $element.data('button-close-text') || 'Close!',
-            //         active: true,
-            //         btnClass: 'btn-default',
-            //         trigger: function() {
-            //             Modal.currentModal.trigger('modal-dismiss');
-            //         }
-            //     },
-            //     {
-            //         text: $element.data('button-ok-text') || 'OK!',
-            //         btnClass: 'btn-primary',
-            //         trigger: function(evt) {
-            //             Modal.currentModal.trigger('modal-dismiss');
-            //             self.location.href = $element.attr('href')
-            //                 .replace('%40widget', Modal.currentModal.find('select[name="widget"]').val())
-            //         }
-            //     }
-            // ];
+
             Modal.advanced({
                 type: Modal.types.default,
                 title: $element.data('modal-title'),
                 content: $($('#widgetSelector').html()),
                 severity: Severity.notice,
-                size: 'medium'
+                size: 'medium',
+                callback: function(currentModal) {
+                    currentModal.find('a.widgetSelector-widget').on('click', function(e) {
+                        currentModal.trigger('modal-dismiss');
+                    });
+                }
             });
         });
     };
 
-    $(document).on('click', '.widgetSelector-widget', function(e) {
-        e.preventDefault();
-        Modal.currentModal.trigger('modal-dismiss');
-    });
     WidgetSelector.initialize();
     return WidgetSelector;
 });
