@@ -30,7 +30,7 @@ abstract class AbstractRssWidget extends AbstractListWidget
     public function prepareData(): void
     {
         /** @var \SimpleXMLElement $rssFeed */
-        $rssFeed = simplexml_load_file($this->rssFile);
+        $rssFeed = simplexml_load_string(file_get_contents($this->rssFile));
 
         $itemCount = 0;
         foreach ($rssFeed->channel->item as $item) {
