@@ -1,15 +1,20 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
-<h1><f:translate key="title" extensionName="dashboard" /></h1>
+<h1>
+    <f:translate key="title" extensionName="dashboard"/>
+</h1>
 
-<f:for each="{availableDashboards}" as="dashboardConfig" key="dashboardKey">
-    <f:if condition="{dashboardKey} == {currentDashboard}">
-        <f:then><f:variable name="activeClass" value="active" /></f:then>
-        <f:else><f:variable name="activeClass" value="nope" /></f:else>
-    </f:if>
-    <f:be.link route="dashboard" parameters="{action: 'setActiveDashboard', currentDashboard: dashboardKey}" class="{activeClass}">
-        <f:translate key="{dashboardConfig.label}" />
-    </f:be.link>
-</f:for>
+<div class="dashboardTabs">
+    <f:for each="{availableDashboards}" as="dashboardConfig" key="dashboardKey">
+        <f:if condition="{dashboardKey} == {currentDashboard}">
+            <f:then>
+                <f:variable name="activeClass" value="dashboardTab--active"/>
+            </f:then>
+        </f:if>
+        <f:be.link route="dashboard" parameters="{action: 'setActiveDashboard', currentDashboard: dashboardKey}" class="dashboardTab {activeClass}">
+            <f:translate key="{dashboardConfig.label}"/>
+        </f:be.link>
+    </f:for>
+</div>
 
 <div class="dashboard-grid">
     <f:for each="{widgets}" as="widget" iteration="widgetIterator" key="widgetHash">
@@ -17,19 +22,26 @@
             <div class="dashboard-item-content">
                 <div class="widget">
                     <div class="widget-waiting">
-                        <core:icon identifier="spinner-circle" size="large" />
+                        <core:icon identifier="spinner-circle" size="large"/>
                     </div>
                     <div class="widget-content hide"></div>
-                    <div class="widget-move"><core:icon identifier="dragdrop"></core:icon></div>
-                    <f:be.link class="widget-remove" route="dashboard" parameters="{action: 'removeWidget', widgetHash: widgetHash}" data="{title: '{f:translate(key: \'widget.remove.confirm.title\', extensionName: \'dashboard\')}', message: '{f:translate(key: \'widget.remove.confirm.message\', extensionName: \'dashboard\')}', button-ok-text: '{f:translate(key: \'widget.remove.button.ok\', extensionName: \'dashboard\')}', button-close-text: '{f:translate(key: \'widget.remove.button.close\', extensionName: \'dashboard\')}'}"><i class="fa fa-times"></i></f:be.link>
+                    <div class="widget-actions">
+                        <div class="widget-move">
+                            <core:icon identifier="dragdrop" alternativeMarkupIdentifier="inline"/>
+                        </div>
+                        <f:be.link class="widget-remove" route="dashboard" parameters="{action: 'removeWidget', widgetHash: widgetHash}" data="{title: '{f:translate(key: \'widget.remove.confirm.title\', extensionName: \'dashboard\')}', message: '{f:translate(key: \'widget.remove.confirm.message\', extensionName: \'dashboard\')}', button-ok-text: '{f:translate(key: \'widget.remove.button.ok\', extensionName: \'dashboard\')}', button-close-text: '{f:translate(key: \'widget.remove.button.close\', extensionName: \'dashboard\')}'}">
+                            <core:icon identifier="timesCircle" alternativeMarkupIdentifier="inline"/>
+                        </f:be.link>
+                    </div>
                 </div>
             </div>
         </div>
     </f:for>
 </div>
+
 <div class="dashboard-add-item">
-    <a href="{addWidgetUri}" class="btn btn-default dashboard-add-widget" data-modal-title="{f:translate(key: 'widget.add', extensionName: 'dashboard')}" data-button-close-text="{f:translate(key: 'widget.add.button.close', extensionName: 'dashboard')}" data-button-ok-text="{f:translate(key: 'widget.add.button.ok', extensionName: 'dashboard')}">
-        <i class="fa fa-plus fa-fw"></i> <f:translate key="widget.add" extensionName="dashboard" />
+    <a href="{addWidgetUri}" class="js-dashboard-addWidget dashBoardButton-addItem" data-modal-title="{f:translate(key: 'widget.add', extensionName: 'dashboard')}" data-button-close-text="{f:translate(key: 'widget.add.button.close', extensionName: 'dashboard')}" data-button-ok-text="{f:translate(key: 'widget.add.button.ok', extensionName: 'dashboard')}">
+        <i class="fa fa-plus fa-fw"></i><span class="sr-only"><f:translate key="widget.add" extensionName="dashboard"/></span>
     </a>
 </div>
 
@@ -37,7 +49,9 @@
     <div>
         <select name="widget">
             <f:for each="{availableWidgets}" as="availableWidgetConfig" key="availableWidgetKey">
-                <option value="{availableWidgetKey}"><f:translate key="{availableWidgetConfig.title}" default="{availableWidgetConfig.title}" /></option>
+                <option value="{availableWidgetKey}">
+                    <f:translate key="{availableWidgetConfig.title}" default="{availableWidgetConfig.title}"/>
+                </option>
             </f:for>
         </select>
     </div>

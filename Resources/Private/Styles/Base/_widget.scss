@@ -5,15 +5,21 @@
 	bottom: 0;
 	left: 0;
 	background-color: #fff;
-	box-shadow: 4px 4px 10px -3px rgba(240, 240, 240, 1);
+	box-shadow: 0 5px 10px 0 rgba(#000, 0.05);
 	color: #333;
 
 	&:hover {
-		> .widget-remove,
-		> .widget-move {
+		.widget-remove,
+		.widget-move {
 			display: block;
 		}
 	}
+}
+
+.widget-content-main {
+	width: 100%;
+	height: 100%;
+	padding: $block-gutter;
 }
 
 .widget-waiting {
@@ -36,40 +42,89 @@
 	text-align: left;
 }
 
-.widget-remove {
+.widget-actions {
 	position: absolute;
-	top: 0;
-	right: 0;
-	display: none;
-	width: 30px;
-	height: 30px;
-	line-height: 30px;
-	font-weight: 400;
-	font-size: 20px;
-	color: rgb(239, 239, 239);
-	text-align: center;
-	cursor: pointer;
+	top: 20px;
+	right: 30px;
+	display: flex;
+}
 
-	&:hover {
-		color: rgb(135, 142, 148);
+.widget-remove,
+.widget-move {
+	position: relative;
+	display: none;
+	width: 15px;
+	height: 15px;
+	color: $secondary-color;
+	text-align: center;
+
+	&:hover,
+	&:focus {
+		color: $primary-color;
+	}
+
+	.icon {
+		width: 100%;
+		height: 100%;
 	}
 }
 
 .widget-move {
-	position: absolute;
-	top: 0;
-	right: 30px;
-	display: none;
-	width: 30px;
-	height: 30px;
-	line-height: 30px;
-	font-weight: 400;
-	font-size: 20px;
-	color: rgb(239, 239, 239);
-	text-align: center;
-	cursor: move;
+	margin-right: 10px;
+	cursor: grab;
+}
 
-	&:hover {
-		color: rgb(135, 142, 148);
+.widget-content {
+	height: 100%;
+}
+
+.widget-content-title {
+	padding: ($block-gutter / 2) $block-gutter;
+	border-bottom: 1px solid $grey;
+	font-weight: 900;
+	font-size: 16px;
+}
+
+.widget-table {
+	width: 100%;
+
+	tr {
+		&:nth-child(even) {
+			background-color: $grey;
+		}
+	}
+
+	th,
+	td {
+		padding: 6px 10px;
+	}
+
+	thead tr {
+		background-color: $primary-color-light;
+	}
+
+	th {
+		font-weight: 400;
+		color: #fff;
+	}
+}
+
+.widget-table-comment {
+	margin-top: 20px;
+	font-style: italic;
+	color: $secondary-color;
+}
+
+.widget-edit {
+	width: 45px;
+	text-align: center;
+}
+
+.widget-editIcon {
+	color: #000;
+
+	&:hover,
+	&:focus {
+		color: #f49702;
 	}
 }

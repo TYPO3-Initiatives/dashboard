@@ -2,7 +2,7 @@
 <f:layout name="WidgetWithTitle" />
 
 <f:section name="main">
-    <table>
+    <table class="widget-table">
         <thead>
         <tr>
             <th><f:translate key="widgets.pagesWithoutDescription.page" extensionName="dashboard" /></th>
@@ -15,13 +15,27 @@
             <tr>
                 <td>{item.page}</td>
                 <td>{item.slug}</td>
-                <td>
-                    <f:be.link route="web_layout" parameters="{id: item.id}"><core:icon identifier="actions-open" /></f:be.link>
+                <td class="widget-edit">
+                    <f:be.link class="widget-editIcon" route="web_layout" parameters="{id: item.id}"><core:icon identifier="actions-open" alternativeMarkupIdentifier="inline" /></f:be.link>
                 </td>
             </tr>
         </f:for>
         </tbody>
     </table>
+
+    <f:if condition="{items -> f:count()} == {totalNumberOfItems}">
+        <f:then>
+            <div class="widget-table-comment">
+                <f:translate key="widgets.pagesWithoutDescription.allresults" extensionName="dashboard" arguments="{0: '{items -> f:count()}'}" default="no translation" />
+            </div>
+        </f:then>
+        <f:else>
+            <div class="widget-table-comment">
+                <f:translate key="widgets.pagesWithoutDescription.onlyxofyresults" extensionName="dashboard" arguments="{0: '{items -> f:count()}', 1: '{totalNumberOfItems}'}" default="no translation" />
+            </div>
+        </f:else>
+    </f:if>
+
 </f:section>
 
 </html>

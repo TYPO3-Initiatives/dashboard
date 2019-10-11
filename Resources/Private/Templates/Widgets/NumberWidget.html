@@ -1,13 +1,15 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
 <div class="dashboard-widget dashboard-widget-number">
-    <f:if condition="{icon}">
-        <div class="dashboard-widget-number--icon">
-            <core:icon identifier="{icon}" size="default" />
+    <div class="widget-content-main u-flex">
+        <f:if condition="{icon}">
+            <div class="dashboard-widget-number--icon">
+                <core:icon identifier="{icon}" size="large" alternativeMarkupIdentifier="inline" />
+            </div>
+        </f:if>
+        <div class="dashboard-widget-number--content">
+            <div class="dashboard-widget-number--title">{title}</div>
+            <div class="dashboard-widget-number--number">{number}</div>
         </div>
-    </f:if>
-    <div class="dashboard-widget-number--content">
-        <div class="dashboard-widget-number--title">{title}</div>
-        <div class="dashboard-widget-number--number">{number}</div>
     </div>
 </div>
 </html>

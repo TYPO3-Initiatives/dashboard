@@ -79,8 +79,8 @@ class DashboardController
         $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('dashboard/WidgetContentCollector');
         $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('dashboard/WidgetSelector');
         $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('dashboard/WidgetRemover');
-        $this->moduleTemplate->getPageRenderer()->addCssFile($publicResourcesPath . 'CSS/dashboard.css');
-        $this->moduleTemplate->getPageRenderer()->disableCompressCss();
+        $this->moduleTemplate->getPageRenderer()->addCssFile($publicResourcesPath . 'CSS/dashboard.min.css');
+
         $action = $request->getQueryParams()['action'] ?? $request->getParsedBody()['action'] ?? 'main';
         $this->initializeView($action);
 
