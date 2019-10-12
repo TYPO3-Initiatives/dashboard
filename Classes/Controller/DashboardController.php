@@ -5,6 +5,7 @@ namespace FriendsOfTYPO3\Dashboard\Controller;
 
 use FriendsOfTYPO3\Dashboard\Registry\DashboardRegistry;
 use FriendsOfTYPO3\Dashboard\Registry\WidgetRegistry;
+use FriendsOfTYPO3\Dashboard\Widgets\WidgetInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
@@ -210,25 +211,29 @@ class DashboardController
     {
         $widgetObject = $this->widgetRegistry->getWidgetObject($widgetKey);
 
-        foreach ($widgetObject->getCssFiles() as $cssFile) {
-            if (!in_array($cssFile, $this->cssFiles, true)) {
-                $this->cssFiles[] = $cssFile;
+        if ($widgetObject instanceof WidgetInterface) {
+            foreach ($widgetObject->getCssFiles() as $cssFile) {
+                if (!in_array($cssFile, $this->cssFiles, true)) {
+                    $this->cssFiles[] = $cssFile;
+                }
             }
+
+            foreach ($widgetObject->getJsFiles() as $key => $jsFile) {
+                if (!in_array($jsFile, $this->jsFiles, true)) {
+                    $this->jsFiles[$key] = $jsFile;
+                }
+            }
+
+            return [
+                'key' => $widgetKey,
+                'height' => $widgetObject->getHeight(),
+                'width' => $widgetObject->getWidth(),
+                'title' => $widgetObject->getTitle(),
+                'config' => $config
+            ];
         }
 
-        foreach ($widgetObject->getJsFiles() as $key => $jsFile) {
-            if (!in_array($jsFile, $this->jsFiles, true)) {
-                $this->jsFiles[$key] = $jsFile;
-            }
-        }
-
-        return [
-            'key' => $widgetKey,
-            'height' => $widgetObject->getHeight(),
-            'width' => $widgetObject->getWidth(),
-            'title' => $widgetObject->getTitle(),
-            'config' => $config
-        ];
+        return [];
     }
 
     /**

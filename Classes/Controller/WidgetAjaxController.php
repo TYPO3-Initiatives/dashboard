@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace FriendsOfTYPO3\Dashboard\Controller;
 
 use FriendsOfTYPO3\Dashboard\Registry\WidgetRegistry;
+use FriendsOfTYPO3\Dashboard\Widgets\WidgetInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
@@ -23,11 +24,15 @@ class WidgetAjaxController
 
         $widgetRegistry = GeneralUtility::makeInstance(WidgetRegistry::class);
         $widgetObject = $widgetRegistry->getWidgetObject($queryParams['widget']);
-        $data = [
-            'widget' => $queryParams['widget'],
-            'content' => $widgetObject->renderWidgetContent(),
-            'callbacks' => $widgetObject->retrieveJavaScriptCallbacks()
-        ];
+
+        $data = [];
+        if ($widgetObject instanceof WidgetInterface) {
+            $data = [
+                'widget' => $queryParams['widget'],
+                'content' => $widgetObject->renderWidgetContent(),
+                'callbacks' => $widgetObject->retrieveJavaScriptCallbacks()
+            ];
+        }
 
         return new JsonResponse($data);
     }

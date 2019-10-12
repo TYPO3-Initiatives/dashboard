@@ -22,7 +22,7 @@ define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity', 'char
 
                     if (Object.keys(response.callbacks).length > 0) {
                         for (const [callbackName, callbackArguments] of Object.entries(response.callbacks)) {
-                            ChartInitializer.init(callbackArguments.type, _this.data('widget-hash'));
+                            ChartInitializer.init(callbackArguments.config, _this.data('widget-hash'));
                         }
                     }
                 });

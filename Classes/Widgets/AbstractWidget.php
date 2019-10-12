@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Dashboard\Widgets;
 
+use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
@@ -58,6 +59,8 @@ abstract class AbstractWidget implements WidgetInterface
      * @var array
      */
     protected $javaScriptCallbacks = [];
+
+    protected $languagePrefix = 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:';
 
     /**
      * AbstractWidget constructor.
@@ -140,5 +143,15 @@ abstract class AbstractWidget implements WidgetInterface
     public function getJsFiles(): array
     {
         return $this->jsFiles;
+    }
+
+    /**
+     * Returns the LanguageService
+     *
+     * @return LanguageService
+     */
+    protected function getLanguageService()
+    {
+        return $GLOBALS['LANG'];
     }
 }

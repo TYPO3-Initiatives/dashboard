@@ -9,12 +9,28 @@ namespace FriendsOfTYPO3\Dashboard\Widgets;
  */
 abstract class AbstractLineChartWidget extends AbstractChartWidget
 {
-    /**
-     * @var array
-     */
-    protected $javaScriptCallbacks = [
-        'ChartInitializer.init' => [
-            'type' => 'line',
+    protected $chartType = 'line';
+
+    protected $chartOptions = [
+        'responsive' => true,
+        'legend' => [
+            'display' => false
+        ],
+        'scales' => [
+            'yAxes' => [
+                [
+                    'ticks' => [
+                        'beginAtZero' => true
+                    ]
+                ]
+            ],
+            'xAxes' => [
+                [
+                    'ticks' => [
+                        'maxTicksLimit' => 15
+                    ]
+                ]
+            ]
         ]
     ];
 
