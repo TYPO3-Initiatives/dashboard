@@ -2,17 +2,17 @@
 	display: inline-block;
 	padding: 10px 13px;
 	margin: 0 15px 20px 0;
-	background-color: #868e96;
+	background-color: $secondary-color;
 	font-size: 14px;
 	color: #fff;
 
 	&:hover,
 	&:focus {
-		background-color: #fbb037;
+		background-color: $primary-color-light;
 	}
 }
 
 .dashboardTab--active {
-	background-color: #f49702;
+	background-color: $primary-color;
 	pointer-events: none;
 }

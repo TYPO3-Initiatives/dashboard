@@ -1,6 +1,9 @@
 .dashBoardButton-addItem {
+  position: fixed;
+  right: 3.7rem;
+  bottom: 3.7rem;
+  z-index: 2;
   display: inline-block;
-  float: right;
   padding: 2rem;
   background-color: #868e96;
   color: #fff; }
@@ -14,7 +17,7 @@
   width: 25%;
   min-width: 32rem;
   height: 18rem;
-  padding: 0 2.2rem 4rem; }
+  padding: 0 2.2rem 4.4rem; }
   .dashboard-item.muuri-item-positioning {
     z-index: 2; }
     .dashboard-item.muuri-item-positioning .widget-remove {
@@ -98,7 +101,7 @@
 .widget-content-main {
   width: 100%;
   height: 100%;
-  padding: 2rem 3rem; }
+  padding: 3rem; }
 
 .widget-waiting {
   position: absolute;
@@ -162,13 +165,25 @@
   .widget-table th,
   .widget-table td {
     padding: 0.6rem 1rem; }
+  .widget-table thead tr {
+    background-color: #fbb037; }
   .widget-table th {
-    background-color: #ededed; }
+    font-weight: 400;
+    color: #fff; }
 
 .widget-table-comment {
   margin-top: 2rem;
   font-style: italic;
   color: #868e96; }
+
+.widget-edit {
+  width: 4.5rem;
+  text-align: center; }
+
+.widget-editIcon {
+  color: #000; }
+  .widget-editIcon:hover, .widget-editIcon:focus {
+    color: #f49702; }
 
 .u-flex {
   display: flex; }
