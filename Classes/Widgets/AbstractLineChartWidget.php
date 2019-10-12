@@ -5,7 +5,6 @@ namespace FriendsOfTYPO3\Dashboard\Widgets;
 
 /**
  * Class AbstractLineChartWidget
- * @package FriendsOfTYPO3\Dashboard\Widgets
  */
 abstract class AbstractLineChartWidget extends AbstractChartWidget
 {

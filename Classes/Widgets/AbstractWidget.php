@@ -50,6 +50,8 @@ abstract class AbstractWidget implements WidgetInterface
      */
     protected $view;
 
+    protected $additionalClasses = '';
+
     /**
      * @var string
      */
@@ -58,7 +60,7 @@ abstract class AbstractWidget implements WidgetInterface
     /**
      * @var array
      */
-    protected $javaScriptCallbacks = [];
+    protected $eventData = [];
 
     protected $languagePrefix = 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:';
 
@@ -124,9 +126,9 @@ abstract class AbstractWidget implements WidgetInterface
     /**
      * @return array
      */
-    public function retrieveJavaScriptCallbacks(): array
+    public function getEventData(): array
     {
-        return $this->javaScriptCallbacks;
+        return $this->eventData;
     }
 
     /**
@@ -143,6 +145,11 @@ abstract class AbstractWidget implements WidgetInterface
     public function getJsFiles(): array
     {
         return $this->jsFiles;
+    }
+
+    public function getAdditionalClasses(): string
+    {
+        return $this->additionalClasses;
     }
 
     /**

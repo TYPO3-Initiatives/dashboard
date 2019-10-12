@@ -14,7 +14,6 @@ use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Http\RedirectResponse;
 use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
@@ -229,6 +228,7 @@ class DashboardController
                 'height' => $widgetObject->getHeight(),
                 'width' => $widgetObject->getWidth(),
                 'title' => $widgetObject->getTitle(),
+                'additionalClasses' => $widgetObject->getAdditionalClasses(),
                 'config' => $config
             ];
         }

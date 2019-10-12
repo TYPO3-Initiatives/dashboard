@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Dashboard\Widgets;
 
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use TYPO3\CMS\Core\Utility\PathUtility;
-
 abstract class AbstractChartWidget extends AbstractWidget
 {
     /**
@@ -28,6 +25,8 @@ abstract class AbstractChartWidget extends AbstractWidget
      */
     protected $chartColors = ['#f49702'];
 
+    protected $additionalClasses = 'dashboard-item--chart';
+
     /**
      * AbstractChartWidget constructor.
      */
@@ -44,24 +43,22 @@ abstract class AbstractChartWidget extends AbstractWidget
      */
     protected function prepareChartData(): void
     {
-
+        // This method need to be implemented by the final class
     }
 
     /**
      * @return array
      */
-    public function retrieveJavaScriptCallbacks(): array
+    public function getEventData(): array
     {
         $this->prepareChartData();
 
-        $this->javaScriptCallbacks['ChartInitializer.init'] = [
-            'config' => [
-                'type' => $this->chartType,
-                'data' => $this->chartData,
-                'options' => $this->chartOptions
-            ]
+        $this->eventData['graphConfig'] = [
+            'type' => $this->chartType,
+            'data' => $this->chartData,
+            'options' => $this->chartOptions
         ];
 
-        return $this->javaScriptCallbacks;
+        return $this->eventData;
     }
 }

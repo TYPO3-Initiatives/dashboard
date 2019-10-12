@@ -8,7 +8,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class SysLogErrorsWidget
- * @package FriendsOfTYPO3\Dashboard\Widgets
  */
 class SysLogErrorsWidget extends AbstractLineChartWidget
 {
@@ -52,8 +51,7 @@ class SysLogErrorsWidget extends AbstractLineChartWidget
         $data = [];
 
         if ($period === 'lastWeek') {
-            for ($daysBefore=7; $daysBefore--; $daysBefore>0)
-            {
+            for ($daysBefore=7; $daysBefore--; $daysBefore>0) {
                 $labels[] = date('d-m-Y', strtotime('-' . $daysBefore . ' day'));
                 $startPeriod = strtotime('-' . $daysBefore . ' day 0:00:00');
                 $endPeriod =  strtotime('-' . $daysBefore . ' day 23:59:59');
@@ -63,8 +61,7 @@ class SysLogErrorsWidget extends AbstractLineChartWidget
         }
 
         if ($period === 'lastMonth') {
-            for ($daysBefore=31; $daysBefore--; $daysBefore>0)
-            {
+            for ($daysBefore=31; $daysBefore--; $daysBefore>0) {
                 $labels[] = date('d-m-Y', strtotime('-' . $daysBefore . ' day'));
                 $startPeriod = strtotime('-' . $daysBefore . ' day 0:00:00');
                 $endPeriod =  strtotime('-' . $daysBefore . ' day 23:59:59');
@@ -72,7 +69,6 @@ class SysLogErrorsWidget extends AbstractLineChartWidget
                 $data[] = $this->getNumberOfErrorsInPeriod($startPeriod, $endPeriod);
             }
         }
-
 
         return [
             'labels' => $labels,

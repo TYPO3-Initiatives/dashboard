@@ -20,10 +20,10 @@ define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity', 'char
                     _this.find('.widget-content').removeClass('hide');
                     _this.find('.widget-waiting').addClass('hide');
 
-                    if (Object.keys(response.callbacks).length > 0) {
-                        for (const [callbackName, callbackArguments] of Object.entries(response.callbacks)) {
-                            ChartInitializer.init(callbackArguments.config, _this.data('widget-hash'));
-                        }
+                    if (Object.keys(response.eventdata).length > 0) {
+                        _this.trigger('widgetContentRendered', response.eventdata);
+                    } else {
+                        _this.trigger('widgetContentRendered');
                     }
                 });
         });

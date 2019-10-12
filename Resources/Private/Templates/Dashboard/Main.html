@@ -18,7 +18,7 @@
 
 <div class="dashboard-grid">
     <f:for each="{widgets}" as="widget" iteration="widgetIterator" key="widgetHash">
-        <div class="dashboard-item dashboard-item--w{widget.width} dashboard-item--h{widget.height}" data-widget-id="{widget.id}" data-widget-hash="{widgetHash}" data-widget-key="{widget.key}" data-widget-config="{widget.config -> f:format.json()}">
+        <div class="dashboard-item dashboard-item--w{widget.width} dashboard-item--h{widget.height} {widget.additionalClasses}" data-widget-id="{widget.id}" data-widget-hash="{widgetHash}" data-widget-key="{widget.key}" data-widget-config="{widget.config -> f:format.json()}">
             <div class="dashboard-item-content">
                 <div class="widget">
                     <div class="widget-waiting">

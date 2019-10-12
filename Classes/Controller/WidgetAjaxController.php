@@ -30,7 +30,7 @@ class WidgetAjaxController
             $data = [
                 'widget' => $queryParams['widget'],
                 'content' => $widgetObject->renderWidgetContent(),
-                'callbacks' => $widgetObject->retrieveJavaScriptCallbacks()
+                'eventdata' => $widgetObject->getEventData()
             ];
         }
 
