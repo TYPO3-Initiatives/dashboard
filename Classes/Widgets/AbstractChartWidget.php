@@ -27,6 +27,8 @@ abstract class AbstractChartWidget extends AbstractWidget
 
     protected $additionalClasses = 'dashboard-item--chart';
 
+    protected $iconIdentifier = 'dashboard-chart';
+
     /**
      * AbstractChartWidget constructor.
      */

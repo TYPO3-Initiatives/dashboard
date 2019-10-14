@@ -21,6 +21,11 @@ abstract class AbstractWidget implements WidgetInterface
     protected $title;
 
     /**
+     * @var string
+     */
+    protected $description = '';
+
+    /**
      * @var int
      */
     protected $height;
@@ -33,7 +38,7 @@ abstract class AbstractWidget implements WidgetInterface
     /**
      * @var string
      */
-    protected $iconIdentifier;
+    protected $iconIdentifier = '';
 
     /**
      * @var array

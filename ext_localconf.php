@@ -49,3 +49,13 @@ $iconRegistry->registerIcon(
     \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
     ['source' => 'EXT:dashboard/Resources/Public/Icons/SignIn.svg']
 );
+$iconRegistry->registerIcon(
+    'dashboard-chart',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/Chart.svg']
+);
+$iconRegistry->registerIcon(
+    'dashboard-chartline',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/ChartLine.svg']
+);
