@@ -1,14 +1,16 @@
-.dashboard-modal .modal-body {
-  display: flex;
-  flex-flow: row wrap;
-  flex-grow: 0; }
-
 .dashboard-modal .modal-content {
   background-color: #f8f8f8; }
 
+.dashboard-modal .widgetSelector-widgets {
+  display: flex;
+  flex-flow: row wrap; }
+
 .dashboard-modal .widgetSelector-widget {
-  width: 50%;
+  width: 100%;
   padding: 0 1.1rem 2.2rem; }
+  @media screen and (min-width: 768PX) {
+    .dashboard-modal .widgetSelector-widget {
+      width: 50%; } }
 
 .dashboard-modal .widgetSelector-widget-block {
   display: flex;
@@ -22,7 +24,9 @@
   margin-right: 1.5rem; }
 
 .dashboard-modal .widgetSelector-widget-title {
-  margin-bottom: 0.5rem;
   font-weight: 800;
   font-size: 1.4rem; }
+
+.dashboard-modal .widgetSelector-widget-description {
+  margin-top: 0.5rem; }
 /*# sourceMappingURL=style.css.map */

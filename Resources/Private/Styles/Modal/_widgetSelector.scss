@@ -1,7 +1,16 @@
 .dashboard-modal {
+	.widgetSelector-widgets {
+		display: flex;
+		flex-flow: row wrap;
+	}
+
 	.widgetSelector-widget {
-		width: 50%;
+		width: 100%;
 		padding: 0 ($column-gutter / 2) ($column-gutter);
+
+		@media screen and (min-width: 768PX) {
+			width: 50%;
+		}
 	}
 
 	.widgetSelector-widget-block {
@@ -18,8 +27,11 @@
 	}
 
 	.widgetSelector-widget-title {
-		margin-bottom: 5px;
 		font-weight: 800;
 		font-size: 14px;
+	}
+
+	.widgetSelector-widget-description {
+		margin-top: 5px;
 	}
 }
