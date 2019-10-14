@@ -48,6 +48,11 @@ module.exports = function (grunt) {
         Object.assign({}, defaultExtConfig, {
             sassFile: 'NumberWidget.scss',
             cssOutputFile: 'numberWidget.min.css',
+        }),
+        Object.assign({}, defaultExtConfig, {
+            sassFile: 'Modal.scss',
+            cssOutputFile: 'Modal/style.css',
+            globbingFolderNames: ['modal'],
         })
     ];
 

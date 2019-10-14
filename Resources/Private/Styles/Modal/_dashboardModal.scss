@@ -1,0 +1,11 @@
+.dashboard-modal {
+	.modal-body {
+		display: flex;
+		flex-flow: row wrap;
+		flex-grow: 0;
+	}
+
+	.modal-content {
+		background-color: $background-color;
+	}
+}
