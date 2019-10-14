@@ -9,7 +9,11 @@ use TYPO3\CMS\Core\Utility\PathUtility;
 abstract class AbstractNumberWidget extends AbstractWidget
 {
     protected $number;
+
     protected $templateName = 'NumberWidget';
+
+    protected $iconIdentifier = 'dashboard-hashtag';
+
     protected $icon;
 
     public function __construct()

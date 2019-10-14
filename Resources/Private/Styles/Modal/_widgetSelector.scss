@@ -1,0 +1,38 @@
+.dashboard-modal {
+	.widgetSelector-widgets {
+		display: flex;
+		flex-flow: row wrap;
+		margin: 0 ($column-gutter / -2);
+	}
+
+	.widgetSelector-widget {
+		width: 100%;
+		padding: 0 ($column-gutter / 2) ($column-gutter);
+
+		@media screen and (min-width: 768px) {
+			width: 50%;
+		}
+	}
+
+	.widgetSelector-widget-block {
+		display: flex;
+		align-items: center;
+		height: 100%;
+		padding: $block-gutter / 2;
+		background-color: #fff;
+		box-shadow: $shadow;
+	}
+
+	.widgetSelector-widget-icon {
+		margin-right: $block-gutter / 2;
+	}
+
+	.widgetSelector-widget-title {
+		font-weight: 800;
+		font-size: 14px;
+	}
+
+	.widgetSelector-widget-description {
+		margin-top: 5px;
+	}
+}

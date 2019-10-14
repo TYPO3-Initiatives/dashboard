@@ -10,6 +10,8 @@ abstract class AbstractListWidget extends AbstractWidget
      */
     protected $items = [];
 
+    protected $iconIdentifier = 'dashboard-bars';
+
     protected $limit = 5;
 
     protected $totalItems = 0;

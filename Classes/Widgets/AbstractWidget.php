@@ -3,7 +3,10 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Dashboard\Widgets;
 
+use TYPO3\CMS\Core\Localization\LanguageService;
+use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3Fluid\Fluid\View\ViewInterface;
 
@@ -12,9 +15,30 @@ use TYPO3Fluid\Fluid\View\ViewInterface;
  */
 abstract class AbstractWidget implements WidgetInterface
 {
+    /**
+     * @var string
+     */
     protected $title;
+
+    /**
+     * @var string
+     */
+    protected $description = '';
+
+    /**
+     * @var int
+     */
     protected $height;
+
+    /**
+     * @var int
+     */
     protected $width;
+
+    /**
+     * @var string
+     */
+    protected $iconIdentifier = '';
 
     /**
      * @var array
@@ -36,6 +60,29 @@ abstract class AbstractWidget implements WidgetInterface
      */
     protected $view;
 
+    protected $additionalClasses = '';
+
+    /**
+     * @var string
+     */
+    protected $publicResourcesPath;
+
+    /**
+     * @var array
+     */
+    protected $eventData = [];
+
+    protected $languagePrefix = 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:';
+
+    /**
+     * AbstractWidget constructor.
+     */
+    public function __construct()
+    {
+        $this->publicResourcesPath =
+            PathUtility::getAbsoluteWebPath(ExtensionManagementUtility::extPath('dashboard')) . 'Resources/Public/';
+    }
+
     /**
      * Sets up the Fluid View.
      *
@@ -49,6 +96,7 @@ abstract class AbstractWidget implements WidgetInterface
         $this->view->setPartialRootPaths(['EXT:dashboard/Resources/Private/Partials/Widgets']);
         $this->view->setLayoutRootPaths(['EXT:dashboard/Resources/Private/Layouts/Widgets']);
     }
+
     /**
      * @return string
      */
@@ -57,6 +105,21 @@ abstract class AbstractWidget implements WidgetInterface
         return $this->title;
     }
 
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIconIdentifier(): string
+    {
+        return $this->iconIdentifier;
+    }
     /**
      * @return int  Returns height of widget in rows (1-4)
      */
@@ -89,6 +152,14 @@ abstract class AbstractWidget implements WidgetInterface
     /**
      * @return array
      */
+    public function getEventData(): array
+    {
+        return $this->eventData;
+    }
+
+    /**
+     * @return array
+     */
     public function getCssFiles(): array
     {
         return $this->cssFiles;
@@ -100,5 +171,20 @@ abstract class AbstractWidget implements WidgetInterface
     public function getJsFiles(): array
     {
         return $this->jsFiles;
+    }
+
+    public function getAdditionalClasses(): string
+    {
+        return $this->additionalClasses;
+    }
+
+    /**
+     * Returns the LanguageService
+     *
+     * @return LanguageService
+     */
+    protected function getLanguageService()
+    {
+        return $GLOBALS['LANG'];
     }
 }

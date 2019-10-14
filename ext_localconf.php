@@ -6,6 +6,7 @@ $widgetRegistry->registerWidget('numberOfBackendUsers', \FriendsOfTYPO3\Dashboar
 $widgetRegistry->registerWidget('numberOfAdminBackendUsers', \FriendsOfTYPO3\Dashboard\Widgets\NumberOfAdminBackendUsersWidget::class);
 $widgetRegistry->registerWidget('lastLogins', \FriendsOfTYPO3\Dashboard\Widgets\LastLoginsWidget::class);
 $widgetRegistry->registerWidget('pagesWithoutDescription', \FriendsOfTYPO3\Dashboard\Widgets\PagesWithoutDescriptionWidget::class);
+$widgetRegistry->registerWidget('sysLogErrors', \FriendsOfTYPO3\Dashboard\Widgets\SysLogErrorsWidget::class);
 $widgetRegistry->registerWidget('t3News', \FriendsOfTYPO3\Dashboard\Widgets\T3NewsWidget::class);
 
 $dashboardRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\FriendsOfTYPO3\Dashboard\Registry\DashboardRegistry::class);
@@ -33,4 +34,29 @@ $iconRegistry->registerIcon(
     'dashboard-user',
     \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
     ['source' => 'EXT:dashboard/Resources/Public/Icons/User.svg']
+);
+$iconRegistry->registerIcon(
+    'dashboard-hashtag',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/Hashtag.svg']
+);
+$iconRegistry->registerIcon(
+    'dashboard-bars',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/Bars.svg']
+);
+$iconRegistry->registerIcon(
+    'dashboard-signin',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/SignIn.svg']
+);
+$iconRegistry->registerIcon(
+    'dashboard-chart',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/Chart.svg']
+);
+$iconRegistry->registerIcon(
+    'dashboard-chartline',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/ChartLine.svg']
 );

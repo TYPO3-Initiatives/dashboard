@@ -16,3 +16,5 @@ defined('TYPO3_MODE') or die();
         'labels' => 'LLL:EXT:dashboard/Resources/Private/Language/locallang_mod.xlf'
     ]
 );
+
+$GLOBALS['TBE_STYLES']['skins']['dashboard']['stylesheetDirectories']['modal'] = 'EXT:dashboard/Resources/Public/CSS/Modal/';
