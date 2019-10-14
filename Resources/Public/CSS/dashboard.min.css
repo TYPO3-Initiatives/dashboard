@@ -17,7 +17,7 @@
   width: 50%;
   height: 18rem;
   padding: 0 2.2rem 4.4rem; }
-  @media screen and (min-width: 1285PX) {
+  @media screen and (min-width: 1285px) {
     .dashboard-item {
       width: 25%;
       min-width: 32rem; } }
@@ -51,7 +51,7 @@
 
 .dashboard-item--w2 {
   width: 100%; }
-  @media screen and (min-width: 1285PX) {
+  @media screen and (min-width: 1285px) {
     .dashboard-item--w2 {
       width: 50%;
       min-width: 62rem; } }

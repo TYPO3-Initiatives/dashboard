@@ -13,7 +13,7 @@ module.exports = function (grunt) {
                 propList: ['*', '!letter-spacing', '!*box*', '!line-height', '!border*', '!background*'],
                 selectorBlackList: [],
                 replace: true,
-                mediaQuery: true,
+                mediaQuery: false,
             })
         ],
         configObject = {

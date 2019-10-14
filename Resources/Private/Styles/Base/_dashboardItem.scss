@@ -6,7 +6,7 @@
 	padding: 0 $column-gutter ($column-gutter * 2);
 
 
-	@media screen and (min-width: 1285PX) {
+	@media screen and (min-width: 1285px) {
 		width: 25%;
 		min-width: 320px;
 	}
@@ -68,7 +68,7 @@
 .dashboard-item--w2 {
 	width: 100%;
 
-	@media screen and (min-width: 1285PX) {
+	@media screen and (min-width: 1285px) {
 		width: 50%;
 		min-width: 620px;
 	}
