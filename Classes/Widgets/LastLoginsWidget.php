@@ -20,6 +20,8 @@ class LastLoginsWidget extends AbstractListWidget
         $this->width = 2;
         $this->height = 2;
         $this->title = 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widgets.lastLogins.title';
+        $this->description = 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widgets.lastLogins.description';
+        $this->iconIdentifier = 'dashboard-signin';
     }
 
     public function prepareData(): void

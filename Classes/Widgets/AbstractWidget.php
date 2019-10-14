@@ -21,6 +21,11 @@ abstract class AbstractWidget implements WidgetInterface
     protected $title;
 
     /**
+     * @var string
+     */
+    protected $description = '';
+
+    /**
      * @var int
      */
     protected $height;
@@ -29,6 +34,11 @@ abstract class AbstractWidget implements WidgetInterface
      * @var int
      */
     protected $width;
+
+    /**
+     * @var string
+     */
+    protected $iconIdentifier = '';
 
     /**
      * @var array
@@ -86,6 +96,7 @@ abstract class AbstractWidget implements WidgetInterface
         $this->view->setPartialRootPaths(['EXT:dashboard/Resources/Private/Partials/Widgets']);
         $this->view->setLayoutRootPaths(['EXT:dashboard/Resources/Private/Layouts/Widgets']);
     }
+
     /**
      * @return string
      */
@@ -94,6 +105,21 @@ abstract class AbstractWidget implements WidgetInterface
         return $this->title;
     }
 
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIconIdentifier(): string
+    {
+        return $this->iconIdentifier;
+    }
     /**
      * @return int  Returns height of widget in rows (1-4)
      */

@@ -9,6 +9,8 @@ namespace FriendsOfTYPO3\Dashboard\Widgets;
 interface WidgetInterface
 {
     public function getTitle(): string;
+    public function getDescription(): string;
+    public function getIconIdentifier(): string;
     public function getHeight(): int;
     public function getWidth(): int;
     public function renderWidgetContent(): string;

@@ -8,6 +8,8 @@ namespace FriendsOfTYPO3\Dashboard\Widgets;
  */
 abstract class AbstractLineChartWidget extends AbstractChartWidget
 {
+    protected $iconIdentifier = 'dashboard-chartline';
+
     protected $chartType = 'line';
 
     protected $chartOptions = [

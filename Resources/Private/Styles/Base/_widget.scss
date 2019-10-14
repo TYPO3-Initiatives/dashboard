@@ -5,7 +5,7 @@
 	bottom: 0;
 	left: 0;
 	background-color: #fff;
-	box-shadow: 0 5px 10px 0 rgba(#000, 0.05);
+	box-shadow: $shadow;
 	color: #333;
 
 	&:hover {

@@ -16,9 +16,9 @@ module.exports = function (grunt) {
         if (extension.sassFile !== '') {
             // Note that each extension has it's own watcher which triggers a extension specific sass + postcss task
             // Without this, every little change would generate 11 CSS-files to be generated + processed by postcss.
-            watchItems['sass-' + extension.name] = {
+            watchItems['sass-dev'] = {
                 files: path.join(baseDir, '**/*.scss'),
-                tasks: ['sass:' + extension.name, 'postcss:' + extension.name],
+                tasks: ['sass:dev', 'postcss:dev'],
                 options: {
                     spawn: false,
                     event: 'changed'

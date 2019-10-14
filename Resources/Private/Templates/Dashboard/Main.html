@@ -46,14 +46,28 @@
 </div>
 
 <div id="widgetSelector" class="hide">
-    <div>
-        <select name="widget">
-            <f:for each="{availableWidgets}" as="availableWidgetConfig" key="availableWidgetKey">
-                <option value="{availableWidgetKey}">
-                    <f:translate key="{availableWidgetConfig.title}" default="{availableWidgetConfig.title}"/>
-                </option>
-            </f:for>
-        </select>
+    <div class="widgetSelector-widgets">
+        <f:for each="{availableWidgets}" as="availableWidgetConfig" key="availableWidgetKey">
+            <div class="widgetSelector-widget">
+                <f:be.link class="widgetSelector-widget-block" route="dashboard" target="list_frame" parameters="{action: 'addWidget', widget: availableWidgetKey}">
+                    <f:if condition="{availableWidgetConfig.iconIdentifier}">
+                        <div class="widgetSelector-widget-icon">
+                            <core:icon size="default" alternativeMarkupIdentifier="inline" identifier="{availableWidgetConfig.iconIdentifier}"/>
+                        </div>
+                    </f:if>
+                    <div class="widgetSelector-widget-details">
+                        <div class="widgetSelector-widget-title">
+                            <f:translate key="{availableWidgetConfig.title}" default="{availableWidgetConfig.title}"/>
+                        </div>
+                        <f:if condition="{availableWidgetConfig.description}">
+                            <div class="widgetSelector-widget-description">
+                                <f:translate key="{availableWidgetConfig.description}" default="{availableWidgetConfig.description}"/>
+                            </div>
+                        </f:if>
+                    </div>
+                </f:be.link>
+            </div>
+        </f:for>
     </div>
 </div>
 </html>
