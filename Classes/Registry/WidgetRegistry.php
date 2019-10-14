@@ -20,12 +20,14 @@ class WidgetRegistry implements SingletonInterface
      */
     public function registerWidget(string $key, string $widgetClass): void
     {
-        $widgetObject = GeneralUtility::makeInstance($widgetClass);
-        if (!$widgetObject instanceof WidgetInterface) {
-            throw new \RuntimeException($widgetClass . ' is not an instance of ' . WidgetInterface::class);
-        }
+        if (class_exists($widgetClass)) {
+            $widgetObject = GeneralUtility::makeInstance($widgetClass);
+            if (!$widgetObject instanceof WidgetInterface) {
+                throw new \RuntimeException($widgetClass . ' is not an instance of ' . WidgetInterface::class);
+            }
 
-        $this->widgets[$key] = $widgetObject;
+            $this->widgets[$key] = $widgetObject;
+        }
     }
 
     /**
@@ -41,12 +43,12 @@ class WidgetRegistry implements SingletonInterface
      * @return WidgetInterface
      * @throws \Exception
      */
-    public function getWidgetObject(string $key): WidgetInterface
+    public function getWidgetObject(string $key): ?WidgetInterface
     {
         if (array_key_exists($key, $this->widgets) && $this->widgets[$key] instanceof WidgetInterface) {
             return $this->widgets[$key];
         }
 
-        throw new \Exception('No valid widget found with this key');
+        return null;
     }
 }

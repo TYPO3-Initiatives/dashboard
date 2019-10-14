@@ -5,6 +5,7 @@ namespace FriendsOfTYPO3\Dashboard\Controller;
 
 use FriendsOfTYPO3\Dashboard\Registry\DashboardRegistry;
 use FriendsOfTYPO3\Dashboard\Registry\WidgetRegistry;
+use FriendsOfTYPO3\Dashboard\Widgets\WidgetInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
@@ -46,6 +47,11 @@ class DashboardController
      * @var array
      */
     protected $cssFiles = [];
+
+    /**
+     * @var array
+     */
+    protected $jsFiles = [];
 
     public function __construct()
     {
@@ -91,6 +97,16 @@ class DashboardController
 
         foreach ($this->cssFiles as $cssFile) {
             $this->moduleTemplate->getPageRenderer()->addCssFile($cssFile);
+        }
+
+        foreach ($this->jsFiles as $key => $jsFile) {
+            $this->moduleTemplate->getPageRenderer()->addRequireJsConfiguration([
+                'paths' => [
+                    $key => $jsFile
+                ]
+            ]);
+
+            $this->moduleTemplate->getPageRenderer()->loadRequireJsModule($key);
         }
 
         $this->moduleTemplate->setContent($this->view->render());
@@ -184,23 +200,40 @@ class DashboardController
         return $widgets;
     }
 
+    /**
+     * @param $widgetKey
+     * @param array $config
+     * @return array
+     * @throws \Exception
+     */
     public function prepareWidgetElement($widgetKey, $config = []): array
     {
         $widgetObject = $this->widgetRegistry->getWidgetObject($widgetKey);
 
-        foreach ($widgetObject->getCssFiles() as $cssFile) {
-            if (!in_array($cssFile, $this->cssFiles, true)) {
-                $this->cssFiles[] = $cssFile;
+        if ($widgetObject instanceof WidgetInterface) {
+            foreach ($widgetObject->getCssFiles() as $cssFile) {
+                if (!in_array($cssFile, $this->cssFiles, true)) {
+                    $this->cssFiles[] = $cssFile;
+                }
             }
+
+            foreach ($widgetObject->getJsFiles() as $key => $jsFile) {
+                if (!in_array($jsFile, $this->jsFiles, true)) {
+                    $this->jsFiles[$key] = $jsFile;
+                }
+            }
+
+            return [
+                'key' => $widgetKey,
+                'height' => $widgetObject->getHeight(),
+                'width' => $widgetObject->getWidth(),
+                'title' => $widgetObject->getTitle(),
+                'additionalClasses' => $widgetObject->getAdditionalClasses(),
+                'config' => $config
+            ];
         }
 
-        return [
-            'key' => $widgetKey,
-            'height' => $widgetObject->getHeight(),
-            'width' => $widgetObject->getWidth(),
-            'title' => $widgetObject->getTitle(),
-            'config' => $config
-        ];
+        return [];
     }
 
     /**
