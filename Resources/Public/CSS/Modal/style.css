@@ -3,7 +3,8 @@
 
 .dashboard-modal .widgetSelector-widgets {
   display: flex;
-  flex-flow: row wrap; }
+  flex-flow: row wrap;
+  margin: 0 -1.1rem; }
 
 .dashboard-modal .widgetSelector-widget {
   width: 100%;

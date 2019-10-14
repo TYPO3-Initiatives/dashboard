@@ -2,6 +2,7 @@
 	.widgetSelector-widgets {
 		display: flex;
 		flex-flow: row wrap;
+		margin: 0 ($column-gutter / -2);
 	}
 
 	.widgetSelector-widget {
