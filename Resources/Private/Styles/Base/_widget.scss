@@ -1,9 +1,5 @@
 .widget {
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
+	height: 100%;
 	background-color: #fff;
 	box-shadow: $shadow;
 	color: #333;
@@ -17,6 +13,8 @@
 }
 
 .widget-content-main {
+	overflow-x: hidden;
+	overflow-y: auto;
 	width: 100%;
 	height: 100%;
 	padding: $block-gutter;
@@ -75,6 +73,8 @@
 }
 
 .widget-content {
+	display: flex;
+	flex-direction: column;
 	height: 100%;
 }
 
@@ -113,6 +113,11 @@
 	margin-top: 20px;
 	font-style: italic;
 	color: $secondary-color;
+}
+
+.widget-chart {
+	width: 100%;
+	height: 100%;
 }
 
 .widget-edit {
