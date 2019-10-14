@@ -116,10 +116,12 @@ class DashboardController
     public function mainAction(ServerRequestInterface $request): void
     {
         $widgets = $this->getWidgetsForCurrentUser();
-        $availableWidget = $this->widgetRegistry->getWidgets();
+        $availableWidgets = $this->widgetRegistry->getWidgets();
+        $this->getJavascriptForWidgets($availableWidgets);
+        $this->getCssForWidgets($availableWidgets);
 
         $this->view->assign('widgets', $widgets);
-        $this->view->assign('availableWidgets', $availableWidget);
+        $this->view->assign('availableWidgets', $availableWidgets);
         $this->view->assign('availableDashboards', $this->dashboardRegistry->getDashboards());
         $this->view->assign('currentDashboard', $this->getCurrentDashboard());
         $parameters = [
@@ -129,6 +131,41 @@ class DashboardController
         $this->view->assign('addWidgetUri', (string)$this->uriBuilder->buildUriFromRoute('dashboard', $parameters));
     }
 
+    /**
+     * @param array $widgets
+     * @throws \Exception
+     */
+    protected function getJavascriptForWidgets(array $widgets): void
+    {
+        foreach ($widgets as $widget) {
+            foreach ($widget->getJsFiles() as $key => $jsFile) {
+                if (!in_array($jsFile, $this->jsFiles, true)) {
+                    $this->jsFiles[$key] = $jsFile;
+                }
+            }
+        }
+    }
+
+    /**
+     * @param array $widgets
+     * @throws \Exception
+     */
+    protected function getCssForWidgets(array $widgets): void
+    {
+        foreach ($widgets as $widget) {
+            foreach ($widget->getCssFiles() as $cssFile) {
+                if (!in_array($cssFile, $this->cssFiles, true)) {
+                    $this->cssFiles[] = $cssFile;
+                }
+            }
+        }
+    }
+
+    /**
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
+     */
     public function setActiveDashboardAction(ServerRequestInterface $request): ResponseInterface
     {
         //TODO: Save currentDashboard to user settings
@@ -138,6 +175,11 @@ class DashboardController
         return new RedirectResponse($route);
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
+     */
     public function removeWidgetAction(ServerRequestInterface $request): ResponseInterface
     {
         $parameters = $request->getQueryParams();
@@ -153,6 +195,11 @@ class DashboardController
         return new RedirectResponse($route);
     }
 
+    /**
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     * @throws \TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException
+     */
     public function addWidgetAction(ServerRequestInterface $request): ResponseInterface
     {
         $parameters = $request->getQueryParams();
@@ -186,6 +233,10 @@ class DashboardController
         $this->moduleTemplate->getDocHeaderComponent()->disable();
     }
 
+    /**
+     * @return array
+     * @throws \Exception
+     */
     protected function getWidgetsForCurrentUser(): array
     {
         $widgets = [];
@@ -211,18 +262,6 @@ class DashboardController
         $widgetObject = $this->widgetRegistry->getWidgetObject($widgetKey);
 
         if ($widgetObject instanceof WidgetInterface) {
-            foreach ($widgetObject->getCssFiles() as $cssFile) {
-                if (!in_array($cssFile, $this->cssFiles, true)) {
-                    $this->cssFiles[] = $cssFile;
-                }
-            }
-
-            foreach ($widgetObject->getJsFiles() as $key => $jsFile) {
-                if (!in_array($jsFile, $this->jsFiles, true)) {
-                    $this->jsFiles[$key] = $jsFile;
-                }
-            }
-
             return [
                 'key' => $widgetKey,
                 'height' => $widgetObject->getHeight(),
