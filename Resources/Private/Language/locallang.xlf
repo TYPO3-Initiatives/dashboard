@@ -65,6 +65,13 @@
 			<trans-unit id="widgets.lastLogins.ip" xml:space="preserve">
 				<source>IP-address</source>
  			</trans-unit>
+
+			<trans-unit id="widgets.sysLogErrors.title" xml:space="preserve">
+				<source>Number of errors in system log</source>
+ 			</trans-unit>
+			<trans-unit id="widgets.sysLogErrors.chart.dataSet.0" xml:space="preserve">
+				<source>Number of errors</source>
+ 			</trans-unit>
 		</body>
 	</file>
 </xliff>
