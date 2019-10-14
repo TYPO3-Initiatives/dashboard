@@ -49,6 +49,11 @@
   .dashboard-item--h2.widget-waiting {
     line-height: 360px; }
 
+.dashboard-item--h3 {
+  height: 54rem; }
+  .dashboard-item--h3.widget-waiting {
+    line-height: 540px; }
+
 .dashboard-item--w2 {
   width: 100%; }
   @media screen and (min-width: 1285px) {

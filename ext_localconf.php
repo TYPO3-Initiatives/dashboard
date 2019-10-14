@@ -60,3 +60,13 @@ $iconRegistry->registerIcon(
     \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
     ['source' => 'EXT:dashboard/Resources/Public/Icons/ChartLine.svg']
 );
+$iconRegistry->registerIcon(
+    'dashboard-rss',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/Rss.svg']
+);
+$iconRegistry->registerIcon(
+    'dashboard-typo3',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/TYPO3.svg']
+);

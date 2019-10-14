@@ -12,6 +12,8 @@ abstract class AbstractRssWidget extends AbstractListWidget
 
     protected $limit = 3;
 
+    protected $iconIdentifier = 'dashboard-rss';
+
     /**
      * @var string
      */
