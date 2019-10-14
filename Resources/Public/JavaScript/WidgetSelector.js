@@ -17,7 +17,7 @@ define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity'], func
                 severity: Severity.notice,
                 size: 'medium',
                 callback: function(currentModal) {
-                    currentModal.find('a.widgetSelector-widget').on('click', function(e) {
+                    currentModal.find('a.widgetSelector-widget-block').on('click', function(e) {
                         currentModal.trigger('modal-dismiss');
                     });
                 },
