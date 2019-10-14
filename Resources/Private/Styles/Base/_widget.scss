@@ -115,6 +115,11 @@
 	color: $secondary-color;
 }
 
+.widget-chart {
+	width: 100%;
+	height: calc(100% - #{$block-gutter});
+}
+
 .widget-edit {
 	width: 45px;
 	text-align: center;

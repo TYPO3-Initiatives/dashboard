@@ -13,7 +13,7 @@ abstract class AbstractLineChartWidget extends AbstractChartWidget
     protected $chartType = 'line';
 
     protected $chartOptions = [
-        'responsive' => true,
+        'maintainAspectRatio' => false,
         'legend' => [
             'display' => false
         ],

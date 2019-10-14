@@ -14,10 +14,13 @@
 .dashboard-item {
   position: absolute;
   z-index: 1;
-  width: 25%;
-  min-width: 32rem;
+  width: 50%;
   height: 18rem;
   padding: 0 2.2rem 4.4rem; }
+  @media screen and (min-width: 1285PX) {
+    .dashboard-item {
+      width: 25%;
+      min-width: 32rem; } }
   .dashboard-item.muuri-item-positioning {
     z-index: 2; }
     .dashboard-item.muuri-item-positioning .widget-remove {
@@ -47,8 +50,11 @@
     line-height: 360px; }
 
 .dashboard-item--w2 {
-  width: 50%;
-  min-width: 62rem; }
+  width: 100%; }
+  @media screen and (min-width: 1285PX) {
+    .dashboard-item--w2 {
+      width: 50%;
+      min-width: 62rem; } }
 
 .dashboard-item-content {
   position: relative;
@@ -86,11 +92,7 @@
   margin-left: -2.3rem; }
 
 .widget {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  height: 100%;
   background-color: #fff;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05);
   color: #333; }
@@ -99,6 +101,8 @@
     display: block; }
 
 .widget-content-main {
+  overflow-x: hidden;
+  overflow-y: auto;
   width: 100%;
   height: 100%;
   padding: 3rem; }
@@ -150,6 +154,8 @@
   cursor: grab; }
 
 .widget-content {
+  display: flex;
+  flex-direction: column;
   height: 100%; }
 
 .widget-content-title {
@@ -175,6 +181,10 @@
   margin-top: 2rem;
   font-style: italic;
   color: #868e96; }
+
+.widget-chart {
+  width: 100%;
+  height: calc(100% - 3rem); }
 
 .widget-edit {
   width: 4.5rem;
