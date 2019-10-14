@@ -184,7 +184,7 @@
 
 .widget-chart {
   width: 100%;
-  height: calc(100% - 3rem); }
+  height: 100%; }
 
 .widget-edit {
   width: 4.5rem;
