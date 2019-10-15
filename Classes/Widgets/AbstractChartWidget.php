@@ -23,7 +23,7 @@ abstract class AbstractChartWidget extends AbstractWidget
     /**
      * @var array
      */
-    protected $chartColors = ['#f49702'];
+    protected $chartColors = ['#f49702', '#a4276a', '#1a568f', '#4c7e3a', '#69bbb5'];
 
     protected $additionalClasses = 'dashboard-item--chart';
 
