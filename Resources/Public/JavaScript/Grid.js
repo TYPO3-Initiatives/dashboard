@@ -24,6 +24,9 @@ define(['jquery', 'muuri'], function ($, Muuri) {
                 action:'move',
                 threshold: 30
             },
+            dragStartPredicate: {
+                handle: '.widget-move'
+            },
             dragReleaseDuration: 400,
             dragReleaseEasing: 'ease',
             layout: {
