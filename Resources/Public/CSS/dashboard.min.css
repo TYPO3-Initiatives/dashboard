@@ -15,7 +15,7 @@
   position: absolute;
   z-index: 1;
   width: 50%;
-  height: 18rem;
+  height: 20rem;
   padding: 0 2.2rem 4.4rem; }
   @media screen and (min-width: 1285px) {
     .dashboard-item {
@@ -42,17 +42,17 @@
   .dashboard-item.muuri-item-hidden {
     z-index: 0; }
   .dashboard-item.widget-waiting {
-    line-height: 180px; }
+    line-height: 200px; }
 
 .dashboard-item--h2 {
-  height: 36rem; }
+  height: 40rem; }
   .dashboard-item--h2.widget-waiting {
-    line-height: 360px; }
+    line-height: 400px; }
 
 .dashboard-item--h3 {
-  height: 54rem; }
+  height: 60rem; }
   .dashboard-item--h3.widget-waiting {
-    line-height: 540px; }
+    line-height: 600px; }
 
 .dashboard-item--w2 {
   width: 100%; }

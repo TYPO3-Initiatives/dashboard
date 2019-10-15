@@ -10,8 +10,6 @@ abstract class AbstractRssWidget extends AbstractListWidget
 {
     protected $rssFile = '';
 
-    protected $limit = 3;
-
     protected $iconIdentifier = 'dashboard-rss';
 
     /**
@@ -26,7 +24,7 @@ abstract class AbstractRssWidget extends AbstractListWidget
         $this->height = 3;
 
         $publicResourcesPath = PathUtility::getAbsoluteWebPath(ExtensionManagementUtility::extPath('dashboard')) . 'Resources/Public/';
-        $this->cssFiles[] = $publicResourcesPath . 'CSS/rssWidget.css';
+        $this->cssFiles[] = $publicResourcesPath . 'CSS/rssWidget.min.css';
     }
 
     public function prepareData(): void
