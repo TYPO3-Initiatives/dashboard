@@ -28,11 +28,9 @@ abstract class AbstractDoughnutChartWidget extends AbstractChartWidget
      */
     protected $templateName = 'DoughnutChartWidget';
 
-
     public function __construct()
     {
         $publicResourcesPath = PathUtility::getAbsoluteWebPath(ExtensionManagementUtility::extPath('dashboard')) . 'Resources/Public/';
         $this->cssFiles[] = $publicResourcesPath . 'CSS/doughnutChartWidget.min.css';
     }
-
 }
