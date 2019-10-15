@@ -141,8 +141,8 @@ abstract class AbstractWidget implements WidgetInterface
      */
     public function renderWidgetContent(): string
     {
-        $this->prepareData();
         $this->initializeView();
+        $this->prepareData();
 
         $this->view->assign('title', $this->title);
 
