@@ -50,6 +50,10 @@ module.exports = function (grunt) {
             cssOutputFile: 'numberWidget.min.css',
         }),
         Object.assign({}, defaultExtConfig, {
+            sassFile: 'DoughnutChartWidget.scss',
+            cssOutputFile: 'doughnutChartWidget.min.css',
+        }),
+        Object.assign({}, defaultExtConfig, {
             sassFile: 'Modal.scss',
             cssOutputFile: 'Modal/style.css',
             globbingFolderNames: ['modal'],
