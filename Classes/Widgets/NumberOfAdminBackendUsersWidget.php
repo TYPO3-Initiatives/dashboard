@@ -14,8 +14,8 @@ class NumberOfAdminBackendUsersWidget extends AbstractNumberWidget
     public function __construct()
     {
         AbstractNumberWidget::__construct();
-        $this->width = 1;
-        $this->height = 1;
+        $this->width = 2;
+        $this->height = 2;
         $this->title = 'Number of admin users';
         $this->icon = 'dashboard-admin';
         $this->iconIdentifier = 'dashboard-admin';

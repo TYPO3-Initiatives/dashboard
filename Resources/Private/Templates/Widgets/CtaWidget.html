@@ -1,5 +1,9 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
-<f:link.typolink parameter="{link}">
-    <f:translate key="{label}" default="{label}" />
-</f:link.typolink>
+<f:layout name="WidgetWithTitle"/>
+
+<f:section name="main">
+    <f:link.external uri="{link}" target="_blank" class="widget-cta">
+        <f:translate key="{label}" default="{label}"/>
+    </f:link.external>
+</f:section>
 </html>

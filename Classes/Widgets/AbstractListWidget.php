@@ -23,8 +23,8 @@ abstract class AbstractListWidget extends AbstractWidget
 
     public function __construct()
     {
-        $this->height = 2;
-        $this->width = 1;
+        $this->height = 4;
+        $this->width = 2;
     }
 
     /**

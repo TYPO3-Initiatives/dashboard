@@ -18,8 +18,8 @@ abstract class AbstractNumberWidget extends AbstractWidget
 
     public function __construct()
     {
-        $this->height = 1;
-        $this->width = 1;
+        $this->height = 2;
+        $this->width = 2;
 
         $publicResourcesPath = PathUtility::getAbsoluteWebPath(ExtensionManagementUtility::extPath('dashboard')) . 'Resources/Public/';
         $this->cssFiles[] = $publicResourcesPath . 'CSS/numberWidget.min.css';

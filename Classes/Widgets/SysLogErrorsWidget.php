@@ -19,12 +19,12 @@ class SysLogErrorsWidget extends AbstractLineChartWidget
     /**
      * @var int
      */
-    protected $width = 2;
+    protected $width = 4;
 
     /**
      * @var int
      */
-    protected $height = 2;
+    protected $height = 4;
 
     public function prepareData(): void
     {

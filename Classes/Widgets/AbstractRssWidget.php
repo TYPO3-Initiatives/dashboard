@@ -20,8 +20,8 @@ abstract class AbstractRssWidget extends AbstractListWidget
     public function __construct()
     {
         AbstractListWidget::__construct();
-        $this->width = 2;
-        $this->height = 3;
+        $this->width = 4;
+        $this->height = 6;
 
         $publicResourcesPath = PathUtility::getAbsoluteWebPath(ExtensionManagementUtility::extPath('dashboard')) . 'Resources/Public/';
         $this->cssFiles[] = $publicResourcesPath . 'CSS/rssWidget.min.css';

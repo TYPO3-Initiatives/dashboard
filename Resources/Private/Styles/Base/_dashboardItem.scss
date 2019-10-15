@@ -5,7 +5,6 @@
 	height: $dashboard-item-height;
 	padding: 0 $column-gutter ($column-gutter * 2);
 
-
 	@media screen and (min-width: 1285px) {
 		width: 25%;
 		min-width: 320px;
@@ -57,7 +56,7 @@
 	}
 }
 
-.dashboard-item--h2 {
+.dashboard-item--h4 {
 	height: $dashboard-item-height * 2;
 
 	&.widget-waiting {
@@ -65,7 +64,7 @@
 	}
 }
 
-.dashboard-item--h3 {
+.dashboard-item--h6 {
 	height: $dashboard-item-height * 3;
 
 	&.widget-waiting {
@@ -73,7 +72,7 @@
 	}
 }
 
-.dashboard-item--w2 {
+.dashboard-item--w4 {
 	width: 100%;
 
 	@media screen and (min-width: 1285px) {

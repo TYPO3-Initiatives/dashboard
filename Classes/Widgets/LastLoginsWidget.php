@@ -17,8 +17,8 @@ class LastLoginsWidget extends AbstractListWidget
     public function __construct()
     {
         AbstractListWidget::__construct();
-        $this->width = 2;
-        $this->height = 2;
+        $this->width = 4;
+        $this->height = 4;
         $this->title = 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widgets.lastLogins.title';
         $this->description = 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widgets.lastLogins.description';
         $this->iconIdentifier = 'dashboard-signin';

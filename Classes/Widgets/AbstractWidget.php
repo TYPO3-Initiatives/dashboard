@@ -28,12 +28,12 @@ abstract class AbstractWidget implements WidgetInterface
     /**
      * @var int
      */
-    protected $height = 1;
+    protected $height = 2;
 
     /**
      * @var int
      */
-    protected $width = 1;
+    protected $width = 2;
 
     /**
      * @var string
