@@ -1,12 +1,1 @@
-.widget-doughnut--value {
-  line-height: 1.3;
-  font-weight: 900;
-  font-size: 3.6rem;
-  text-align: center; }
-
-.widget-doughnut--meta {
-  margin-top: 1rem;
-  font-style: italic;
-  color: #868e96;
-  text-align: center; }
-/*# sourceMappingURL=doughnutChartWidget.min.css.map */
+.widget-doughnut--value{line-height:1.3;font-weight:900;font-size:3.6rem;text-align:center}.widget-doughnut--meta{margin-top:1rem;font-style:italic;color:#868e96;text-align:center}
