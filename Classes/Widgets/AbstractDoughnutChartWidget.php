@@ -11,7 +11,7 @@ use TYPO3\CMS\Core\Utility\PathUtility;
  */
 abstract class AbstractDoughnutChartWidget extends AbstractChartWidget
 {
-    protected $iconIdentifier = 'dashboard-chartdoughnut';
+    protected $iconIdentifier = 'dashboard-pie';
 
     protected $chartType = 'doughnut';
 

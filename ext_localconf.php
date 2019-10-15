@@ -70,3 +70,8 @@ $iconRegistry->registerIcon(
     \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
     ['source' => 'EXT:dashboard/Resources/Public/Icons/TYPO3.svg']
 );
+$iconRegistry->registerIcon(
+    'dashboard-pie',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/Pie.svg']
+);
