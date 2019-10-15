@@ -1,0 +1,14 @@
+.widget-cta {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: $block-gutter / 2;
+	background-color: $primary-color;
+	font-size: 14px;
+	color: #fff;
+
+	&:hover,
+	&:focus {
+		background-color: $primary-color-light;
+	}
+}

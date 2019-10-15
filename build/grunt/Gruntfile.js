@@ -58,6 +58,10 @@ module.exports = function (grunt) {
             cssOutputFile: 'rssWidget.min.css',
         }),
         Object.assign({}, defaultExtConfig, {
+            sassFile: 'CtaWidget.scss',
+            cssOutputFile: 'ctaWidget.min.css',
+        }),
+        Object.assign({}, defaultExtConfig, {
             sassFile: 'Modal.scss',
             cssOutputFile: 'Modal/style.css',
             globbingFolderNames: ['modal'],

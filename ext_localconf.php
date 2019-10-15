@@ -8,6 +8,7 @@ $widgetRegistry->registerWidget('lastLogins', \FriendsOfTYPO3\Dashboard\Widgets\
 $widgetRegistry->registerWidget('pagesWithoutDescription', \FriendsOfTYPO3\Dashboard\Widgets\PagesWithoutDescriptionWidget::class);
 $widgetRegistry->registerWidget('sysLogErrors', \FriendsOfTYPO3\Dashboard\Widgets\SysLogErrorsWidget::class);
 $widgetRegistry->registerWidget('t3News', \FriendsOfTYPO3\Dashboard\Widgets\T3NewsWidget::class);
+$widgetRegistry->registerWidget('documentation', \FriendsOfTYPO3\Dashboard\Widgets\DocumentationWidget::class);
 
 $dashboardRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\FriendsOfTYPO3\Dashboard\Registry\DashboardRegistry::class);
 $dashboardRegistry->registerDashboard('default', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default');
@@ -74,4 +75,9 @@ $iconRegistry->registerIcon(
     'dashboard-pie',
     \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
     ['source' => 'EXT:dashboard/Resources/Public/Icons/Pie.svg']
+);
+$iconRegistry->registerIcon(
+    'dashboard-cta',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/Pointer.svg']
 );

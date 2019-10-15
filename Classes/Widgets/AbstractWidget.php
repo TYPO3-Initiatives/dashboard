@@ -28,12 +28,12 @@ abstract class AbstractWidget implements WidgetInterface
     /**
      * @var int
      */
-    protected $height = 1;
+    protected $height = 2;
 
     /**
      * @var int
      */
-    protected $width = 1;
+    protected $width = 2;
 
     /**
      * @var string
@@ -141,8 +141,8 @@ abstract class AbstractWidget implements WidgetInterface
      */
     public function renderWidgetContent(): string
     {
-        $this->prepareData();
         $this->initializeView();
+        $this->prepareData();
 
         $this->view->assign('title', $this->title);
 

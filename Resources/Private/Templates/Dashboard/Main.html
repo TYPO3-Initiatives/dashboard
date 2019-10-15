@@ -1,19 +1,21 @@
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
-<h1>
-    <f:translate key="title" extensionName="dashboard"/>
-</h1>
+<div class="dashboardHeader">
+    <h1>
+        <f:translate key="title" extensionName="dashboard"/>
+    </h1>
 
-<div class="dashboardTabs">
-    <f:for each="{availableDashboards}" as="dashboardConfig" key="dashboardKey">
-        <f:if condition="{dashboardKey} == {currentDashboard}">
-            <f:then>
-                <f:variable name="activeClass" value="dashboardTab--active"/>
-            </f:then>
-        </f:if>
-        <f:be.link route="dashboard" parameters="{action: 'setActiveDashboard', currentDashboard: dashboardKey}" class="dashboardTab {activeClass}">
-            <f:translate key="{dashboardConfig.label}"/>
-        </f:be.link>
-    </f:for>
+    <div class="dashboardTabs">
+        <f:for each="{availableDashboards}" as="dashboardConfig" key="dashboardKey">
+            <f:if condition="{dashboardKey} == {currentDashboard}">
+                <f:then>
+                    <f:variable name="activeClass" value="dashboardTab--active"/>
+                </f:then>
+            </f:if>
+            <f:be.link route="dashboard" parameters="{action: 'setActiveDashboard', currentDashboard: dashboardKey}" class="dashboardTab {activeClass}">
+                <f:translate key="{dashboardConfig.label}"/>
+            </f:be.link>
+        </f:for>
+    </div>
 </div>
 
 <div class="dashboard-grid">
