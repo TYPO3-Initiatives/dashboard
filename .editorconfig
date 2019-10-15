@@ -69,3 +69,7 @@ indent_size = 2
 [{package.json,composer.json,.travis.yml}]
 indent_style = space
 indent_size = 2
+
+[*.scss]
+indent_style = tab
+indent_size = 2

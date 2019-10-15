@@ -7,6 +7,7 @@ $widgetRegistry->registerWidget('numberOfAdminBackendUsers', \FriendsOfTYPO3\Das
 $widgetRegistry->registerWidget('lastLogins', \FriendsOfTYPO3\Dashboard\Widgets\LastLoginsWidget::class);
 $widgetRegistry->registerWidget('pagesWithoutDescription', \FriendsOfTYPO3\Dashboard\Widgets\PagesWithoutDescriptionWidget::class);
 $widgetRegistry->registerWidget('sysLogErrors', \FriendsOfTYPO3\Dashboard\Widgets\SysLogErrorsWidget::class);
+$widgetRegistry->registerWidget('t3News', \FriendsOfTYPO3\Dashboard\Widgets\T3NewsWidget::class);
 
 $dashboardRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\FriendsOfTYPO3\Dashboard\Registry\DashboardRegistry::class);
 $dashboardRegistry->registerDashboard('default', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default');
@@ -58,4 +59,14 @@ $iconRegistry->registerIcon(
     'dashboard-chartline',
     \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
     ['source' => 'EXT:dashboard/Resources/Public/Icons/ChartLine.svg']
+);
+$iconRegistry->registerIcon(
+    'dashboard-rss',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/Rss.svg']
+);
+$iconRegistry->registerIcon(
+    'dashboard-typo3',
+    \TYPO3\CMS\Core\Imaging\IconProvider\SvgIconProvider::class,
+    ['source' => 'EXT:dashboard/Resources/Public/Icons/TYPO3.svg']
 );

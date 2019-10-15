@@ -65,6 +65,14 @@
 	}
 }
 
+.dashboard-item--h3 {
+	height: $dashboard-item-height * 3;
+
+	&.widget-waiting {
+		line-height: $dashboard-item-height * 3;
+	}
+}
+
 .dashboard-item--w2 {
 	width: 100%;
 
