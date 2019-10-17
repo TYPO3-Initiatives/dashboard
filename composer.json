@@ -1,12 +1,10 @@
 {
   "name": "friendsoftypo3/dashboard",
   "type": "typo3-cms-extension",
-  "description": "Dashboard for TYPO3.",
+  "description": "Dashboard for TYPO3",
   "minimum-stability": "dev",
   "homepage": "https://typo3.org",
-  "license": [
-    "GPL-2.0-or-later"
-  ],
+  "license": "GPL-2.0-or-later",
   "authors": [
     {
       "name": "Richard Haeser",
@@ -34,8 +32,6 @@
     }
   ],
   "config": {
-    "sort-packages": true,
-    "optimize-autoloader": true,
     "vendor-dir": ".build/vendor",
     "bin-dir": ".build/bin"
   },
