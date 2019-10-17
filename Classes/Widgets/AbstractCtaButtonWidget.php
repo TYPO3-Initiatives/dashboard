@@ -30,7 +30,7 @@ abstract class AbstractCtaButtonWidget extends AbstractWidget
 
     public function prepareData(): void
     {
-       $this->view->assign('link', $this->link);
-       $this->view->assign('label', $this->label);
+        $this->view->assign('link', $this->link);
+        $this->view->assign('label', $this->label);
     }
 }
