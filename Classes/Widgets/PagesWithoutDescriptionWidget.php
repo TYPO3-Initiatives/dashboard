@@ -25,16 +25,20 @@ class PagesWithoutDescriptionWidget extends AbstractListWidget
     public function prepareData(): void
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('pages');
+        $constraints = [
+            $queryBuilder->expr()->orX(
+                $queryBuilder->expr()->eq('description', $queryBuilder->createNamedParameter('')),
+                $queryBuilder->expr()->isNull('description')
+            ),
+        ];
+        if (isset($GLOBALS['TCA']['pages']['columns']['no_index'])) {
+            // Column is potentially not defined; added by system extension that is not (should not) be a dependency.
+            $constraints[] = $queryBuilder->expr()->eq('no_index', 0);
+        }
         $queryBuilder
             ->select('*')
             ->from('pages')
-            ->where(
-                $queryBuilder->expr()->orX(
-                    $queryBuilder->expr()->eq('description', $queryBuilder->createNamedParameter('')),
-                    $queryBuilder->expr()->isNull('description')
-                ),
-                $queryBuilder->expr()->eq('no_index', 0)
-            )
+            ->where(...$constraints)
             ->orderBy('tstamp', 'DESC');
 
         $statementAll = $queryBuilder->execute();
