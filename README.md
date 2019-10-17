@@ -6,9 +6,9 @@ In this repository the [TYPO3 Dashboard initiative](https://typo3.org/community/
 Please check the page of the [TYPO3 Dashboard initiative](https://typo3.org/community/teams/typo3-development/initiatives/typo3-dashboard-initiative/) to see the goals of the initiative.
 
 
-## Work in progress!
+## We need feedback!
 
-**PLEASE TRY THE EXTENSION, BUT BE AWARE THAT THIS EXTENSION IS NOT PROVEN TO BE STABLE ENOUGH FOR PRODUCTION ENVIRONMENTS**
+Please try this extension and let us know your opinion. Do you have bugs, ideas or suggestions, please contact us in [Slack Channel: #cig-dashboard](https://typo3.slack.com/archives/cig-dashboard).
 
 ## Contribution
 
