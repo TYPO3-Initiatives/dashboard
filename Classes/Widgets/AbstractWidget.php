@@ -56,6 +56,11 @@ abstract class AbstractWidget implements WidgetInterface
     protected $templateName = 'Widget';
 
     /**
+     * @var string
+     */
+    protected $extensionKey = 'dashboard';
+
+    /**
      * @var ViewInterface
      */
     protected $view;
@@ -91,10 +96,8 @@ abstract class AbstractWidget implements WidgetInterface
     protected function initializeView(): void
     {
         $this->view = GeneralUtility::makeInstance(StandaloneView::class);
-        $this->view->setTemplate($this->templateName);
-        $this->view->setTemplateRootPaths(['EXT:dashboard/Resources/Private/Templates/Widgets']);
-        $this->view->setPartialRootPaths(['EXT:dashboard/Resources/Private/Partials/Widgets']);
-        $this->view->setLayoutRootPaths(['EXT:dashboard/Resources/Private/Layouts/Widgets']);
+        $this->view->setTemplate('Widget/' . $this->templateName);
+        $this->view->getRenderingContext()->getTemplatePaths()->fillDefaultsByPackageName($this->extensionKey);
     }
 
     /**
