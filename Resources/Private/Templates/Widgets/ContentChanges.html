@@ -1,0 +1,70 @@
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" xmlns:backend="http://typo3.org/ns/TYPO3/CMS/Backend/ViewHelpers" xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers" data-namespace-typo3-fluid="true">
+<f:layout name="WidgetWithTitle" />
+
+<f:section name="main">
+    <f:if condition="!{items.changedRecords} && !{items.pendingRecords}">
+        <h4><f:translate key="widgets.contentchanges.nothing_to_show" extensionName="dashboard" /></h4>
+    </f:if>
+    <f:if condition="{items.pendingRecords}">
+        <table class="widget-table">
+            <thead>
+            <tr>
+                <th><f:translate key="widgets.contentchanges.label.pending" extensionName="dashboard" /></th>
+                <th><f:translate key="widgets.contentchanges.type" extensionName="dashboard" /></th>
+                <th><f:translate key="widgets.contentchanges.id" extensionName="dashboard" /></th>
+                <th><f:translate key="widgets.contentchanges.starts" extensionName="dashboard" /></th>
+                <th><f:translate key="widgets.contentchanges.ends" extensionName="dashboard" /></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <f:for each="{items.pendingRecords}" as="item">
+                <tr>
+                    <td>{item.icon | f:format.raw()} {item.label}</td>
+                    <td>{item.type}</td>
+                    <td>{item.uid}</td>
+                    <td><f:if condition="{item.starttime}"><f:format.date format="%d-%m-%Y %H:%M">{item.starttime}</f:format.date></f:if></td>
+                    <td><f:if condition="{item.endtime}"><f:format.date format="%d-%m-%Y %H:%M">{item.endtime}</f:format.date></f:if></td>
+                    <td class="widget-edit">
+                        <backend:link.editRecord uid="{item.uid}" table="{item.type}" returnUrl="{f:be.uri(route: 'dashboard')}">
+                            <core:icon identifier="actions-open" alternativeMarkupIdentifier="inline" />
+                        </backend:link.editRecord>
+                    </td>
+                </tr>
+            </f:for>
+            </tbody>
+        </table>
+    </f:if>
+    <f:if condition="{items.changedRecords}">
+        <table class="widget-table">
+            <thead>
+            <tr>
+                <th><f:translate key="widgets.contentchanges.label.changed" extensionName="dashboard" /></th>
+                <th><f:translate key="widgets.contentchanges.type" extensionName="dashboard" /></th>
+                <th><f:translate key="widgets.contentchanges.id" extensionName="dashboard" /></th>
+                <th><f:translate key="widgets.contentchanges.date" extensionName="dashboard" /></th>
+                <th><f:translate key="widgets.contentchanges.user" extensionName="dashboard" /></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <f:for each="{items.changedRecords}" as="item">
+                <tr>
+                    <td>{item.icon | f:format.raw()} {item.label}</td>
+                    <td>{item.type}</td>
+                    <td>{item.uid}</td>
+                    <td><f:format.date format="%d-%m-%Y %H:%M">{item.tstamp}</f:format.date></td>
+                    <td>{item.username}</td>
+                    <td class="widget-edit">
+                        <backend:link.editRecord uid="{item.uid}" table="{item.type}" returnUrl="{f:be.uri(route: 'dashboard')}">
+                            <core:icon identifier="actions-open" alternativeMarkupIdentifier="inline" />
+                        </backend:link.editRecord>
+                    </td>
+                </tr>
+            </f:for>
+            </tbody>
+        </table>
+    </f:if>
+</f:section>
+
+</html>

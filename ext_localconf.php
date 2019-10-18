@@ -9,6 +9,7 @@ $widgetRegistry->registerWidget('pagesWithoutDescription', \FriendsOfTYPO3\Dashb
 $widgetRegistry->registerWidget('sysLogErrors', \FriendsOfTYPO3\Dashboard\Widgets\SysLogErrorsWidget::class);
 $widgetRegistry->registerWidget('t3News', \FriendsOfTYPO3\Dashboard\Widgets\T3NewsWidget::class);
 $widgetRegistry->registerWidget('documentation', \FriendsOfTYPO3\Dashboard\Widgets\DocumentationWidget::class);
+$widgetRegistry->registerWidget('contentChanges', \FriendsOfTYPO3\Dashboard\Widgets\ContentChangesWidget::class);
 
 $dashboardRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\FriendsOfTYPO3\Dashboard\Registry\DashboardRegistry::class);
 $dashboardRegistry->registerDashboard('default', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default');

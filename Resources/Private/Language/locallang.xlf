@@ -50,6 +50,40 @@
 				<source>This overview is showing all (%s) pages without description</source>
 			</trans-unit>
 
+			<trans-unit id="widgets.contentchanges.title" xml:space="preserve">
+				<source>Content Changes</source>
+			</trans-unit>
+			<trans-unit id="widgets.contentchanges.description" xml:space="preserve">
+				<source>Shows most recently edited pages/content and up-coming publishing and un-publishing based on start/end time</source>
+			</trans-unit>
+			<trans-unit id="widgets.contentchanges.label.changed" xml:space="preserve">
+				<source>Changed item</source>
+			</trans-unit>
+			<trans-unit id="widgets.contentchanges.label.pending" xml:space="preserve">
+				<source>Pending publish/unpublish</source>
+			</trans-unit>
+			<trans-unit id="widgets.contentchanges.type" xml:space="preserve">
+				<source>Type</source>
+			</trans-unit>
+			<trans-unit id="widgets.contentchanges.date" xml:space="preserve">
+				<source>Date</source>
+			</trans-unit>
+			<trans-unit id="widgets.contentchanges.user" xml:space="preserve">
+				<source>Edit by</source>
+			</trans-unit>
+			<trans-unit id="widgets.contentchanges.starts" xml:space="preserve">
+				<source>Publishes on</source>
+			</trans-unit>
+			<trans-unit id="widgets.contentchanges.ends" xml:space="preserve">
+				<source>Unpublishes on</source>
+			</trans-unit>
+			<trans-unit id="widgets.contentchanges.id" xml:space="preserve">
+				<source>ID</source>
+			</trans-unit>
+			<trans-unit id="widgets.contentchanges.nothing_to_show" xml:space="preserve">
+				<source>Nothing to show</source>
+			</trans-unit>
+
 			<trans-unit id="widgets.lastLogins.title" xml:space="preserve">
 				<source>Last 5 logins</source>
 			</trans-unit>
