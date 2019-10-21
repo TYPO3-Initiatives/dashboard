@@ -5,16 +5,13 @@
     </h1>
 
     <div class="dashboardTabs">
-        <f:for each="{availableDashboards}" as="dashboardConfig" key="dashboardKey">
-            <f:if condition="{dashboardKey} == {currentDashboard}">
-                <f:then>
-                    <f:variable name="activeClass" value="dashboardTab--active"/>
-                </f:then>
-            </f:if>
-            <f:be.link route="dashboard" parameters="{action: 'setActiveDashboard', currentDashboard: dashboardKey}" class="dashboardTab {activeClass}">
-                <f:translate key="{dashboardConfig.label}"/>
-            </f:be.link>
-        </f:for>
+        <f:if condition="{availableDashboards -> f:count()} > 1">
+            <f:for each="{availableDashboards}" as="dashboardConfig" key="dashboardKey">
+                <f:be.link route="dashboard" parameters="{action: 'setActiveDashboard', currentDashboard: dashboardKey}" class="dashboardTab {f:if(condition: '{dashboardKey} == {currentDashboard}', then: 'dashboardTab--active')}">
+                    <f:translate key="{dashboardConfig.label}"/>
+                </f:be.link>
+            </f:for>
+        </f:if>
     </div>
 </div>
 
