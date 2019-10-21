@@ -6,6 +6,7 @@ namespace FriendsOfTYPO3\Dashboard\Widgets;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\IpAnonymizationUtility;
 
 class LastLoginsWidget extends AbstractListWidget
 {
@@ -40,7 +41,11 @@ class LastLoginsWidget extends AbstractListWidget
         while ($row = $statement->fetch()) {
             $user = BackendUtility::getRecord('be_users', $row['userid']);
 
-            $this->items[] = ['user' => $user['username'], 'tstamp' => $row['tstamp'], 'ip' => $row['ip']];
+            $this->items[] = [
+                'user' => $user['username'],
+                'tstamp' => $row['tstamp'],
+                'ip' => IpAnonymizationUtility::anonymizeIp($row['ip'])
+            ];
         }
     }
 }
