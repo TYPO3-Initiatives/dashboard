@@ -9,7 +9,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Class SysLogErrorsWidget
  */
-class SysLogErrorsWidget extends AbstractLineChartWidget
+class SysLogErrorsWidget extends AbstractBarChartWidget
 {
     /**
      * @var string
@@ -75,8 +75,8 @@ class SysLogErrorsWidget extends AbstractLineChartWidget
             'datasets' => [
                 [
                     'label' => $this->getLanguageService()->sL($this->languagePrefix . 'widgets.sysLogErrors.chart.dataSet.0'),
-                    'borderColor' => $this->chartColors[0],
-                    'fill' => false,
+                    'backgroundColor' => $this->chartColors[0],
+                    'border' => 0,
                     'data' => $data
                 ]
             ]
