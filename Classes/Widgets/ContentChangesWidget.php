@@ -39,7 +39,7 @@ class ContentChangesWidget extends AbstractListWidget
     {
         $limit = ceil($this->limit / 2);
         $pendingRecords = $this->getPublishStateChangePendingRecordsFromTable('pages') + $this->getPublishStateChangePendingRecordsFromTable('tt_content');
-        usort($pendingRecords, function(array $a, array $b) {
+        usort($pendingRecords, function (array $a, array $b) {
             return min($b['starttime'], $b['endtime']) <=> min($a['starttime'], $a['endtime']);
         });
         return count($pendingRecords) > $limit ? array_slice($pendingRecords, 0, $limit) : $pendingRecords;
@@ -49,7 +49,7 @@ class ContentChangesWidget extends AbstractListWidget
     {
         $limit = $this->limit - $alreadyCollectedItemCount;
         $changedRecords = $this->getMostRecentChangedRecordsFromTable('pages') + $this->getMostRecentChangedRecordsFromTable('tt_content');
-        usort($changedRecords, function(array $a, array $b) {
+        usort($changedRecords, function (array $a, array $b) {
             return $b['tstamp'] <=> $a['tstamp'];
         });
         return count($changedRecords) > $limit ? array_slice($changedRecords, 0, $limit) : $changedRecords;
@@ -76,10 +76,7 @@ class ContentChangesWidget extends AbstractListWidget
     {
         $labelFieldsForQuery = $this->resolveLabelFieldsForTable($table);
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable($table);
-        $query = $queryBuilder->select(
-            'u.username',
-            ...$labelFieldsForQuery
-            )
+        $query = $queryBuilder->select('u.username', ...$labelFieldsForQuery)
             ->from($table, 't')
             ->rightJoin(
                 't',
