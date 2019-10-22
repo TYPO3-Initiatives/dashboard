@@ -12,7 +12,6 @@ use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Configuration\Loader\YamlFileLoader;
 use TYPO3\CMS\Core\Package\PackageManager;
 use TYPO3\CMS\Core\SingletonInterface;
-use TYPO3\CMS\Core\Utility\ArrayUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -149,11 +148,12 @@ class DashboardConfiguration implements SingletonInterface
                 $finder = [];
             }
             $loader = GeneralUtility::makeInstance(YamlFileLoader::class);
-            $dashboardConfiguration = [];
+            $dashboardConfigurations = [[]];
             foreach ($finder as $fileInfo) {
                 $configuration = $loader->load(GeneralUtility::fixWindowsFilePath((string)$fileInfo));
-                ArrayUtility::mergeRecursiveWithOverrule($dashboardConfiguration, $configuration);
+                $dashboardConfigurations[] = $configuration;
             }
+            $dashboardConfiguration = array_merge_recursive(...$dashboardConfigurations);
             $this->getCache()->set($this->cacheIdentifier, json_encode($dashboardConfiguration));
         }
         return $dashboardConfiguration ?? [];

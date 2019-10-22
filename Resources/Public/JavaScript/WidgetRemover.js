@@ -20,7 +20,7 @@ define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity'], func
                 },
                 {
                     text: $element.data('button-ok-text') || 'OK',
-                    btnClass: 'btn-primary',
+                    btnClass: 'btn-warning',
                     trigger: function(evt) {
                         Modal.currentModal.trigger('modal-dismiss');
                         self.location.href = $element.attr('href');

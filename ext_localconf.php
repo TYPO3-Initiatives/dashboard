@@ -10,19 +10,21 @@ call_user_func(function () {
             \TYPO3\CMS\Core\Imaging\IconRegistry::class
         );
         $icons = [
-            'dragdrop' => 'Drag.svg',
-            'timesCircle' => 'Times-circle.svg',
-            'dashboard-admin' => 'AdminUser.svg',
-            'dashboard-user' => 'User.svg',
-            'dashboard-hashtag' => 'Hashtag.svg',
-            'dashboard-bars' => 'Bars.svg',
-            'dashboard-signin' => 'SignIn.svg',
-            'dashboard-chart' => 'Chart.svg',
-            'dashboard-chartline' => 'ChartLine.svg',
-            'dashboard-rss' => 'Rss.svg',
-            'dashboard-typo3' => 'TYPO3.svg',
-            'dashboard-pie' => 'Pie.svg',
-            'dashboard-cta' => 'Pointer.svg',
+            'dashboard-action-dragdrop' => 'dashboard-action-dragdrop.svg',
+            'dashboard-action-close' => 'dashboard-action-close.svg',
+            'dashboard-admin' => 'dashboard-admin.svg',
+            'dashboard-bars' => 'dashboard-bars.svg',
+            'dashboard-chart' => 'dashboard-chart.svg',
+            'dashboard-chartline' => 'dashboard-chartline.svg',
+            'dashboard-cta' => 'dashboard-cta.svg',
+            'dashboard-dashboard' => 'dashboard-dashboard.svg',
+            'dashboard-hashtag' => 'dashboard-hashtag.svg',
+            'dashboard-pie' => 'dashboard-pie.svg',
+            'dashboard-rss' => 'dashboard-rss.svg',
+            'dashboard-signin' => 'dashboard-signin.svg',
+            'dashboard-typo3' => 'dashboard-typo3.svg',
+            'dashboard-user' => 'dashboard-user.svg',
+            'mimetypes-x-sys_dashboard' => 'mimetypes-x-sys_dashboard.svg',
         ];
         foreach ($icons as $iconIdentifier => $iconFile) {
             $iconRegistry->registerIcon(

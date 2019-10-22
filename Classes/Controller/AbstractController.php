@@ -8,27 +8,25 @@ use TYPO3\CMS\Core\Localization\LanguageService;
 
 class AbstractController
 {
-    /**
-     * @return BackendUserAuthentication
-     */
+    private const MODULE_DATA_CURRENT_DASHBOARD_IDENTIFIER = 'web_dashboard/current_dashboard/';
+
     protected function getBackendUser(): BackendUserAuthentication
     {
         return $GLOBALS['BE_USER'];
     }
 
-    /**
-     * @return LanguageService
-     */
     protected function getLanguageService(): LanguageService
     {
         return $GLOBALS['LANG'];
     }
 
-    /**
-     * @return string
-     */
     protected function getCurrentDashboard(): string
     {
-        return $this->getBackendUser()->getModuleData('web_dashboard/current_dashboard/') ?: 'default';
+        return $this->getBackendUser()->getModuleData(self::MODULE_DATA_CURRENT_DASHBOARD_IDENTIFIER) ?? '';
+    }
+
+    protected function setCurrentDashboard(string $identifier): void
+    {
+        $this->getBackendUser()->pushModuleData(self::MODULE_DATA_CURRENT_DASHBOARD_IDENTIFIER, $identifier);
     }
 }

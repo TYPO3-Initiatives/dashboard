@@ -12,6 +12,9 @@
                 </f:be.link>
             </f:for>
         </f:if>
+        <a href="{addDashboardUri}" class="js-dashboard-addDashboard dashboardControl" data-modal-title="{f:translate(key: 'dashboard.add', extensionName: 'dashboard')}" data-button-close-text="{f:translate(key: 'dashboard.add.button.close', extensionName: 'dashboard')}" data-button-ok-text="{f:translate(key: 'dashboard.add.button.ok', extensionName: 'dashboard')}">
+            <core:icon identifier="actions-add" alternativeMarkupIdentifier="inline" /><span class="sr-only"><f:translate key="dashboard.add" extensionName="dashboard"/></span>
+        </a>
     </div>
 </div>
 
@@ -26,10 +29,10 @@
                     <div class="widget-content hide"></div>
                     <div class="widget-actions">
                         <div class="widget-move">
-                            <core:icon identifier="dragdrop" alternativeMarkupIdentifier="inline"/>
+                            <core:icon identifier="dashboard-action-dragdrop" alternativeMarkupIdentifier="inline"/>
                         </div>
                         <f:be.link class="widget-remove" route="dashboard" parameters="{action: 'removeWidget', widgetHash: widgetHash}" data="{title: '{f:translate(key: \'widget.remove.confirm.title\', extensionName: \'dashboard\')}', message: '{f:translate(key: \'widget.remove.confirm.message\', extensionName: \'dashboard\')}', button-ok-text: '{f:translate(key: \'widget.remove.button.ok\', extensionName: \'dashboard\')}', button-close-text: '{f:translate(key: \'widget.remove.button.close\', extensionName: \'dashboard\')}'}">
-                            <core:icon identifier="timesCircle" alternativeMarkupIdentifier="inline"/>
+                            <core:icon identifier="dashboard-action-close" alternativeMarkupIdentifier="inline"/>
                         </f:be.link>
                     </div>
                 </div>
@@ -40,7 +43,7 @@
 
 <div class="dashboard-add-item">
     <a href="{addWidgetUri}" class="js-dashboard-addWidget dashBoardButton-addItem" data-modal-title="{f:translate(key: 'widget.add', extensionName: 'dashboard')}" data-button-close-text="{f:translate(key: 'widget.add.button.close', extensionName: 'dashboard')}" data-button-ok-text="{f:translate(key: 'widget.add.button.ok', extensionName: 'dashboard')}">
-        <i class="fa fa-plus fa-fw"></i><span class="sr-only"><f:translate key="widget.add" extensionName="dashboard"/></span>
+        <core:icon identifier="actions-add" alternativeMarkupIdentifier="inline" /><span class="sr-only"><f:translate key="widget.add" extensionName="dashboard"/></span>
     </a>
 </div>
 
@@ -66,6 +69,34 @@
                     </div>
                 </f:be.link>
             </div>
+        </f:for>
+    </div>
+</div>
+
+<div id="dashboardSelector" class="hide">
+    <div class="dashboardSelector-dashboards">
+        <f:for each="{dashboardConfigurations}" as="availableDashboardConfig" key="availableDashboardKey">
+            <f:if condition="!{availableDashboardConfig.excludeFromWizard}">
+                <div class="dashboardSelector-dashboard">
+                    <f:be.link class="dashboardSelector-dashboard-block" route="dashboard" target="list_frame" parameters="{action: 'addDashboard', dashboard: availableDashboardKey}">
+                        <f:if condition="{availableDashboardConfig.iconIdentifier}">
+                            <div class="dashboardSelector-dashboard-icon">
+                                <core:icon size="default" alternativeMarkupIdentifier="inline" identifier="{availableDashboardConfig.iconIdentifier}"/>
+                            </div>
+                        </f:if>
+                        <div class="dashboardSelector-dashboard-details">
+                            <div class="dashboardSelector-dashboard-title">
+                                <f:translate key="{availableDashboardConfig.label}" default="{availableDashboardConfig.label}"/>
+                            </div>
+                            <f:if condition="{availableDashboardConfig.description}">
+                                <div class="dashboardSelector-dashboard-description">
+                                    <f:translate key="{availableDashboardConfig.description}" default="{availableDashboardConfig.description}"/>
+                                </div>
+                            </f:if>
+                        </div>
+                    </f:be.link>
+                </div>
+            </f:if>
         </f:for>
     </div>
 </div>
