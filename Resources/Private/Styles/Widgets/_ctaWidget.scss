@@ -4,8 +4,9 @@
 	align-items: center;
 	padding: $block-gutter / 2;
 	background-color: $primary-color;
+	font-weight: 600;
 	font-size: 14px;
-	color: #fff;
+	color: #000;
 
 	&:hover,
 	&:focus {
