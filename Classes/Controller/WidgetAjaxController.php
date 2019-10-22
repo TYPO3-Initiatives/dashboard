@@ -7,11 +7,10 @@ use FriendsOfTYPO3\Dashboard\DashboardConfiguration;
 use FriendsOfTYPO3\Dashboard\Widgets\WidgetInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-class WidgetAjaxController
+class WidgetAjaxController extends AbstractController
 {
     /**
      * @var DashboardConfiguration
@@ -20,11 +19,7 @@ class WidgetAjaxController
 
     public function __construct(DashboardConfiguration $dashboardConfiguration = null)
     {
-<<<<<<< HEAD
         $this->dashboardConfiguration = $dashboardConfiguration ?? GeneralUtility::makeInstance(DashboardConfiguration::class);
-=======
-        $this->dashboardConfiguration = $dashboardConfiguration;
->>>>>>> [TASK] Remove registries and add yaml file loader
     }
 
     /**
@@ -64,31 +59,5 @@ class WidgetAjaxController
 
         $this->getBackendUser()->pushModuleData('web_dashboard/dashboard/' . $this->getCurrentDashboard() . '/widgets', $widgets);
         return new JsonResponse(['status' => 'saved']);
-    }
-
-    /**
-     * @return BackendUserAuthentication
-     */
-    protected function getBackendUser(): BackendUserAuthentication
-    {
-        return $GLOBALS['BE_USER'];
-    }
-
-    /**
-     * @return string
-     */
-    protected function getCurrentDashboard(): string
-    {
-        return $this->getBackendUser()->getModuleData('web_dashboard/current_dashboard/') ?: 'default';
-    }
-
-    /**
-     * @param string $key
-     * @param array $config
-     * @return string
-     */
-    protected function getWidgetKey(string $key, array $config = [])
-    {
-        return sha1(implode('|', [$key, serialize($config)]));
     }
 }

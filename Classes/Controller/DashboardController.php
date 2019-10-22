@@ -10,17 +10,15 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
-use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Http\RedirectResponse;
-use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
-class DashboardController
+class DashboardController extends AbstractController
 {
     /**
      * @var ModuleTemplate
@@ -48,10 +46,10 @@ class DashboardController
      */
     protected $jsFiles = [];
 
-    public function __construct(DashboardConfiguration $dashboardConfiguration = null)
+    public function __construct(ModuleTemplate $moduleTemplate = null, UriBuilder $uriBuilder = null, DashboardConfiguration $dashboardConfiguration = null)
     {
-        $this->moduleTemplate = GeneralUtility::makeInstance(ModuleTemplate::class);
-        $this->uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
+        $this->moduleTemplate = $moduleTemplate ?? GeneralUtility::makeInstance(ModuleTemplate::class);
+        $this->uriBuilder = $uriBuilder ?? GeneralUtility::makeInstance(UriBuilder::class);
         $this->dashboardConfiguration = $dashboardConfiguration ?? GeneralUtility::makeInstance(DashboardConfiguration::class);
     }
 
@@ -64,8 +62,8 @@ class DashboardController
     public function handleRequest(ServerRequestInterface $request): ResponseInterface
     {
         $publicResourcesPath = PathUtility::getAbsoluteWebPath(ExtensionManagementUtility::extPath('dashboard')) . 'Resources/Public/';
-
-        $this->moduleTemplate->getPageRenderer()->addRequireJsConfiguration(
+        $pageRenderer = $this->moduleTemplate->getPageRenderer();
+        $pageRenderer->addRequireJsConfiguration(
             [
                 'paths' => [
                     'dashboard' => $publicResourcesPath . 'JavaScript',
@@ -74,12 +72,12 @@ class DashboardController
             ]
         );
 
-        $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('muuri');
-        $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('dashboard/Grid');
-        $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('dashboard/WidgetContentCollector');
-        $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('dashboard/WidgetSelector');
-        $this->moduleTemplate->getPageRenderer()->loadRequireJsModule('dashboard/WidgetRemover');
-        $this->moduleTemplate->getPageRenderer()->addCssFile($publicResourcesPath . 'CSS/dashboard.min.css');
+        $pageRenderer->loadRequireJsModule('muuri');
+        $pageRenderer->loadRequireJsModule('dashboard/Grid');
+        $pageRenderer->loadRequireJsModule('dashboard/WidgetContentCollector');
+        $pageRenderer->loadRequireJsModule('dashboard/WidgetSelector');
+        $pageRenderer->loadRequireJsModule('dashboard/WidgetRemover');
+        $pageRenderer->addCssFile($publicResourcesPath . 'CSS/dashboard.min.css');
 
         $action = $request->getQueryParams()['action'] ?? $request->getParsedBody()['action'] ?? 'main';
         $this->initializeView($action);
@@ -90,17 +88,17 @@ class DashboardController
         }
 
         foreach ($this->cssFiles as $cssFile) {
-            $this->moduleTemplate->getPageRenderer()->addCssFile($cssFile);
+            $pageRenderer->addCssFile($cssFile);
         }
 
         foreach ($this->jsFiles as $key => $jsFile) {
-            $this->moduleTemplate->getPageRenderer()->addRequireJsConfiguration([
+            $pageRenderer->addRequireJsConfiguration([
                 'paths' => [
                     $key => $jsFile
                 ]
             ]);
 
-            $this->moduleTemplate->getPageRenderer()->loadRequireJsModule($key);
+            $pageRenderer->loadRequireJsModule($key);
         }
 
         $this->moduleTemplate->setContent($this->view->render());
@@ -257,7 +255,6 @@ class DashboardController
     public function prepareWidgetElement($widgetKey, $config = []): array
     {
         $widgetConfiguration = $this->dashboardConfiguration->getWidgets()[$widgetKey];
-<<<<<<< HEAD
         if ($widgetConfiguration instanceof Widget) {
             $widgetObject = GeneralUtility::makeInstance($widgetConfiguration->getClassname());
             if ($widgetObject instanceof WidgetInterface) {
@@ -270,54 +267,8 @@ class DashboardController
                     'config' => $config
                 ];
             }
-=======
-        $widgetObject = GeneralUtility::makeInstance($widgetConfiguration->getClassname());
-        if ($widgetObject instanceof WidgetInterface) {
-            return [
-                'key' => $widgetKey,
-                'height' => $widgetObject->getHeight(),
-                'width' => $widgetObject->getWidth(),
-                'title' => $widgetObject->getTitle(),
-                'additionalClasses' => $widgetObject->getAdditionalClasses(),
-                'config' => $config
-            ];
->>>>>>> [TASK] Remove registries and add yaml file loader
         }
 
         return [];
-    }
-
-    /**
-     * @return BackendUserAuthentication
-     */
-    protected function getBackendUser(): BackendUserAuthentication
-    {
-        return $GLOBALS['BE_USER'];
-    }
-
-    /**
-     * @return LanguageService
-     */
-    protected function getLanguageService(): LanguageService
-    {
-        return $GLOBALS['LANG'];
-    }
-
-    /**
-     * @return string
-     */
-    protected function getCurrentDashboard(): string
-    {
-        return $this->getBackendUser()->getModuleData('web_dashboard/current_dashboard/') ?: 'default';
-    }
-
-    /**
-     * @param string $key
-     * @param array $config
-     * @return string
-     */
-    protected function getWidgetKey(string $key, array $config = [])
-    {
-        return sha1(implode('|', [$key, serialize($config)]));
     }
 }
