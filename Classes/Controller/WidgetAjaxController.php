@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Dashboard\Controller;
 
-use FriendsOfTYPO3\Dashboard\Registry\WidgetRegistry;
+use FriendsOfTYPO3\Dashboard\DashboardConfiguration;
 use FriendsOfTYPO3\Dashboard\Widgets\WidgetInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -14,6 +14,16 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 class WidgetAjaxController
 {
     /**
+     * @var DashboardConfiguration
+     */
+    protected $dashboardConfiguration;
+
+    public function __construct(DashboardConfiguration $dashboardConfiguration = null)
+    {
+        $this->dashboardConfiguration = $dashboardConfiguration ?? GeneralUtility::makeInstance(DashboardConfiguration::class);
+    }
+
+    /**
      * @param ServerRequestInterface $request
      * @return ResponseInterface
      * @throws \Exception
@@ -21,10 +31,9 @@ class WidgetAjaxController
     public function getContent(ServerRequestInterface $request): ResponseInterface
     {
         $queryParams = $request->getQueryParams();
+        $widgetConfiguration = $this->dashboardConfiguration->getWidgets()[$queryParams['widget']];
 
-        $widgetRegistry = GeneralUtility::makeInstance(WidgetRegistry::class);
-        $widgetObject = $widgetRegistry->getWidgetObject($queryParams['widget']);
-
+        $widgetObject = GeneralUtility::makeInstance($widgetConfiguration->getClassname());
         $data = [];
         if ($widgetObject instanceof WidgetInterface) {
             $data = [

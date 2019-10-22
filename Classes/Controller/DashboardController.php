@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Dashboard\Controller;
 
-use FriendsOfTYPO3\Dashboard\Registry\DashboardRegistry;
-use FriendsOfTYPO3\Dashboard\Registry\WidgetRegistry;
+use FriendsOfTYPO3\Dashboard\Configuration\Widget;
+use FriendsOfTYPO3\Dashboard\DashboardConfiguration;
 use FriendsOfTYPO3\Dashboard\Widgets\WidgetInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -28,11 +28,6 @@ class DashboardController
     protected $moduleTemplate;
 
     /**
-     * @var WidgetRegistry
-     */
-    protected $widgetRegistry;
-
-    /**
      * @var UriBuilder
      */
     protected $uriBuilder;
@@ -40,8 +35,8 @@ class DashboardController
     /** @var ViewInterface */
     protected $view;
 
-    /** @var DashboardRegistry */
-    protected $dashboardRegistry;
+    /** @var DashboardConfiguration */
+    protected $dashboardConfiguration;
 
     /**
      * @var array
@@ -53,12 +48,11 @@ class DashboardController
      */
     protected $jsFiles = [];
 
-    public function __construct()
+    public function __construct(DashboardConfiguration $dashboardConfiguration = null)
     {
         $this->moduleTemplate = GeneralUtility::makeInstance(ModuleTemplate::class);
-        $this->widgetRegistry = GeneralUtility::makeInstance(WidgetRegistry::class);
         $this->uriBuilder = GeneralUtility::makeInstance(UriBuilder::class);
-        $this->dashboardRegistry = GeneralUtility::makeInstance(DashboardRegistry::class);
+        $this->dashboardConfiguration = $dashboardConfiguration ?? GeneralUtility::makeInstance(DashboardConfiguration::class);
     }
 
     /**
@@ -116,13 +110,16 @@ class DashboardController
     public function mainAction(ServerRequestInterface $request): void
     {
         $widgets = $this->getWidgetsForCurrentUser();
-        $availableWidgets = $this->widgetRegistry->getWidgets();
+        $availableWidgets = [];
+        foreach ($this->dashboardConfiguration->getWidgets() as $availableWidgetConfiguration) {
+            $availableWidgets[$availableWidgetConfiguration->getIdentifier()] = GeneralUtility::makeInstance($availableWidgetConfiguration->getClassname());
+        }
         $this->getJavascriptForWidgets($availableWidgets);
         $this->getCssForWidgets($availableWidgets);
 
         $this->view->assign('widgets', $widgets);
         $this->view->assign('availableWidgets', $availableWidgets);
-        $this->view->assign('availableDashboards', $this->dashboardRegistry->getDashboards());
+        $this->view->assign('availableDashboards', $this->dashboardConfiguration->getDashboards());
         $this->view->assign('currentDashboard', $this->getCurrentDashboard());
         $parameters = [
             'widget' => '@widget',
@@ -132,7 +129,7 @@ class DashboardController
     }
 
     /**
-     * @param array $widgets
+     * @param Widget[] $widgets
      * @throws \Exception
      */
     protected function getJavascriptForWidgets(array $widgets): void
@@ -147,7 +144,7 @@ class DashboardController
     }
 
     /**
-     * @param array $widgets
+     * @param Widget[] $widgets
      * @throws \Exception
      */
     protected function getCssForWidgets(array $widgets): void
@@ -259,17 +256,19 @@ class DashboardController
      */
     public function prepareWidgetElement($widgetKey, $config = []): array
     {
-        $widgetObject = $this->widgetRegistry->getWidgetObject($widgetKey);
-
-        if ($widgetObject instanceof WidgetInterface) {
-            return [
-                'key' => $widgetKey,
-                'height' => $widgetObject->getHeight(),
-                'width' => $widgetObject->getWidth(),
-                'title' => $widgetObject->getTitle(),
-                'additionalClasses' => $widgetObject->getAdditionalClasses(),
-                'config' => $config
-            ];
+        $widgetConfiguration = $this->dashboardConfiguration->getWidgets()[$widgetKey];
+        if ($widgetConfiguration instanceof Widget) {
+            $widgetObject = GeneralUtility::makeInstance($widgetConfiguration->getClassname());
+            if ($widgetObject instanceof WidgetInterface) {
+                return [
+                    'key' => $widgetKey,
+                    'height' => $widgetObject->getHeight(),
+                    'width' => $widgetObject->getWidth(),
+                    'title' => $widgetObject->getTitle(),
+                    'additionalClasses' => $widgetObject->getAdditionalClasses(),
+                    'config' => $config
+                ];
+            }
         }
 
         return [];

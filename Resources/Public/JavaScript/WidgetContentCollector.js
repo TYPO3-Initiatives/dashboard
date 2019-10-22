@@ -1,4 +1,4 @@
-define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity', 'chartinitializer'], function ($, Modal, Severity, ChartInitializer) {
+define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity'], function ($, Modal, Severity) {
     'use strict';
 
     var WidgetContentCollector = {
