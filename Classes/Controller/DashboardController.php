@@ -5,11 +5,9 @@ namespace FriendsOfTYPO3\Dashboard\Controller;
 
 use FriendsOfTYPO3\Dashboard\Configuration\Widget;
 use FriendsOfTYPO3\Dashboard\DashboardConfiguration;
-use FriendsOfTYPO3\Dashboard\Dashboards\AbstractDashboard;
-use FriendsOfTYPO3\Dashboard\Dashboards\DashboardRepository;
+use FriendsOfTYPO3\Dashboard\Widgets\WidgetInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Core\Http\HtmlResponse;
@@ -22,8 +20,6 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 
 class DashboardController extends AbstractController
 {
-    private const DEFAULT_DASHBOARD_IDENTIFIER = 'dashboard-default';
-
     /**
      * @var ModuleTemplate
      */
@@ -39,9 +35,6 @@ class DashboardController extends AbstractController
 
     /** @var DashboardConfiguration */
     protected $dashboardConfiguration;
-
-    /** @var DashboardRepository */
-    protected $dashboardRepository;
 
     /**
      * @var array
@@ -152,11 +145,10 @@ class DashboardController extends AbstractController
     }
 
     /**
-     * @param ServerRequestInterface $request
-     * @return ResponseInterface
-     * @throws RouteNotFoundException
+     * @param Widget[] $widgets
+     * @throws \Exception
      */
-    public function setActiveDashboardAction(ServerRequestInterface $request): ResponseInterface
+    protected function getJavascriptForWidgets(array $widgets): void
     {
         $this->setCurrentDashboard($request->getQueryParams()['currentDashboard']);
         $route = $this->uriBuilder->buildUriFromRoute('dashboard', ['action' => 'main']);
