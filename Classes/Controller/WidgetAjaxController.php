@@ -20,7 +20,11 @@ class WidgetAjaxController
 
     public function __construct(DashboardConfiguration $dashboardConfiguration = null)
     {
+<<<<<<< HEAD
         $this->dashboardConfiguration = $dashboardConfiguration ?? GeneralUtility::makeInstance(DashboardConfiguration::class);
+=======
+        $this->dashboardConfiguration = $dashboardConfiguration;
+>>>>>>> [TASK] Remove registries and add yaml file loader
     }
 
     /**

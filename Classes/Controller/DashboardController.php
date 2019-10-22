@@ -257,6 +257,7 @@ class DashboardController
     public function prepareWidgetElement($widgetKey, $config = []): array
     {
         $widgetConfiguration = $this->dashboardConfiguration->getWidgets()[$widgetKey];
+<<<<<<< HEAD
         if ($widgetConfiguration instanceof Widget) {
             $widgetObject = GeneralUtility::makeInstance($widgetConfiguration->getClassname());
             if ($widgetObject instanceof WidgetInterface) {
@@ -269,6 +270,18 @@ class DashboardController
                     'config' => $config
                 ];
             }
+=======
+        $widgetObject = GeneralUtility::makeInstance($widgetConfiguration->getClassname());
+        if ($widgetObject instanceof WidgetInterface) {
+            return [
+                'key' => $widgetKey,
+                'height' => $widgetObject->getHeight(),
+                'width' => $widgetObject->getWidth(),
+                'title' => $widgetObject->getTitle(),
+                'additionalClasses' => $widgetObject->getAdditionalClasses(),
+                'config' => $config
+            ];
+>>>>>>> [TASK] Remove registries and add yaml file loader
         }
 
         return [];
