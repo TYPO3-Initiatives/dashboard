@@ -8,7 +8,7 @@
 
 /public
 /vendor
-/.php_cs.cache
+/*.cache
 /.build
 /build/.phpunit.result.cache
 
