@@ -12,6 +12,10 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\JsonResponse;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
+/**
+ * Class WidgetAjaxController
+ * @codeCoverageIgnore no coverage for controllers yet
+ */
 class WidgetAjaxController extends AbstractController
 {
     /**
@@ -63,10 +67,12 @@ class WidgetAjaxController extends AbstractController
         $body = $request->getParsedBody();
         $widgets = [];
         foreach ($body['widgets'] as $widget) {
-            $widgets[$widget[2]] = ['key' => $widget[0], 'config' => json_decode($widget[1], false)];
+            $widgets[$widget[2]] = ['key' => $widget[0], 'config' => json_decode($widget[1], false, 512, JSON_THROW_ON_ERROR)];
         }
         $dashboard = $this->dashboardRepository->getDashboardByIdentifier($this->getCurrentDashboard());
-        $this->dashboardRepository->updateWidgets($dashboard, $widgets);
+        if ($dashboard !== null) {
+            $this->dashboardRepository->updateWidgets($dashboard, $widgets);
+        }
         return new JsonResponse(['status' => 'saved']);
     }
 }

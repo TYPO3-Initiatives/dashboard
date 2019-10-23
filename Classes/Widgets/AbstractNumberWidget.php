@@ -33,10 +33,6 @@ abstract class AbstractNumberWidget extends AbstractWidget
         $this->prepareData();
         $this->initializeView();
 
-        $iconFactory = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-            \TYPO3\CMS\Core\Imaging\IconFactory::class
-        );
-
         $this->view->assign('icon', $this->icon);
         $this->view->assign('title', $this->title);
         $this->view->assign('number', $this->number);

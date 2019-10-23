@@ -3,6 +3,8 @@
 /.vscode
 /.DS_Store
 /.ddev
+/logs
+/var
 
 /public
 /vendor

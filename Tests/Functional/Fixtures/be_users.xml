@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <be_users>
+        <uid>1</uid>
+        <username>kasper</username>
+        <admin>1</admin>
+    </be_users>
+    <be_users>
+        <uid>2</uid>
+        <username>max</username>
+        <admin>0</admin>
+    </be_users>
+</dataset>

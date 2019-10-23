@@ -6,16 +6,11 @@ namespace FriendsOfTYPO3\Dashboard\Dashboards;
 use FriendsOfTYPO3\Dashboard\Configuration\Dashboard;
 use FriendsOfTYPO3\Dashboard\Configuration\Widget;
 use FriendsOfTYPO3\Dashboard\DashboardConfiguration;
-use FriendsOfTYPO3\Dashboard\Widgets\AbstractWidget;
 use FriendsOfTYPO3\Dashboard\Widgets\WidgetInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Class DashboardRepository
- * @internal
- */
 class DashboardRepository
 {
     private const TABLE = 'sys_dashboards';
@@ -49,7 +44,7 @@ class DashboardRepository
      * @param string $identifier
      * @return AbstractDashboard
      */
-    public function getDashboardByIdentifier(string $identifier): AbstractDashboard
+    public function getDashboardByIdentifier(string $identifier): ?AbstractDashboard
     {
         $queryBuilder = $this->getQueryBuilder();
         $row = $queryBuilder
@@ -58,7 +53,10 @@ class DashboardRepository
             ->where($queryBuilder->expr()->eq('identifier', $queryBuilder->createNamedParameter($identifier)))
             ->execute()
             ->fetchAll();
-        return $this->createFromRow($row[0]);
+        if (count($row)) {
+            return $this->createFromRow($row[0]);
+        }
+        return null;
     }
 
     public function createDashboard(Dashboard $dashboardConfiguration): AbstractDashboard
@@ -125,23 +123,6 @@ class DashboardRepository
     protected function createFromRow(array $row): AbstractDashboard
     {
         return GeneralUtility::makeInstance(DefaultDashboard::class, $row['identifier'], $row['label'], json_decode($row['configuration'], true));
-    }
-
-    /**
-     * @param string $configuration
-     * @return AbstractWidget[]
-     */
-    protected function createWidgets(string $configuration): array
-    {
-        $widgets = [];
-        if ($configuration !== '') {
-            $configuration = json_decode($configuration, true);
-            foreach ($configuration['widgets'] as $widgetKey) {
-                $widgetConfiguration = $this->dashboardConfiguration->getWidgets()[$widgetKey];
-                $widgets[] = GeneralUtility::makeInstance($widgetConfiguration->getClassname());
-            }
-        }
-        return $widgets;
     }
 
     protected function getQueryBuilder(): QueryBuilder
