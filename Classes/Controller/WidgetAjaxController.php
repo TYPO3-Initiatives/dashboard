@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Dashboard\Controller;
 
+use FriendsOfTYPO3\Dashboard\Configuration\Widget;
 use FriendsOfTYPO3\Dashboard\DashboardConfiguration;
+use FriendsOfTYPO3\Dashboard\Dashboards\DashboardRepository;
 use FriendsOfTYPO3\Dashboard\Widgets\WidgetInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -17,9 +19,15 @@ class WidgetAjaxController extends AbstractController
      */
     protected $dashboardConfiguration;
 
-    public function __construct(DashboardConfiguration $dashboardConfiguration = null)
+    /**
+     * @var DashboardRepository
+     */
+    protected $dashboardRepository;
+
+    public function __construct(DashboardConfiguration $dashboardConfiguration = null, DashboardRepository $dashboardRepository = null)
     {
         $this->dashboardConfiguration = $dashboardConfiguration ?? GeneralUtility::makeInstance(DashboardConfiguration::class);
+        $this->dashboardRepository = $dashboardRepository ?? GeneralUtility::makeInstance(DashboardRepository::class);
     }
 
     /**
@@ -32,16 +40,17 @@ class WidgetAjaxController extends AbstractController
         $queryParams = $request->getQueryParams();
         $widgetConfiguration = $this->dashboardConfiguration->getWidgets()[$queryParams['widget']];
 
-        $widgetObject = GeneralUtility::makeInstance($widgetConfiguration->getClassname());
         $data = [];
-        if ($widgetObject instanceof WidgetInterface) {
-            $data = [
-                'widget' => $queryParams['widget'],
-                'content' => $widgetObject->renderWidgetContent(),
-                'eventdata' => $widgetObject->getEventData()
-            ];
+        if ($widgetConfiguration instanceof Widget) {
+            $widgetObject = GeneralUtility::makeInstance($widgetConfiguration->getClassname());
+            if ($widgetObject instanceof WidgetInterface) {
+                $data = [
+                    'widget' => $queryParams['widget'],
+                    'content' => $widgetObject->renderWidgetContent(),
+                    'eventdata' => $widgetObject->getEventData()
+                ];
+            }
         }
-
         return new JsonResponse($data);
     }
 
@@ -54,10 +63,10 @@ class WidgetAjaxController extends AbstractController
         $body = $request->getParsedBody();
         $widgets = [];
         foreach ($body['widgets'] as $widget) {
-            $widgets[$widget[2]] = ['key' => $widget[0], 'config' => json_decode($widget[1])];
+            $widgets[$widget[2]] = ['key' => $widget[0], 'config' => json_decode($widget[1], false)];
         }
-
-        $this->getBackendUser()->pushModuleData('web_dashboard/dashboard/' . $this->getCurrentDashboard() . '/widgets', $widgets);
+        $dashboard = $this->dashboardRepository->getDashboardByIdentifier($this->getCurrentDashboard());
+        $this->dashboardRepository->updateWidgets($dashboard, $widgets);
         return new JsonResponse(['status' => 'saved']);
     }
 }

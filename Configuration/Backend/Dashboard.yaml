@@ -1,7 +1,14 @@
 Dashboard:
   Dashboards:
-    - { identifier: 'default',
-        label: 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default' }
+    - { identifier: 'dashboard-default',
+        iconIdentifier: 'dashboard-dashboard',
+        label: 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default',
+        description: 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default.description',
+        widgets: ['t3News', 'documentation', 'numberOfBackendUsers', 'numberOfAdminBackendUsers', 'lastLogins', 'pagesWithoutDescription', 'sysLogErrors'] }
+    - { identifier: 'dashboard-empty',
+        iconIdentifier: 'dashboard-dashboard',
+        label: 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.empty',
+        description: 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.empty.description' }
   Widgets:
     - { identifier: 'numberOfBackendUsers',
         className: FriendsOfTYPO3\Dashboard\Widgets\NumberOfBackendUsersWidget }

@@ -33,6 +33,24 @@
 			<trans-unit id="dashboard.default" xml:space="preserve">
 				<source>Default</source>
 			</trans-unit>
+			<trans-unit id="dashboard.default.description" xml:space="preserve">
+				<source>This is the dashboard</source>
+			</trans-unit>
+			<trans-unit id="dashboard.empty" xml:space="preserve">
+				<source>Empty Dashboard</source>
+			</trans-unit>
+			<trans-unit id="dashboard.empty.description" xml:space="preserve">
+				<source>This is an empty dashboard</source>
+			</trans-unit>
+			<trans-unit id="dashboard.add" xml:space="preserve">
+				<source>Add dashboard</source>
+			</trans-unit>
+			<trans-unit id="dashboard.add.button.close" xml:space="preserve">
+				<source>Close</source>
+			</trans-unit>
+			<trans-unit id="dashboard.add.button.ok" xml:space="preserve">
+				<source>Add Dashboard</source>
+			</trans-unit>
 
 			<trans-unit id="widgets.pagesWithoutDescription.title" xml:space="preserve">
 				<source>Pages without a meta description</source>

@@ -12,9 +12,19 @@ root: # root is always required (note no prefix here)
             identifier:
               _required: true
               _type: text
+            excludeFromWizard:
+              _type: bool
+            iconIdentifier:
+              _type: text
             label:
               _required: true
               _type: text
+            description:
+              _type: text
+            widgets:
+              _type: array
+              _children:
+                _type: text
         Widgets:
           _required: true
           _type: array

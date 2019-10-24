@@ -5,6 +5,8 @@ namespace FriendsOfTYPO3\Dashboard\Configuration;
 
 /**
  * Class Widget
+ * This class represents the definition of an available widget.
+ * The scope of this class is only the configuration not a representation of a concrete widget instance.
  * @internal
  */
 class Widget extends AbstractConfiguration
