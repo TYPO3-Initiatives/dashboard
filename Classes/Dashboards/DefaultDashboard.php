@@ -5,7 +5,6 @@ namespace FriendsOfTYPO3\Dashboard\Dashboards;
 
 /**
  * A default empty dashboard
- * @internal
  */
 class DefaultDashboard extends AbstractDashboard
 {

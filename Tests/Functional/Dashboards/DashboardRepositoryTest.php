@@ -108,9 +108,9 @@ class DashboardRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function prepareWidgetElementReturnsEmptyArrayForUnknonwConfiguration(): void
+    public function createWidgetRepresentationReturnsEmptyArrayForUnknonwConfiguration(): void
     {
-        $this->assertSame([], $this->subject->prepareWidgetElement('foo'));
+        $this->assertSame([], $this->subject->createWidgetRepresentation('foo'));
     }
 
     /**

@@ -143,8 +143,12 @@ class DashboardController extends AbstractController
         $this->getJavascriptForWidgets($availableWidgets);
         $this->getCssForWidgets($availableWidgets);
 
+        $widgets = [];
+        foreach ($dashboards[$currentDashboard]->getConfiguration()['widgets'] as $widgetHash => $widget) {
+            $widgets[$widgetHash] = $this->dashboardRepository->createWidgetRepresentation($widget['identifier'], $widget['config']);
+        }
         $this->view->assignMultiple([
-            'widgets' => $dashboards[$currentDashboard]->getConfiguration()['widgets'],
+            'widgets' => $widgets,
             'availableWidgets' => $availableWidgets,
             'availableDashboards' => $dashboards,
             'dashboardConfigurations' => $this->dashboardConfiguration->getDashboards(),
@@ -196,8 +200,9 @@ class DashboardController extends AbstractController
             if ($dashboard !== null) {
                 $widgets = $dashboard->getConfiguration()['widgets'] ?? [];
             }
-            $key = sha1($widgetKey . '-' . time());
-            $widgets[$key] = $this->dashboardRepository->prepareWidgetElement($widgetKey);
+            $hash = sha1($widgetKey . '-' . time());
+            // @TODO: The creation of $widgets is not perfect, we should move this into a central place and work with objects
+            $widgets[$hash] = ['identifier' => $widgetKey, 'config' => json_decode('[]', false, 512, JSON_THROW_ON_ERROR)];
             $this->dashboardRepository->updateWidgets($dashboard, $widgets);
         }
 

@@ -63,8 +63,8 @@ class DashboardRepository
     {
         $configuration = ['widgets' => []];
         foreach ($dashboardConfiguration->getWidgets() as $widget) {
-            $key = sha1($widget . '-' . time());
-            $configuration['widgets'][$key] = $this->prepareWidgetElement($widget);
+            $hash = sha1($widget . '-' . time());
+            $configuration['widgets'][$hash] = ['identifier' => $widget, 'config' => json_decode('[]', false, 512, JSON_THROW_ON_ERROR)];
         }
         $identifier = sha1($dashboardConfiguration->getIdentifier() . '-' . time());
         $this->getQueryBuilder()
@@ -72,26 +72,29 @@ class DashboardRepository
             ->values([
                 'identifier' => $identifier,
                 'label' => $dashboardConfiguration->getLabel(),
-                'configuration' => json_encode($configuration)
+                'configuration' => json_encode($configuration, JSON_THROW_ON_ERROR, 512)
             ])
             ->execute();
         return $this->getDashboardByIdentifier($identifier);
     }
 
     /**
-     * @param $widgetKey
+     * @param $widgetIdentifier
      * @param array $config
      * @return array
      * @throws \Exception
      */
-    public function prepareWidgetElement($widgetKey, $config = []): array
+    public function createWidgetRepresentation($widgetIdentifier, $config = []): array
     {
-        $widgetConfiguration = $this->dashboardConfiguration->getWidgets()[$widgetKey];
+        // @TODO: This method and the whole Widget system should be adjusted
+        // @TODO: Maybe add WidgetFactory which creates Widget instances from configuration
+        // @TODO: The AbstractWidget should implement JsonSerializable to provide an easy representation for the view.
+        $widgetConfiguration = $this->dashboardConfiguration->getWidgets()[$widgetIdentifier];
         if ($widgetConfiguration instanceof Widget) {
             $widgetObject = GeneralUtility::makeInstance($widgetConfiguration->getClassname());
             if ($widgetObject instanceof WidgetInterface) {
                 return [
-                    'key' => $widgetKey,
+                    'identifier' => $widgetIdentifier,
                     'height' => $widgetObject->getHeight(),
                     'width' => $widgetObject->getWidth(),
                     'title' => $widgetObject->getTitle(),
@@ -115,7 +118,7 @@ class DashboardRepository
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
             ->update(self::TABLE)
-            ->set('configuration', json_encode($configuration))
+            ->set('configuration', json_encode($configuration, JSON_THROW_ON_ERROR, 512))
             ->where($queryBuilder->expr()->eq('identifier', $queryBuilder->createNamedParameter($dashboard->getIdentifier())))
             ->execute();
     }
