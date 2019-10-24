@@ -63,8 +63,8 @@ class DashboardRepository
     {
         $configuration = ['widgets' => []];
         foreach ($dashboardConfiguration->getWidgets() as $widget) {
-            $key = sha1($widget . '-' . time());
-            $configuration['widgets'][$key] = $this->prepareWidgetElement($widget);
+            $hash = sha1($widget . '-' . time());
+            $configuration['widgets'][$hash] = ['identifier' => $widget, 'config' => json_decode('[]', false)];
         }
         $identifier = sha1($dashboardConfiguration->getIdentifier() . '-' . time());
         $this->getQueryBuilder()
@@ -79,19 +79,22 @@ class DashboardRepository
     }
 
     /**
-     * @param $widgetKey
+     * @param $widgetIdentifier
      * @param array $config
      * @return array
      * @throws \Exception
      */
-    public function prepareWidgetElement($widgetKey, $config = []): array
+    public function createWidgetRepresentation($widgetIdentifier, $config = []): array
     {
-        $widgetConfiguration = $this->dashboardConfiguration->getWidgets()[$widgetKey];
+        // @TODO: This method and the whole Widget system should be adjusted
+        // @TODO: Maybe add WidgetFactory which creates Widget instances from configuration
+        // @TODO: The AbstractWidget should implement JsonSerializable to provide an easy representation for the view.
+        $widgetConfiguration = $this->dashboardConfiguration->getWidgets()[$widgetIdentifier];
         if ($widgetConfiguration instanceof Widget) {
             $widgetObject = GeneralUtility::makeInstance($widgetConfiguration->getClassname());
             if ($widgetObject instanceof WidgetInterface) {
                 return [
-                    'key' => $widgetKey,
+                    'identifier' => $widgetIdentifier,
                     'height' => $widgetObject->getHeight(),
                     'width' => $widgetObject->getWidth(),
                     'title' => $widgetObject->getTitle(),
