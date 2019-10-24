@@ -14,7 +14,7 @@ class SysLogErrorsWidgetTest extends AbstractWidgetTestCase
     protected $expectedWidth = 4;
     protected $expectedHeight = 4;
     protected $expectedAdditionalClasses = 'dashboard-item--chart';
-    protected $expectedIconIdentifier = 'dashboard-chartbar';
+    protected $expectedIconIdentifier = 'dashboard-chartbars';
     protected $expectedJsFiles = [
         'chartjs' => 'typo3conf/ext/dashboard/Resources/Public/JavaScript/Dist/Chart.min',
         'chartinitializer' => 'typo3conf/ext/dashboard/Resources/Public/JavaScript/ChartInitializer',
