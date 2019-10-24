@@ -8,7 +8,7 @@ namespace FriendsOfTYPO3\Dashboard\Widgets;
  */
 abstract class AbstractBarChartWidget extends AbstractChartWidget
 {
-    protected $iconIdentifier = 'dashboard-chartbar';
+    protected $iconIdentifier = 'dashboard-chartbars';
 
     protected $chartType = 'bar';
 

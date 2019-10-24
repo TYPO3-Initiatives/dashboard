@@ -50,6 +50,9 @@ class SysLogErrorsWidget extends AbstractBarChartWidget
         $labels = [];
         $data = [];
 
+        // @TODO: the next block is not reached yet.
+        // @TOOO: this block is prepared for having a configuration option with two periods
+        // @codeCoverageIgnoreStart
         if ($period === 'lastWeek') {
             for ($daysBefore=7; $daysBefore--; $daysBefore>0) {
                 $labels[] = date('d-m-Y', strtotime('-' . $daysBefore . ' day'));
@@ -59,6 +62,7 @@ class SysLogErrorsWidget extends AbstractBarChartWidget
                 $data[] = $this->getNumberOfErrorsInPeriod($startPeriod, $endPeriod);
             }
         }
+        // @codeCoverageIgnoreEnd
 
         if ($period === 'lastMonth') {
             for ($daysBefore=31; $daysBefore--; $daysBefore>0) {

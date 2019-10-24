@@ -14,10 +14,6 @@ use TYPO3\CMS\Core\Package\PackageManager;
 use TYPO3\CMS\Core\SingletonInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
-/**
- * Class DashboardConfiguration
- * @internal
- */
 class DashboardConfiguration implements SingletonInterface
 {
     /**
@@ -141,11 +137,10 @@ class DashboardConfiguration implements SingletonInterface
                 }
             }
 
-            $finder = new Finder();
-            try {
+            $finder = [];
+            if (count($paths)) {
+                $finder = new Finder();
                 $finder->files()->depth(0)->in($paths)->name($this->configFileName);
-            } catch (\InvalidArgumentException $e) {
-                $finder = [];
             }
             $loader = GeneralUtility::makeInstance(YamlFileLoader::class);
             $dashboardConfigurations = [[]];

@@ -1,6 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <phpunit
         backupGlobals="true"
-        bootstrap="../.build/vendor/typo3/testing-framework/Resources/Core/Build/UnitTestsBootstrap.php"
+        backupStaticAttributes="false"
+        bootstrap="../.build/vendor/typo3/testing-framework/Resources/Core/Build/FunctionalTestsBootstrap.php"
         colors="true"
         convertErrorsToExceptions="true"
         convertWarningsToExceptions="true"
@@ -11,11 +13,13 @@
         stopOnIncomplete="false"
         stopOnSkipped="false"
         verbose="false"
-        beStrictAboutTestsThatDoNotTestAnything="true"
 >
     <testsuites>
-        <testsuite name="dashboard-unit-tests">
+        <testsuite name="Unit Test Suite">
             <directory>../Tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Functional Test Suite">
+            <directory>../Tests/Functional</directory>
         </testsuite>
     </testsuites>
     <filter>

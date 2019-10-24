@@ -14,6 +14,7 @@ call_user_func(function () {
             'dashboard-action-close' => 'dashboard-action-close.svg',
             'dashboard-admin' => 'dashboard-admin.svg',
             'dashboard-bars' => 'dashboard-bars.svg',
+            'dashboard-chartbars' => 'dashboard-chartbars.svg',
             'dashboard-chart' => 'dashboard-chart.svg',
             'dashboard-chartline' => 'dashboard-chartline.svg',
             'dashboard-cta' => 'dashboard-cta.svg',

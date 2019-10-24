@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" datatype="plaintext" original="messages" date="2018-11-27T22:26:21Z" product-name="demo">
+        <header/>
+        <body>
+            <trans-unit id="dashboard" xml:space="preserve">
+				<source>Demo</source>
+			</trans-unit>
+            <trans-unit id="demo.title" xml:space="preserve">
+				<source>Demo Title</source>
+			</trans-unit>
+            <trans-unit id="demo.description" xml:space="preserve">
+				<source>Demo Description</source>
+			</trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -90,14 +90,15 @@ abstract class AbstractWidget implements WidgetInterface
 
     /**
      * Sets up the Fluid View.
-     *
-     * @param string $templateName
      */
     protected function initializeView(): void
     {
         $this->view = GeneralUtility::makeInstance(StandaloneView::class);
         $this->view->setTemplate('Widget/' . $this->templateName);
-        $this->view->getRenderingContext()->getTemplatePaths()->fillDefaultsByPackageName($this->extensionKey);
+        $this->view->getRenderingContext()->getTemplatePaths()->fillDefaultsByPackageName('dashboard');
+        if ($this->extensionKey !== 'dashboard') {
+            $this->view->getRenderingContext()->getTemplatePaths()->fillDefaultsByPackageName($this->extensionKey);
+        }
     }
 
     /**
@@ -123,6 +124,7 @@ abstract class AbstractWidget implements WidgetInterface
     {
         return $this->iconIdentifier;
     }
+
     /**
      * @return int  Returns height of widget in rows (1-4)
      */
@@ -186,7 +188,7 @@ abstract class AbstractWidget implements WidgetInterface
      *
      * @return LanguageService
      */
-    protected function getLanguageService()
+    protected function getLanguageService(): LanguageService
     {
         return $GLOBALS['LANG'];
     }

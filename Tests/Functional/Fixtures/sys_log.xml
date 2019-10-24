@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <sys_log>
+        <userid>1</userid>
+        <tstamp>123456789</tstamp>
+        <ip>127.0.0.1</ip>
+        <type>255</type>
+    </sys_log>
+</dataset>

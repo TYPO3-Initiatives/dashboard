@@ -32,7 +32,7 @@ class PagesWithoutDescriptionWidget extends AbstractListWidget
             ),
         ];
         if (isset($GLOBALS['TCA']['pages']['columns']['no_index'])) {
-            // Column is potentially not defined; added by system extension that is not (should not) be a dependency.
+            // Column is potentially not defined; added by system extension EXT:seo that is not (should not) be a dependency.
             $constraints[] = $queryBuilder->expr()->eq('no_index', 0);
         }
         $queryBuilder
@@ -41,8 +41,7 @@ class PagesWithoutDescriptionWidget extends AbstractListWidget
             ->where(...$constraints)
             ->orderBy('tstamp', 'DESC');
 
-        $statementAll = $queryBuilder->execute();
-        $this->totalItems = $statementAll->rowCount();
+        $this->totalItems = $queryBuilder->execute()->rowCount();
 
         $statement = $queryBuilder->setMaxResults($this->limit)->execute();
         while ($row = $statement->fetch()) {

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<dataset>
+    <sys_dashboards>
+        <label>LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default</label>
+        <configuration>{"widgets":{"3112d6978dadbe95278ba4777f7de47e47548613":{"key":"t3News","height":6,"width":4,"title":"TYPO3 News","additionalClasses":"","config":[]},"808dda7dafe737b3dc779f51bd379276a8d04786":{"key":"documentation","height":1,"width":2,"title":"LLL:EXT:dashboard\/Resources\/Private\/Language\/locallang.xlf:widgets.documentation.title","additionalClasses":"","config":[]},"0f4e8b910994690c27376d125f3b3cbf4fbdb6d7":{"key":"numberOfBackendUsers","height":2,"width":2,"title":"Number of backend users","additionalClasses":"","config":[]},"9ae59fa2cda8557284404cafe3a59def6d6d9c60":{"key":"numberOfAdminBackendUsers","height":2,"width":2,"title":"Number of admin users","additionalClasses":"","config":[]},"8ad4bfd03e3d61899da5937239031c4dff22c9b9":{"key":"lastLogins","height":4,"width":4,"title":"LLL:EXT:dashboard\/Resources\/Private\/Language\/locallang.xlf:widgets.lastLogins.title","additionalClasses":"","config":[]},"8d29c20c9493d7d2f001cfb5d935f10ef7f4df54":{"key":"pagesWithoutDescription","height":4,"width":4,"title":"LLL:EXT:dashboard\/Resources\/Private\/Language\/locallang.xlf:widgets.pagesWithoutDescription.title","additionalClasses":"","config":[]},"39e84d3d2b75a383f0a1146ab697b9c6d9c0eaa1":{"key":"sysLogErrors","height":4,"width":4,"title":"LLL:EXT:dashboard\/Resources\/Private\/Language\/locallang.xlf:widgets.sysLogErrors.title","additionalClasses":"dashboard-item--chart","config":[]}}}</configuration>
+        <identifier>a8a9ad23c27c51640738fcae687563243af5a58f</identifier>
+    </sys_dashboards>
+</dataset>

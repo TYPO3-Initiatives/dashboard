@@ -1,0 +1,20 @@
+{
+  "name": "friendsoftypo3/demo",
+  "type": "typo3-cms-extension",
+  "prefer-stable": true,
+  "description": "Demo Dashboard for TYPO3",
+  "minimum-stability": "dev",
+  "homepage": "https://typo3.org",
+  "license": "GPL-2.0-or-later",
+  "require": {
+    "friendsoftypo3/dashboard": "*",
+    "psr/http-message": "^1.0",
+    "symfony/finder": "^4.3",
+    "typo3fluid/fluid": "^2.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "DEMO\\Demo\\": "Classes/"
+    }
+  }
+}

@@ -9,7 +9,7 @@ use FriendsOfTYPO3\Dashboard\Dashboards\AbstractDashboard;
 use FriendsOfTYPO3\Dashboard\Dashboards\DashboardRepository;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException;
+use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException as RouteNotFoundExceptionAlias;
 use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Core\Http\HtmlResponse;
@@ -20,6 +20,10 @@ use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Extbase\Mvc\View\ViewInterface;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 
+/**
+ * Class DashboardController
+ * @codeCoverageIgnore no coverage for controllers yet
+ */
 class DashboardController extends AbstractController
 {
     private const DEFAULT_DASHBOARD_IDENTIFIER = 'dashboard-default';
@@ -34,13 +38,19 @@ class DashboardController extends AbstractController
      */
     protected $uriBuilder;
 
-    /** @var ViewInterface */
+    /**
+     * @var ViewInterface
+     */
     protected $view;
 
-    /** @var DashboardConfiguration */
+    /**
+     * @var DashboardConfiguration
+     */
     protected $dashboardConfiguration;
 
-    /** @var DashboardRepository */
+    /**
+     * @var DashboardRepository
+     */
     protected $dashboardRepository;
 
     /**
@@ -105,7 +115,6 @@ class DashboardController extends AbstractController
                     $key => $jsFile
                 ]
             ]);
-
             $pageRenderer->loadRequireJsModule($key);
         }
 
@@ -154,26 +163,16 @@ class DashboardController extends AbstractController
     /**
      * @param ServerRequestInterface $request
      * @return ResponseInterface
-     * @throws RouteNotFoundException
-     */
-    public function setActiveDashboardAction(ServerRequestInterface $request): ResponseInterface
-    {
-        $this->setCurrentDashboard($request->getQueryParams()['currentDashboard']);
-        $route = $this->uriBuilder->buildUriFromRoute('dashboard', ['action' => 'main']);
-        return new RedirectResponse($route);
-    }
-
-    /**
-     * @param ServerRequestInterface $request
-     * @return ResponseInterface
-     * @throws RouteNotFoundException
      */
     public function removeWidgetAction(ServerRequestInterface $request): ResponseInterface
     {
         $parameters = $request->getQueryParams();
         $widgetHash = $parameters['widgetHash'];
         $dashboard = $this->dashboardRepository->getDashboardByIdentifier($this->getCurrentDashboard());
-        $widgets = $dashboard->getConfiguration()['widgets'] ?? [];
+        $widgets = [];
+        if ($dashboard !== null) {
+            $widgets = $dashboard->getConfiguration()['widgets'] ?? [];
+        }
         if (array_key_exists($widgetHash, $widgets)) {
             unset($widgets[$widgetHash]);
             $this->dashboardRepository->updateWidgets($dashboard, $widgets);
@@ -185,7 +184,6 @@ class DashboardController extends AbstractController
     /**
      * @param ServerRequestInterface $request
      * @return ResponseInterface
-     * @throws RouteNotFoundException
      */
     public function addWidgetAction(ServerRequestInterface $request): ResponseInterface
     {
@@ -194,7 +192,10 @@ class DashboardController extends AbstractController
 
         if ($widgetKey) {
             $dashboard = $this->dashboardRepository->getDashboardByIdentifier($this->getCurrentDashboard());
-            $widgets = $dashboard->getConfiguration()['widgets'];
+            $widgets = [];
+            if ($dashboard !== null) {
+                $widgets = $dashboard->getConfiguration()['widgets'] ?? [];
+            }
             $key = sha1($widgetKey . '-' . time());
             $widgets[$key] = $this->dashboardRepository->prepareWidgetElement($widgetKey);
             $this->dashboardRepository->updateWidgets($dashboard, $widgets);
@@ -207,7 +208,6 @@ class DashboardController extends AbstractController
     /**
      * @param ServerRequestInterface $request
      * @return ResponseInterface
-     * @throws RouteNotFoundException
      */
     public function addDashboardAction(ServerRequestInterface $request): ResponseInterface
     {
@@ -220,6 +220,18 @@ class DashboardController extends AbstractController
             $route = $this->uriBuilder->buildUriFromRoute('dashboard', ['action' => 'setActiveDashboard', 'currentDashboard' => $dashboard->getIdentifier()]);
         }
 
+        return new RedirectResponse($route);
+    }
+
+    /**
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     * @throws RouteNotFoundExceptionAlias
+     */
+    public function setActiveDashboardAction(ServerRequestInterface $request): ResponseInterface
+    {
+        $this->setCurrentDashboard($request->getQueryParams()['currentDashboard']);
+        $route = $this->uriBuilder->buildUriFromRoute('dashboard', ['action' => 'main']);
         return new RedirectResponse($route);
     }
 

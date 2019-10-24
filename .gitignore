@@ -3,10 +3,12 @@
 /.vscode
 /.DS_Store
 /.ddev
+/logs
+/var
 
 /public
 /vendor
-/.php_cs.cache
+/*.cache
 /.build
 /build/.phpunit.result.cache
 
