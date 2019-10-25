@@ -9,18 +9,30 @@ Dashboard:
         iconIdentifier: 'dashboard-dashboard',
         label: 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.empty',
         description: 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.empty.description' }
+  WidgetGroups:
+    - { identifier: 'widgetGroup-default',
+        label: 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widget_group.default' }
+    - { identifier: 'widgetGroup-system',
+        label: 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widget_group.system' }
   Widgets:
     - { identifier: 'numberOfBackendUsers',
-        className: FriendsOfTYPO3\Dashboard\Widgets\NumberOfBackendUsersWidget }
+        className: FriendsOfTYPO3\Dashboard\Widgets\NumberOfBackendUsersWidget,
+        groups: ['widgetGroup-system'] }
     - { identifier: 'numberOfAdminBackendUsers',
-        className: FriendsOfTYPO3\Dashboard\Widgets\NumberOfAdminBackendUsersWidget }
+        className: FriendsOfTYPO3\Dashboard\Widgets\NumberOfAdminBackendUsersWidget,
+        groups: ['widgetGroup-system'] }
     - { identifier: 'lastLogins',
-        className: FriendsOfTYPO3\Dashboard\Widgets\LastLoginsWidget }
+        className: FriendsOfTYPO3\Dashboard\Widgets\LastLoginsWidget,
+        groups: ['widgetGroup-system'] }
     - { identifier: 'pagesWithoutDescription',
-        className: FriendsOfTYPO3\Dashboard\Widgets\PagesWithoutDescriptionWidget }
+        className: FriendsOfTYPO3\Dashboard\Widgets\PagesWithoutDescriptionWidget,
+        groups: ['widgetGroup-system'] }
     - { identifier: 'sysLogErrors',
-        className: FriendsOfTYPO3\Dashboard\Widgets\SysLogErrorsWidget }
+        className: FriendsOfTYPO3\Dashboard\Widgets\SysLogErrorsWidget,
+        groups: ['widgetGroup-system'] }
     - { identifier: 't3News',
-        className: FriendsOfTYPO3\Dashboard\Widgets\T3NewsWidget }
+        className: FriendsOfTYPO3\Dashboard\Widgets\T3NewsWidget,
+        groups: ['widgetGroup-default'] }
     - { identifier: 'documentation',
-        className: FriendsOfTYPO3\Dashboard\Widgets\DocumentationWidget }
+        className: FriendsOfTYPO3\Dashboard\Widgets\DocumentationWidget,
+        groups: ['widgetGroup-default'] }

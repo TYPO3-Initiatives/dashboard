@@ -6,6 +6,7 @@ namespace FriendsOfTYPO3\Dashboard\Tests\Functional;
 
 use FriendsOfTYPO3\Dashboard\Configuration\Dashboard;
 use FriendsOfTYPO3\Dashboard\Configuration\Widget;
+use FriendsOfTYPO3\Dashboard\Configuration\WidgetGroup;
 use FriendsOfTYPO3\Dashboard\DashboardConfiguration;
 use TYPO3\TestingFramework\Core\Functional\FunctionalTestCase;
 
@@ -18,6 +19,7 @@ abstract class AbstractDashboardConfigurationTest extends FunctionalTestCase
 
     abstract public function getDashboardsDataProvider(): array;
     abstract public function getWidgetsDataProvider(): array;
+    abstract public function getWidgetGroupsDataProvider(): array;
 
     /**
      * @test
@@ -53,5 +55,19 @@ abstract class AbstractDashboardConfigurationTest extends FunctionalTestCase
         $this->assertInstanceOf(Widget::class, $widgets[$identifier]);
         $this->assertSame($identifier, $widgets[$identifier]->getIdentifier());
         $this->assertSame($className, $widgets[$identifier]->getClassname());
+    }
+
+    /**
+     * @test
+     * @dataProvider getWidgetGroupsDataProvider
+     * @param string $identifier
+     * @param string $label
+     */
+    public function getWidgetGroupsReturnsWidgetConfiguration(string $identifier, string $label): void
+    {
+        $widgetsGroups = $this->subject->getWidgetsGroups();
+        $this->assertInstanceOf(WidgetGroup::class, $widgetsGroups[$identifier]);
+        $this->assertSame($identifier, $widgetsGroups[$identifier]->getIdentifier());
+        $this->assertSame($label, $widgetsGroups[$identifier]->getLabel());
     }
 }

@@ -3,7 +3,6 @@ root: # root is always required (note no prefix here)
   _children: # array nodes have a '_children' node, defining their children
     Dashboard:
       _type: array
-      _required: true # optional, default false
       _children:
         Dashboards:
           _required: true
@@ -25,6 +24,16 @@ root: # root is always required (note no prefix here)
               _type: array
               _children:
                 _type: text
+        WidgetGroups:
+          _required: false
+          _type: array
+          _children:
+            identifier:
+              _required: true
+              _type: text
+            label:
+              _required: true
+              _type: text
         Widgets:
           _required: true
           _type: array
@@ -35,3 +44,7 @@ root: # root is always required (note no prefix here)
             className:
               _required: true
               _type: text
+            groups:
+              _type: array
+              _children:
+                _type: text

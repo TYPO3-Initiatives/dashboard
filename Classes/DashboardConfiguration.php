@@ -5,6 +5,7 @@ namespace FriendsOfTYPO3\Dashboard;
 
 use FriendsOfTYPO3\Dashboard\Configuration\Dashboard;
 use FriendsOfTYPO3\Dashboard\Configuration\Widget;
+use FriendsOfTYPO3\Dashboard\Configuration\WidgetGroup;
 use Symfony\Component\Finder\Finder;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException;
@@ -49,6 +50,14 @@ class DashboardConfiguration implements SingletonInterface
     protected $firstLevelCacheWidgets;
 
     /**
+     * Cache stores all configuration as Dashboard objects, as long as they haven't been changed.
+     * This drastically improves performance
+     *
+     * @var array|null
+     */
+    protected $firstLevelCacheWidgetGroups;
+
+    /**
      * @var PackageManager
      */
     protected $packageManager;
@@ -76,6 +85,16 @@ class DashboardConfiguration implements SingletonInterface
     public function getWidgets(): array
     {
         return $this->firstLevelCacheWidgets ?? $this->resolveAllExistingWidgets();
+    }
+
+    /**
+     * Return all wizards objects which have been found in the filesystem.
+     *
+     * @return WidgetGroup[]
+     */
+    public function getWidgetsGroups(): array
+    {
+        return $this->firstLevelCacheWidgetGroups ?? $this->resolveAllExistingWidgetGroups();
     }
 
     /**
@@ -110,6 +129,23 @@ class DashboardConfiguration implements SingletonInterface
         }
         $this->firstLevelCacheWidgets = $widgets;
         return $widgets;
+    }
+
+    /**
+     * Resolve all widget groups objects which have been found in the filesystem.
+     *
+     * @param bool $useCache
+     * @return Widget[]
+     */
+    protected function resolveAllExistingWidgetGroups(bool $useCache = true): array
+    {
+        $widgetsGroups = [];
+        $dashboardConfiguration = $this->getAllDashboardConfigurationFromFiles($useCache);
+        foreach ($dashboardConfiguration['Dashboard']['WidgetGroups'] ?? [] as $configuration) {
+            $widgetsGroups[$configuration['identifier']] = GeneralUtility::makeInstance(WidgetGroup::class, $configuration);
+        }
+        $this->firstLevelCacheWidgetGroups = $widgetsGroups;
+        return $widgetsGroups;
     }
 
     /**

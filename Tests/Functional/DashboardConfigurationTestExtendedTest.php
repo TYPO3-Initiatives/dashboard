@@ -53,4 +53,15 @@ class DashboardConfigurationTestExtendedTest extends AbstractDashboardConfigurat
             'demo_widget_2' => ['demo_widget_2', 'DEMO\Demo\Dashboard\Widgets\Widget2'],
         ];
     }
+
+    /**
+     * @return array
+     */
+    public function getWidgetGroupsDataProvider(): array
+    {
+        return [
+            'widgetGroup-default' => ['widgetGroup-default', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widget_group.default'],
+            'demo_widget_group_1' => ['demo_widget_group_1', 'LLL:EXT:demo/Resources/Private/Language/locallang_be.xlf:demo.group.title'],
+        ];
+    }
 }

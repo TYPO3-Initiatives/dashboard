@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Dashboard\Controller;
 
-use FriendsOfTYPO3\Dashboard\Configuration\Widget;
 use FriendsOfTYPO3\Dashboard\DashboardConfiguration;
 use FriendsOfTYPO3\Dashboard\Dashboards\AbstractDashboard;
 use FriendsOfTYPO3\Dashboard\Dashboards\DashboardRepository;
+use FriendsOfTYPO3\Dashboard\Widgets\AbstractWidget;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException as RouteNotFoundExceptionAlias;
@@ -14,6 +14,7 @@ use TYPO3\CMS\Backend\Routing\UriBuilder;
 use TYPO3\CMS\Backend\Template\ModuleTemplate;
 use TYPO3\CMS\Core\Http\HtmlResponse;
 use TYPO3\CMS\Core\Http\RedirectResponse;
+use TYPO3\CMS\Core\Page\PageRenderer;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
@@ -27,6 +28,7 @@ use TYPO3\CMS\Fluid\View\StandaloneView;
 class DashboardController extends AbstractController
 {
     private const DEFAULT_DASHBOARD_IDENTIFIER = 'dashboard-default';
+    private const DEFAULT_WIDGET_GROUP_IDENTIFIER = 'widgetGroup-default';
 
     /**
      * @var ModuleTemplate
@@ -79,45 +81,16 @@ class DashboardController extends AbstractController
      */
     public function handleRequest(ServerRequestInterface $request): ResponseInterface
     {
-        $publicResourcesPath = PathUtility::getAbsoluteWebPath(ExtensionManagementUtility::extPath('dashboard')) . 'Resources/Public/';
         $pageRenderer = $this->moduleTemplate->getPageRenderer();
-        $pageRenderer->addRequireJsConfiguration(
-            [
-                'paths' => [
-                    'muuri' => $publicResourcesPath . 'JavaScript/Dist/Muuri',
-                ],
-            ]
-        );
-
-        $pageRenderer->loadRequireJsModule('muuri');
-        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/Grid');
-        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/WidgetContentCollector');
-        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/WidgetSelector');
-        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/DashboardSelector');
-        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/WidgetRemover');
-        $pageRenderer->addCssFile($publicResourcesPath . 'CSS/dashboard.min.css');
+        $this->preparePageRenderer($pageRenderer);
 
         $action = $request->getQueryParams()['action'] ?? $request->getParsedBody()['action'] ?? 'main';
         $this->initializeView($action);
-
         $result = $this->{$action . 'Action'}($request);
         if ($result instanceof ResponseInterface) {
             return $result;
         }
-
-        foreach ($this->cssFiles as $cssFile) {
-            $pageRenderer->addCssFile($cssFile);
-        }
-
-        foreach ($this->jsFiles as $key => $jsFile) {
-            $pageRenderer->addRequireJsConfiguration([
-                'paths' => [
-                    $key => $jsFile
-                ]
-            ]);
-            $pageRenderer->loadRequireJsModule($key);
-        }
-
+        $this->addFrontendResources($pageRenderer);
         $this->moduleTemplate->setContent($this->view->render());
         return new HtmlResponse($this->moduleTemplate->renderContent());
     }
@@ -136,22 +109,16 @@ class DashboardController extends AbstractController
             $currentDashboard = $dashboards[array_key_first($dashboards)]->getIdentifier();
             $this->setCurrentDashboard($currentDashboard);
         }
-        $availableWidgets = [];
-        foreach ($this->dashboardConfiguration->getWidgets() as $availableWidgetConfiguration) {
-            $availableWidgets[$availableWidgetConfiguration->getIdentifier()] = GeneralUtility::makeInstance($availableWidgetConfiguration->getClassname());
-        }
-        $this->getJavascriptForWidgets($availableWidgets);
-        $this->getCssForWidgets($availableWidgets);
-
-        $widgets = [];
+        $groupConfigurations = $this->buildWidgetGroupsConfiguration();
+        $widgetsOnCurrentDashboard = [];
         foreach ($dashboards[$currentDashboard]->getConfiguration()['widgets'] as $widgetHash => $widget) {
-            $widgets[$widgetHash] = $this->dashboardRepository->createWidgetRepresentation($widget['identifier'], $widget['config']);
+            $widgetsOnCurrentDashboard[$widgetHash] = $this->dashboardRepository->createWidgetRepresentation($widget['identifier'], $widget['config']);
         }
         $this->view->assignMultiple([
-            'widgets' => $widgets,
-            'availableWidgets' => $availableWidgets,
+            'widgetsOnCurrentDashboard' => $widgetsOnCurrentDashboard,
             'availableDashboards' => $dashboards,
             'dashboardConfigurations' => $this->dashboardConfiguration->getDashboards(),
+            'groupConfigurations' => $groupConfigurations,
             'currentDashboard' => $currentDashboard,
             'addWidgetUri' => (string)$this->uriBuilder->buildUriFromRoute('dashboard', [
                 'widget' => '@widget',
@@ -249,10 +216,8 @@ class DashboardController extends AbstractController
     {
         $this->view = GeneralUtility::makeInstance(StandaloneView::class);
         $this->view->setTemplate($templateName);
+        $this->view->getRenderingContext()->getTemplatePaths()->fillDefaultsByPackageName('dashboard');
         $this->view->setTemplateRootPaths(['EXT:dashboard/Resources/Private/Templates/Dashboard']);
-        $this->view->setPartialRootPaths(['EXT:dashboard/Resources/Private/Partials']);
-        $this->view->setLayoutRootPaths(['EXT:dashboard/Resources/Private/Layouts']);
-
         $this->moduleTemplate->getDocHeaderComponent()->disable();
     }
 
@@ -269,33 +234,68 @@ class DashboardController extends AbstractController
         return $dashboards;
     }
 
-    /**
-     * @param Widget[] $widgets
-     * @throws \Exception
-     */
-    protected function getJavascriptForWidgets(array $widgets): void
+    protected function preparePageRenderer(PageRenderer $pageRenderer): void
     {
-        foreach ($widgets as $widget) {
-            foreach ($widget->getJsFiles() as $key => $jsFile) {
-                if (!in_array($jsFile, $this->jsFiles, true)) {
-                    $this->jsFiles[$key] = $jsFile;
-                }
-            }
+        $publicResourcesPath = PathUtility::getAbsoluteWebPath(ExtensionManagementUtility::extPath('dashboard')) . 'Resources/Public/';
+        $pageRenderer->addRequireJsConfiguration(
+            [
+                'paths' => [
+                    'muuri' => $publicResourcesPath . 'JavaScript/Dist/Muuri',
+                ],
+            ]
+        );
+
+        $pageRenderer->loadRequireJsModule('muuri');
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/Grid');
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/WidgetContentCollector');
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/WidgetSelector');
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/DashboardSelector');
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/WidgetRemover');
+        $pageRenderer->addCssFile($publicResourcesPath . 'CSS/dashboard.min.css');
+    }
+
+    protected function addFrontendResources(PageRenderer $pageRenderer): void
+    {
+        foreach ($this->cssFiles as $cssFile) {
+            $pageRenderer->addCssFile($cssFile);
+        }
+        foreach ($this->jsFiles as $key => $jsFile) {
+            $pageRenderer->addRequireJsConfiguration([
+                'paths' => [
+                    $key => $jsFile
+                ]
+            ]);
+            $pageRenderer->loadRequireJsModule($key);
         }
     }
 
-    /**
-     * @param Widget[] $widgets
-     * @throws \Exception
-     */
-    protected function getCssForWidgets(array $widgets): void
+    protected function buildWidgetGroupsConfiguration(): array
     {
-        foreach ($widgets as $widget) {
-            foreach ($widget->getCssFiles() as $cssFile) {
-                if (!in_array($cssFile, $this->cssFiles, true)) {
-                    $this->cssFiles[] = $cssFile;
+        $groupConfigurations = [];
+        foreach ($this->dashboardConfiguration->getWidgetsGroups() as $widgetGroup) {
+            $widgetGroupIdentifier = $widgetGroup->getIdentifier();
+            $groupConfigurations[$widgetGroupIdentifier] = [
+                'identifier' => $widgetGroupIdentifier,
+                'label' => $widgetGroup->getLabel(),
+                'widgets' => []
+            ];
+        }
+        foreach ($this->dashboardConfiguration->getWidgets() as $availableWidgetConfiguration) {
+            $groups = $availableWidgetConfiguration->getGroups() ?: [self::DEFAULT_WIDGET_GROUP_IDENTIFIER];
+            foreach ($groups as $groupIdentifier) {
+                /** @var AbstractWidget $widgetInstance */
+                $widgetInstance = GeneralUtility::makeInstance($availableWidgetConfiguration->getClassname());
+                $groupConfigurations[$groupIdentifier]['widgets'][$availableWidgetConfiguration->getIdentifier()] = $widgetInstance;
+                foreach ($widgetInstance->getJsFiles() as $key => $jsFile) {
+                    $this->jsFiles[$key] = $jsFile;
+                }
+                foreach ($widgetInstance->getCssFiles() as $cssFile) {
+                    if (!in_array($cssFile, $this->cssFiles, true)) {
+                        $this->cssFiles[$cssFile] = $cssFile;
+                    }
                 }
             }
         }
+        return $groupConfigurations;
     }
 }
