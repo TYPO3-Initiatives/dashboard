@@ -29,7 +29,7 @@ Dashboard extension
       dashboard, widgets
 
 :Copyright:
-      2018-2019
+      2019
 
 :Author:
       TYPO3 CMS Core Development Team
