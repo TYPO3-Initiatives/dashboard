@@ -38,5 +38,4 @@ Now head over to the extension manager and activate the extension.
 Installation without composer
 =============================
 
-In an installation without composer you may use the extension manager and search for the extension dashboard.
-Then install it as any TYPO3 extension.
+Will not be possible at all, use composer!
