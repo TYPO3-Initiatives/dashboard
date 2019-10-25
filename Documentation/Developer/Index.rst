@@ -1,11 +1,14 @@
 .. include:: ../Includes.txt
 
-
 .. _developer:
 
 ================
 Developer Corner
 ================
+
+.. index::
+   single: Building Widget
+   seealso: Building Widget; Widget
 
 Build your own widget
 =====================
@@ -16,6 +19,10 @@ Each and every has to implement the `WidgetInterface`, for most cases it's recom
 .. todo::
 
    define how developers can build their own widgets
+
+.. index:: 
+   single: Extending Widget
+   seealso: Extending Widget; Widget
 
 Extend predefined widgets
 -------------------------

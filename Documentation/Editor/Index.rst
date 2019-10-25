@@ -9,6 +9,9 @@ For Editors
 
 Target group: **Editors**
 
+.. index::
+   single: Widget
+
 What is a widget?
 =================
 
@@ -20,6 +23,8 @@ A widget is an element on the dashboard that displays up to date information or 
    :alt: Example Widget with TYPO3 News (version 1.0)
 
    Example Widget with TYPO3 News (version 1.0)
+
+.. index:: Dashboard
 
 What is a dashboard?
 ====================
