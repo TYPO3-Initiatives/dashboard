@@ -10,8 +10,6 @@ Installation
 
 Target group: **Administrators**
 
-This extension is part of the TYPO3 core.
-
 Installation with composer
 ==========================
 
