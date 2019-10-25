@@ -16,6 +16,12 @@ class T3NewsWidgetTest extends AbstractWidgetTestCase
     protected $expectedWidth = 4;
     protected $expectedCssFiles = ['typo3conf/ext/dashboard/Resources/Public/CSS/rssWidget.min.css'];
 
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->widget->setRssFile(__DIR__ . '/../Fixtures/rss.xml');
+    }
+
     /**
      * @test
      */

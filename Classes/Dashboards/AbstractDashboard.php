@@ -10,7 +10,6 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  * Class Widget
  * This class represents the instance of a dashboard.
- * @internal
  */
 abstract class AbstractDashboard
 {
@@ -65,7 +64,7 @@ abstract class AbstractDashboard
         $widgets = [];
         $widgetConfigurations = GeneralUtility::makeInstance(DashboardConfiguration::class)->getWidgets();
         foreach ($this->configuration['widgets'] ?? [] as $widgetConfiguration) {
-            $widgets[] = GeneralUtility::makeInstance($widgetConfigurations[$widgetConfiguration['key']]->getClassname());
+            $widgets[] = GeneralUtility::makeInstance($widgetConfigurations[$widgetConfiguration['identifier']]->getClassname());
         }
         return $widgets;
     }

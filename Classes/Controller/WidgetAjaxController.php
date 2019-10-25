@@ -66,8 +66,9 @@ class WidgetAjaxController extends AbstractController
     {
         $body = $request->getParsedBody();
         $widgets = [];
+        // @TODO: The creation of $widgets is not perfect, we should move this into a central place and work with objects
         foreach ($body['widgets'] as $widget) {
-            $widgets[$widget[2]] = ['key' => $widget[0], 'config' => json_decode($widget[1], false, 512, JSON_THROW_ON_ERROR)];
+            $widgets[$widget[2]] = ['identifier' => $widget[0], 'config' => json_decode($widget[1], false)];
         }
         $dashboard = $this->dashboardRepository->getDashboardByIdentifier($this->getCurrentDashboard());
         if ($dashboard !== null) {
