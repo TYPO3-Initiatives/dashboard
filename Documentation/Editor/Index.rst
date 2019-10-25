@@ -12,7 +12,7 @@ Target group: **Editors**
 What is a widget?
 =================
 
-A widget consists of a canvas with a given size, which is enriched with data over time.
+A widget is an element on the dashboard that displays up to date information or gives you the possibility to easily execute a command.
 
 .. figure:: ../Images/widget.png
    :class: with-shadow
@@ -27,7 +27,6 @@ What is a dashboard?
 A dashboard is a collection of configured widgets.
 Each user can have it's own dashboards.
 
----------------------
 Predefined Dashboards
 ---------------------
 
@@ -35,7 +34,6 @@ Predefined Dashboards
 
    define how editors can interact with predefined dashboards
 
------------------------
 Setup custom Dashboards
 -----------------------
 
