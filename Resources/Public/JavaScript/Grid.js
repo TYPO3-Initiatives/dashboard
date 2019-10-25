@@ -35,11 +35,13 @@ define(['jquery', 'muuri'], function ($, Muuri) {
             }
         };
 
-        var dashboard = new Muuri('.dashboard-grid', options);
+        if ($('.dashboard-grid').length) {
+            var dashboard = new Muuri('.dashboard-grid', options);
 
-        dashboard.on('dragReleaseEnd', function() {
-            Grid.saveItems(dashboard);
-        })
+            dashboard.on('dragReleaseEnd', function() {
+                Grid.saveItems(dashboard);
+            })
+        }
     };
 
     Grid.saveItems = function(dashboard) {

@@ -97,6 +97,16 @@
 			<trans-unit id="widgets.documentation.label" xml:space="preserve">
 				<source>Check TYPO3 documentation</source>
  			</trans-unit>
+
+			<trans-unit id="dashboard.empty.title" xml:space="preserve">
+				<source>No dashboard configured :(</source>
+ 			</trans-unit>
+			<trans-unit id="dashboard.empty.description" xml:space="preserve">
+				<source>Dashboards are pretty cool, aren't they? But they are way cooler with a widget.</source>
+ 			</trans-unit>
+			<trans-unit id="dashboard.empty.button" xml:space="preserve">
+				<source>Add a widget</source>
+ 			</trans-unit>
 		</body>
 	</file>
 </xliff>
