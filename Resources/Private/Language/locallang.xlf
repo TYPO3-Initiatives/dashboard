@@ -99,7 +99,7 @@
  			</trans-unit>
 
 			<trans-unit id="dashboard.empty.title" xml:space="preserve">
-				<source>No dashboard configured :(</source>
+				<source>No widgets on this dashboard :(</source>
  			</trans-unit>
 			<trans-unit id="dashboard.empty.description" xml:space="preserve">
 				<source>Dashboards are pretty cool, aren't they? But they are way cooler with a widget.</source>
