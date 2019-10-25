@@ -3,26 +3,30 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Dashboard\Widgets;
 
-abstract class AbstractChartWidget extends AbstractWidget
+use FriendsOfTYPO3\Dashboard\Widgets\Interfaces\AdditionalCssInterface;
+use FriendsOfTYPO3\Dashboard\Widgets\Interfaces\EventDataInterface;
+use FriendsOfTYPO3\Dashboard\Widgets\Interfaces\RequireJsModuleInterface;
+
+/**
+ * The AbstractChartWidget class is the basic widget class for all chart widgets
+ * Is it possible to extends this class for own widgets, but EXT:dashboard provide
+ * also some more special chart types of widgets. For more details, please check:
+ * @see AbstractBarChartWidget
+ * @see AbstractDoughnutChartWidget
+ * @see AbstractLineChartWidget
+ * More information can be found in the documentation.
+ * @TODO: Add link to documentation
+ */
+abstract class AbstractChartWidget extends AbstractWidget implements AdditionalCssInterface, RequireJsModuleInterface, EventDataInterface
 {
-    /**
-     * @var string
-     */
     protected $chartType = '';
 
-    /**
-     * @var array
-     */
     protected $chartData = [];
 
-    /**
-     * @var array
-     */
     protected $chartOptions = [];
 
-    /**
-     * @var array
-     */
+    protected $eventData = [];
+
     protected $chartColors = ['#f49702', '#a4276a', '#1a568f', '#4c7e3a', '#69bbb5'];
 
     protected $additionalClasses = 'dashboard-item--chart';
@@ -30,37 +34,35 @@ abstract class AbstractChartWidget extends AbstractWidget
     protected $iconIdentifier = 'dashboard-chart';
 
     /**
-     * AbstractChartWidget constructor.
+     * Method to set all data for the chart in $this->eventData
      */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->cssFiles[] = $this->publicResourcesPath . 'CSS/Dist/Chart.min.css';
-        $this->jsFiles['chartjs'] = $this->publicResourcesPath . 'JavaScript/Dist/Chart.min';
-        $this->jsFiles['chartinitializer'] = $this->publicResourcesPath . 'JavaScript/ChartInitializer';
-    }
+    abstract protected function prepareChartData(): void;
 
-    /**
-     * Method to set all data for the chart
-     */
-    protected function prepareChartData(): void
-    {
-        // This method need to be implemented by the final class
-    }
-
-    /**
-     * @return array
-     */
     public function getEventData(): array
     {
-        $this->prepareChartData();
-
         $this->eventData['graphConfig'] = [
             'type' => $this->chartType,
             'data' => $this->chartData,
             'options' => $this->chartOptions
         ];
-
+        $this->prepareChartData();
         return $this->eventData;
+    }
+
+    /**
+     * This method returns an array with paths to required CSS files.
+     * e.g. ['EXT:myext/Resources/Public/Css/my_widget.css']
+     * @return array
+     */
+    public function getCssFiles(): array
+    {
+        return ['EXT:dashboard/Resources/Public/CSS/Dist/Chart.min.css'];
+    }
+
+    public function getRequireJsModules(): array
+    {
+        return [
+            'TYPO3/CMS/Dashboard/ChartInitializer',
+        ];
     }
 }

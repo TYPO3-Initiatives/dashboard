@@ -14,7 +14,7 @@ class T3NewsWidgetTest extends AbstractWidgetTestCase
     protected $expectedIconIdentifier = 'dashboard-typo3';
     protected $expectedHeight = 6;
     protected $expectedWidth = 4;
-    protected $expectedCssFiles = ['typo3conf/ext/dashboard/Resources/Public/CSS/rssWidget.min.css'];
+    protected $expectedCssFiles = ['EXT:dashboard/Resources/Public/CSS/rssWidget.min.css'];
 
     public function setUp(): void
     {

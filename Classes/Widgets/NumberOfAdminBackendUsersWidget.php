@@ -19,12 +19,13 @@ class NumberOfAdminBackendUsersWidget extends AbstractNumberWidget
         $this->title = 'Number of admin users';
         $this->icon = 'dashboard-admin';
         $this->iconIdentifier = 'dashboard-admin';
+        $this->number = $this->getNumberOfAdminBackendUsers();
     }
 
-    public function prepareData(): void
+    protected function getNumberOfAdminBackendUsers(): int
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('be_users');
-        $this->number = $queryBuilder
+        return $queryBuilder
             ->select('*')
             ->from('be_users')
             ->where(

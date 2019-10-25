@@ -1,4 +1,4 @@
-define(['jquery', 'chartjs'], function ($, Chart) {
+    define(['jquery', 'TYPO3/CMS/Dashboard/Dist/Chart.min'], function ($, Chart) {
     'use strict';
 
     let ChartInitializer = {
