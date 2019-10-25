@@ -202,7 +202,7 @@ class DashboardController extends AbstractController
             }
             $hash = sha1($widgetKey . '-' . time());
             // @TODO: The creation of $widgets is not perfect, we should move this into a central place and work with objects
-            $widgets[$hash] = ['identifier' => $widgetKey, 'config' => json_decode('[]', false, 512, JSON_THROW_ON_ERROR)];
+            $widgets[$hash] = ['identifier' => $widgetKey, 'config' => json_decode('[]', false)];
             $this->dashboardRepository->updateWidgets($dashboard, $widgets);
         }
 

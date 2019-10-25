@@ -60,7 +60,8 @@
     "friendsofphp/php-cs-fixer": "^2.15",
     "overtrue/phplint": "^1.1",
     "typo3/cms-seo": "^9.5 || 10.*@dev",
-    "typo3/testing-framework": "^4.9 || ^5.0"
+    "typo3/testing-framework": "^4.9 || ^5.0",
+    "brianium/paratest": "^3.1"
   },
   "extra": {
     "typo3/cms": {
@@ -77,10 +78,12 @@
       "mkdir -p logs/; phpunit -c build/phpunit.xml --log-junit logs/phpunit-unit.xml --testsuite \"Unit Test Suite\""
     ],
     "test:php:functional": [
-      "mkdir -p logs/; phpunit -c build/phpunit.xml --log-junit logs/phpunit-functional.xml --testsuite \"Functional Test Suite\""
+      "Composer\\Config::disableProcessTimeout",
+      "mkdir -p logs/; paratest -p4 -c build/phpunit.xml --log-junit logs/phpunit-functional.xml --testsuite \"Functional Test Suite\""
     ],
     "test:php:cover": [
-      "mkdir -p logs/; phpunit -c build/phpunit.xml --log-junit logs/phpunit.xml --coverage-clover logs/coverage.xml --coverage-html logs/coverage/"
+      "Composer\\Config::disableProcessTimeout",
+      "mkdir -p logs/; paratest -p4 -c build/phpunit.xml --log-junit logs/phpunit.xml --coverage-clover logs/coverage.xml --coverage-html logs/coverage/"
     ],
     "test": [
       "@test:php:lint",

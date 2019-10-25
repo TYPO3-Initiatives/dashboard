@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace FriendsOfTYPO3\Dashboard\Widgets;
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
 
 abstract class AbstractRssWidget extends AbstractListWidget
@@ -27,10 +28,15 @@ abstract class AbstractRssWidget extends AbstractListWidget
         $this->cssFiles[] = $publicResourcesPath . 'CSS/rssWidget.min.css';
     }
 
+    public function setRssFile(string $rssFile): void
+    {
+        $this->rssFile = $rssFile;
+    }
+
     public function prepareData(): void
     {
         /** @var \SimpleXMLElement $rssFeed */
-        $rssFeed = simplexml_load_string(file_get_contents($this->rssFile));
+        $rssFeed = simplexml_load_string(GeneralUtility::getUrl($this->rssFile));
 
         $itemCount = 0;
         foreach ($rssFeed->channel->item as $item) {

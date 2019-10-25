@@ -64,7 +64,7 @@ class DashboardRepository
         $configuration = ['widgets' => []];
         foreach ($dashboardConfiguration->getWidgets() as $widget) {
             $hash = sha1($widget . '-' . time());
-            $configuration['widgets'][$hash] = ['identifier' => $widget, 'config' => json_decode('[]', false, 512, JSON_THROW_ON_ERROR)];
+            $configuration['widgets'][$hash] = ['identifier' => $widget, 'config' => json_decode('[]', false)];
         }
         $identifier = sha1($dashboardConfiguration->getIdentifier() . '-' . time());
         $this->getQueryBuilder()
@@ -72,7 +72,7 @@ class DashboardRepository
             ->values([
                 'identifier' => $identifier,
                 'label' => $dashboardConfiguration->getLabel(),
-                'configuration' => json_encode($configuration, JSON_THROW_ON_ERROR, 512)
+                'configuration' => json_encode($configuration)
             ])
             ->execute();
         return $this->getDashboardByIdentifier($identifier);
@@ -118,7 +118,7 @@ class DashboardRepository
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder
             ->update(self::TABLE)
-            ->set('configuration', json_encode($configuration, JSON_THROW_ON_ERROR, 512))
+            ->set('configuration', json_encode($configuration))
             ->where($queryBuilder->expr()->eq('identifier', $queryBuilder->createNamedParameter($dashboard->getIdentifier())))
             ->execute();
     }
