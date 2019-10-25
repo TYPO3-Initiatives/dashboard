@@ -7,7 +7,7 @@ namespace FriendsOfTYPO3\Dashboard\Tests\Functional\Widgets\Demo;
 use DEMO\Demo\Dashboard\Widgets\Widget3;
 use FriendsOfTYPO3\Dashboard\Tests\Functional\Widgets\AbstractWidgetTestCase;
 
-class Widget3TestCase extends AbstractWidgetTestCase
+class Widget3Test extends AbstractWidgetTestCase
 {
     protected $widgetClassName = Widget3::class;
 

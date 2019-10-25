@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Dashboard\Tests\Functional\Widgets\Demo;
 
-use DEMO\Demo\Dashboard\Widgets\Widget2;
+use DEMO\Demo\Dashboard\Widgets\Widget1;
 use FriendsOfTYPO3\Dashboard\Tests\Functional\Widgets\AbstractWidgetTestCase;
 
-class Widget2TestCase extends AbstractWidgetTestCase
+class Widget1Test extends AbstractWidgetTestCase
 {
-    protected $widgetClassName = Widget2::class;
+    protected $widgetClassName = Widget1::class;
 
-    protected $expectedTitle = 'Title: Widget 2';
-    protected $expectedIconIdentifier = 'demo-widget2';
+    protected $expectedTitle = 'Title: Widget 1';
+    protected $expectedIconIdentifier = 'demo-widget1';
     protected $expectedHeight = 2;
     protected $expectedWidth = 2;
 
@@ -22,7 +22,7 @@ class Widget2TestCase extends AbstractWidgetTestCase
     public function renderWidgetContentContainsExpectedMarkup(): void
     {
         $markup = $this->widget->renderWidgetContent();
-        $this->assertStringContainsString('Title: Widget 2', $markup);
-        $this->assertStringContainsString('Content: Widget 2', $markup);
+        $this->assertStringContainsString('Title: Widget 1', $markup);
+        $this->assertStringContainsString('Content: Widget 1', $markup);
     }
 }
