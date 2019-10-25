@@ -15,3 +15,4 @@
 *.css.map
 **/*temp_*
 **/node_modules
+/Documentation-GENERATED-temp
