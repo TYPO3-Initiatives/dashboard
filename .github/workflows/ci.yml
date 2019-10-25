@@ -41,3 +41,9 @@ jobs:
           typo3DatabaseName: t3func
           typo3DatabasePassword: root
           typo3DatabaseUsername: root
+      - name: Test & publish code coverage
+        uses: paambaati/codeclimate-action@v2.2.1
+        env:
+          CC_TEST_REPORTER_ID: 8091cc0262e618638a7d7a0825f490659f5f7ee58991b3ba5d869b724afbfb21
+        with:
+          coverageCommand: npm run coverage
