@@ -7,7 +7,7 @@
 Introduction
 ============
 
-In this repository the TYPO3 Dashboard initiative will create a proof of concept of a Dashboard extension for TYPO3.
+The TYPO3 Dashboard initiative will create a proof of concept of a Dashboard extension for TYPO3.
 When the extension is production ready, we will move this extension to TYPO3 core.
 
 Please check the page of the TYPO3 Dashboard initiative to see the goals of the initiative.
