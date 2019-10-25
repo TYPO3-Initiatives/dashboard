@@ -108,9 +108,24 @@ class DashboardRepositoryTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function createWidgetRepresentationReturnsEmptyArrayForUnknonwConfiguration(): void
+    public function createWidgetRepresentationReturnsEmptyArrayForUnknownConfiguration(): void
     {
         $this->assertSame([], $this->subject->createWidgetRepresentation('foo'));
+    }
+
+    /**
+     * @test
+     */
+    public function createWidgetRepresentationReturnsArrayForKnownConfiguration(): void
+    {
+        $this->assertSame([
+            'identifier' => 'numberOfBackendUsers',
+            'height' => 2,
+            'width' => 2,
+            'title' => 'Number of backend users',
+            'additionalClasses' => '',
+            'config' => [],
+        ], $this->subject->createWidgetRepresentation('numberOfBackendUsers'));
     }
 
     /**
