@@ -20,9 +20,10 @@ class PagesWithoutDescriptionWidget extends AbstractListWidget
         $this->height = 4;
         $this->limit = 5;
         $this->title = 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widgets.pagesWithoutDescription.title';
+        $this->getDataForWidget();
     }
 
-    public function prepareData(): void
+    protected function getDataForWidget(): void
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('pages');
         $constraints = [

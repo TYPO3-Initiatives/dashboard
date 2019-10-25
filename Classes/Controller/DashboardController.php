@@ -7,6 +7,9 @@ use FriendsOfTYPO3\Dashboard\DashboardConfiguration;
 use FriendsOfTYPO3\Dashboard\Dashboards\AbstractDashboard;
 use FriendsOfTYPO3\Dashboard\Dashboards\DashboardRepository;
 use FriendsOfTYPO3\Dashboard\Widgets\AbstractWidget;
+use FriendsOfTYPO3\Dashboard\Widgets\Interfaces\AdditionalCssInterface;
+use FriendsOfTYPO3\Dashboard\Widgets\Interfaces\AdditionalJavaScriptInterface;
+use FriendsOfTYPO3\Dashboard\Widgets\Interfaces\RequireJsModuleInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Backend\Routing\Exception\RouteNotFoundException as RouteNotFoundExceptionAlias;
@@ -259,18 +262,14 @@ class DashboardController extends AbstractController
         foreach ($this->cssFiles as $cssFile) {
             $pageRenderer->addCssFile($cssFile);
         }
-        foreach ($this->jsFiles as $key => $jsFile) {
-            $pageRenderer->addRequireJsConfiguration([
-                'paths' => [
-                    $key => $jsFile
-                ]
-            ]);
-            $pageRenderer->loadRequireJsModule($key);
+        foreach ($this->jsFiles as $jsFile) {
+            $pageRenderer->addJsFile($jsFile);
         }
     }
 
     protected function buildWidgetGroupsConfiguration(): array
     {
+        $pageRenderer = $this->moduleTemplate->getPageRenderer();
         $groupConfigurations = [];
         foreach ($this->dashboardConfiguration->getWidgetsGroups() as $widgetGroup) {
             $widgetGroupIdentifier = $widgetGroup->getIdentifier();
@@ -286,16 +285,50 @@ class DashboardController extends AbstractController
                 /** @var AbstractWidget $widgetInstance */
                 $widgetInstance = GeneralUtility::makeInstance($availableWidgetConfiguration->getClassname());
                 $groupConfigurations[$groupIdentifier]['widgets'][$availableWidgetConfiguration->getIdentifier()] = $widgetInstance;
-                foreach ($widgetInstance->getJsFiles() as $key => $jsFile) {
-                    $this->jsFiles[$key] = $jsFile;
+                if ($widgetInstance instanceof AdditionalCssInterface) {
+                    $this->addCssFiles($widgetInstance);
                 }
-                foreach ($widgetInstance->getCssFiles() as $cssFile) {
-                    if (!in_array($cssFile, $this->cssFiles, true)) {
-                        $this->cssFiles[$cssFile] = $cssFile;
-                    }
+                if ($widgetInstance instanceof AdditionalJavaScriptInterface) {
+                    $this->addJsFiles($widgetInstance);
+                }
+                if ($widgetInstance instanceof RequireJsModuleInterface) {
+                    $this->addRequireJsModules($pageRenderer, $widgetInstance);
                 }
             }
         }
         return $groupConfigurations;
+    }
+
+    protected function addRequireJsModules(PageRenderer $pageRenderer, RequireJsModuleInterface $widgetInstance): void
+    {
+        foreach ($widgetInstance->getRequireJsModules() as $moduleNameOrIndex => $callbackOrModuleName) {
+            if (is_string($moduleNameOrIndex)) {
+                $pageRenderer->loadRequireJsModule($moduleNameOrIndex, $callbackOrModuleName);
+            } else {
+                $pageRenderer->loadRequireJsModule($callbackOrModuleName);
+            }
+        }
+    }
+
+    protected function addJsFiles(AdditionalJavaScriptInterface $widgetInstance): void
+    {
+        foreach ($widgetInstance->getJsFiles() as $key => $jsFile) {
+            if (strpos($jsFile, 'EXT:') === 0) {
+                $jsFile = PathUtility::getAbsoluteWebPath(GeneralUtility::getFileAbsFileName($jsFile));
+            }
+            $this->jsFiles[$jsFile] = $jsFile;
+        }
+    }
+
+    protected function addCssFiles(AdditionalCssInterface $widgetInstance): void
+    {
+        foreach ($widgetInstance->getCssFiles() as $cssFile) {
+            if (strpos($cssFile, 'EXT:') === 0) {
+                $cssFile = PathUtility::getAbsoluteWebPath(GeneralUtility::getFileAbsFileName($cssFile));
+            }
+            if (!in_array($cssFile, $this->cssFiles, true)) {
+                $this->cssFiles[$cssFile] = $cssFile;
+            }
+        }
     }
 }

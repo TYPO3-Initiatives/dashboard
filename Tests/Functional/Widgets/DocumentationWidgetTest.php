@@ -14,7 +14,7 @@ class DocumentationWidgetTest extends AbstractWidgetTestCase
     protected $expectedWidth = 2;
     protected $expectedHeight = 1;
     protected $expectedIconIdentifier = 'dashboard-cta';
-    protected $expectedCssFiles = ['typo3conf/ext/dashboard/Resources/Public/CSS/ctaWidget.min.css'];
+    protected $expectedCssFiles = ['EXT:dashboard/Resources/Public/CSS/ctaWidget.min.css'];
 
     /**
      * @test

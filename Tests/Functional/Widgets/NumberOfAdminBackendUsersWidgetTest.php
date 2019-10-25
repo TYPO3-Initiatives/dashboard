@@ -14,7 +14,7 @@ class NumberOfAdminBackendUsersWidgetTest extends AbstractWidgetTestCase
     protected $expectedWidth = 2;
     protected $expectedHeight = 2;
     protected $expectedIconIdentifier = 'dashboard-admin';
-    protected $expectedCssFiles = ['typo3conf/ext/dashboard/Resources/Public/CSS/numberWidget.min.css'];
+    protected $expectedCssFiles = ['EXT:dashboard/Resources/Public/CSS/numberWidget.min.css'];
 
     /**
      * @test
