@@ -29,7 +29,7 @@ If it is not yet installed, use the ``composer require`` command to install the 
 
 .. code-block:: bash
 
-   composer require friendsoftypo3/dashboard ^1.0
+   composer require friendsoftypo3/dashboard
 
 The given version depends on the version of the TYPO3 core you are using.
 
