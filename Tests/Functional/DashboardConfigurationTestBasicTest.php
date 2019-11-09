@@ -49,4 +49,14 @@ class DashboardConfigurationTestBasicTest extends AbstractDashboardConfiguration
             'documentation' => ['documentation', DocumentationWidget::class],
         ];
     }
+
+    /**
+     * @return array
+     */
+    public function getWidgetGroupsDataProvider(): array
+    {
+        return [
+            'widgetGroup-default' => ['widgetGroup-default', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widget_group.default'],
+        ];
+    }
 }

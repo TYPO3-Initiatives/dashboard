@@ -20,6 +20,11 @@ class Widget extends AbstractConfiguration
      */
     protected $className;
 
+    /**
+     * @var string[]
+     */
+    protected $groups = [];
+
     public function getIdentifier(): string
     {
         return $this->identifier;
@@ -28,5 +33,13 @@ class Widget extends AbstractConfiguration
     public function getClassname(): string
     {
         return $this->className;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getGroups(): array
+    {
+        return $this->groups;
     }
 }

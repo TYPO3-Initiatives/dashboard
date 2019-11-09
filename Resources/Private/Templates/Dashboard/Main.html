@@ -19,7 +19,7 @@
 </div>
 
 <div class="dashboard-grid">
-    <f:for each="{widgets}" as="widget" iteration="widgetIterator" key="widgetHash">
+    <f:for each="{widgetsOnCurrentDashboard}" as="widget" iteration="widgetIterator" key="widgetHash">
         <div class="dashboard-item dashboard-item--w{widget.width} dashboard-item--h{widget.height} {widget.additionalClasses}" data-widget-id="{widget.id}" data-widget-hash="{widgetHash}" data-widget-key="{widget.identifier}" data-widget-config="{widget.config -> f:format.json()}">
             <div class="dashboard-item-content">
                 <div class="widget">
@@ -46,30 +46,42 @@
         <core:icon identifier="actions-add" alternativeMarkupIdentifier="inline" /><span class="sr-only"><f:translate key="widget.add" extensionName="dashboard"/></span>
     </a>
 </div>
-
 <div id="widgetSelector" class="hide">
-    <div class="widgetSelector-widgets">
-        <f:for each="{availableWidgets}" as="availableWidgetConfig" key="availableWidgetKey">
-            <div class="widgetSelector-widget">
-                <f:be.link class="widgetSelector-widget-block" route="dashboard" target="list_frame" parameters="{action: 'addWidget', widget: availableWidgetKey}">
-                    <f:if condition="{availableWidgetConfig.iconIdentifier}">
-                        <div class="widgetSelector-widget-icon">
-                            <core:icon size="default" alternativeMarkupIdentifier="inline" identifier="{availableWidgetConfig.iconIdentifier}"/>
+    <div role="tabpanel">
+        <ul class="nav nav-tabs t3js-tabs" id="widget-selector" role="tablist">
+            <f:for each="{groupConfigurations}" as="groupConfiguration" iteration="iterator">
+                <li class="t3js-tabmenu-item {f:if(condition: '{iterator.isFirst}', then: 'active')}">
+                    <a id="tab-{groupConfiguration.identifier}" data-toggle="tab" href="#{groupConfiguration.identifier}" role="tab" aria-controls="{groupConfiguration.identifier}" aria-selected="true"><f:translate key="{groupConfiguration.label}" default="{groupConfiguration.label}"/></a>
+                </li>
+            </f:for>
+        </ul>
+        <div class="tab-content">
+            <f:for each="{groupConfigurations}" as="groupConfiguration" iteration="iterator">
+                <div class="tab-pane widgetSelector-widgets {f:if(condition: '{iterator.isFirst}', then: 'active')}" id="{groupConfiguration.identifier}" role="tabpanel" aria-labelledby="{groupConfiguration.identifier}-tab">
+                    <f:for each="{groupConfiguration.widgets}" as="widgetConfiguration" key="widgetIdentifier">
+                        <div class="widgetSelector-widget">
+                            <f:be.link class="widgetSelector-widget-block" route="dashboard" target="list_frame" parameters="{action: 'addWidget', widget: widgetIdentifier}">
+                                <f:if condition="{widgetConfiguration.iconIdentifier}">
+                                    <div class="widgetSelector-widget-icon">
+                                        <core:icon size="default" alternativeMarkupIdentifier="inline" identifier="{widgetConfiguration.iconIdentifier}"/>
+                                    </div>
+                                </f:if>
+                                <div class="widgetSelector-widget-details">
+                                    <div class="widgetSelector-widget-title">
+                                        <f:translate key="{widgetConfiguration.title}" default="{widgetConfiguration.title}"/>
+                                    </div>
+                                    <f:if condition="{widgetConfiguration.description}">
+                                        <div class="widgetSelector-widget-description">
+                                            <f:translate key="{widgetConfiguration.description}" default="{widgetConfiguration.description}"/>
+                                        </div>
+                                    </f:if>
+                                </div>
+                            </f:be.link>
                         </div>
-                    </f:if>
-                    <div class="widgetSelector-widget-details">
-                        <div class="widgetSelector-widget-title">
-                            <f:translate key="{availableWidgetConfig.title}" default="{availableWidgetConfig.title}"/>
-                        </div>
-                        <f:if condition="{availableWidgetConfig.description}">
-                            <div class="widgetSelector-widget-description">
-                                <f:translate key="{availableWidgetConfig.description}" default="{availableWidgetConfig.description}"/>
-                            </div>
-                        </f:if>
-                    </div>
-                </f:be.link>
-            </div>
-        </f:for>
+                    </f:for>
+                </div>
+            </f:for>
+        </div>
     </div>
 </div>
 

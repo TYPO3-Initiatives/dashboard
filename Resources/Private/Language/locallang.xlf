@@ -97,6 +97,13 @@
 			<trans-unit id="widgets.documentation.label" xml:space="preserve">
 				<source>Check TYPO3 documentation</source>
  			</trans-unit>
+
+			<trans-unit id="widget_group.default" xml:space="preserve">
+				<source>Default</source>
+ 			</trans-unit>
+			<trans-unit id="widget_group.system" xml:space="preserve">
+				<source>System</source>
+ 			</trans-unit>
 		</body>
 	</file>
 </xliff>

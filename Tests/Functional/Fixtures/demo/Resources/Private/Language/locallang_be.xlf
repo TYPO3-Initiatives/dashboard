@@ -12,6 +12,9 @@
             <trans-unit id="demo.description" xml:space="preserve">
 				<source>Demo Description</source>
 			</trans-unit>
+            <trans-unit id="demo.group.title" xml:space="preserve">
+				<source>Demo Group</source>
+			</trans-unit>
         </body>
     </file>
 </xliff>
