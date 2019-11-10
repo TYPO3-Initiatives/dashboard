@@ -4,6 +4,9 @@ declare(strict_types=1);
 namespace FriendsOfTYPO3\Dashboard\Widgets;
 
 use FriendsOfTYPO3\Dashboard\Widgets\Interfaces\AdditionalCssInterface;
+use RuntimeException;
+use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -17,13 +20,22 @@ abstract class AbstractRssWidget extends AbstractListWidget implements Additiona
 {
     protected $rssFile = '';
 
+    protected $lifeTime = 900;
+
     protected $iconIdentifier = 'dashboard-rss';
 
     protected $templateName = 'RssWidget';
 
-    public function __construct()
+    /**
+     * @var FrontendInterface
+     */
+    protected $cache;
+
+    public function __construct(FrontendInterface $cache = null)
     {
         AbstractListWidget::__construct();
+        $this->cache = $cache ?? GeneralUtility::makeInstance(CacheManager::class)
+            ->getCache('dashboard_rss');
         $this->width = 4;
         $this->height = 6;
         $this->loadRssFeed();
@@ -46,22 +58,32 @@ abstract class AbstractRssWidget extends AbstractListWidget implements Additiona
 
     protected function loadRssFeed(): void
     {
-        // @TODO: This method should use a cache for better performance
+        $cacheHash = md5($this->rssFile);
+        if ($this->cache->has($cacheHash)) {
+            $this->items = $this->cache->get($cacheHash);
+            return;
+        }
+
         /** @var \SimpleXMLElement $rssFeed */
-        $rssFeed = simplexml_load_string(GeneralUtility::getUrl($this->rssFile));
+        $rssContent = GeneralUtility::getUrl($this->rssFile);
+        if ($rssContent === false) {
+            throw new RuntimeException('RSS URL could not be fetched', 1573385431);
+        }
+        $rssFeed = simplexml_load_string($rssContent);
         $itemCount = 0;
         foreach ($rssFeed->channel->item as $item) {
             if ($itemCount < $this->limit) {
                 $this->items[] = [
-                    'title' => $item->title,
-                    'link' => $item->link,
-                    'pubDate' => $item->pubDate,
-                    'description' => $item->description,
+                    'title' => (string)$item->title,
+                    'link' => (string)$item->link,
+                    'pubDate' => (string)$item->pubDate,
+                    'description' => (string)$item->description,
                 ];
             } else {
                 continue;
             }
             $itemCount++;
         }
+        $this->cache->set($cacheHash, $this->items, ['dashboard_rss'], $this->lifeTime);
     }
 }
