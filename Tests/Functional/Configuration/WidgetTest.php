@@ -40,4 +40,13 @@ class WidgetTest extends FunctionalTestCase
         $widget = $this->dashboardConfiguration->getWidgets()['numberOfBackendUsers'];
         $this->assertSame(NumberOfBackendUsersWidget::class, $widget->getClassname());
     }
+
+    /**
+     * @test
+     */
+    public function WidgetReturnsAValidArray(): void
+    {
+        $widget = $this->dashboardConfiguration->getWidgets()['numberOfBackendUsers'];
+        $this->assertSame(['widgetGroup-system'], $widget->getGroups());
+    }
 }

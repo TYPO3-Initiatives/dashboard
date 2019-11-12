@@ -10,9 +10,6 @@ use TYPO3\CMS\Core\Utility\IpAnonymizationUtility;
 
 class LastLoginsWidget extends AbstractListWidget
 {
-    /**
-     * @var string
-     */
     protected $templateName = 'LastLogins';
 
     public function __construct()
@@ -23,9 +20,10 @@ class LastLoginsWidget extends AbstractListWidget
         $this->title = 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widgets.lastLogins.title';
         $this->description = 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widgets.lastLogins.description';
         $this->iconIdentifier = 'dashboard-signin';
+        $this->getLastLoginUser();
     }
 
-    public function prepareData(): void
+    protected function getLastLoginUser(): void
     {
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('sys_log');
         $statement = $queryBuilder

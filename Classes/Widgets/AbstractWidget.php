@@ -3,15 +3,23 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Dashboard\Widgets;
 
+use FriendsOfTYPO3\Dashboard\Widgets\Interfaces\WidgetInterface;
 use TYPO3\CMS\Core\Localization\LanguageService;
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\PathUtility;
 use TYPO3\CMS\Fluid\View\StandaloneView;
 use TYPO3Fluid\Fluid\View\ViewInterface;
 
 /**
- * Class AbstractWidget
+ * The AbstractWidget class is the basic widget class for all widgets
+ * Is it possible to extends this class for own widgets, but EXT:dashboard provide
+ * also some more special types of widgets. For more details, please check:
+ * @see AbstractChartWidget
+ * @see AbstractCtaButtonWidget
+ * @see AbstractListWidget
+ * @see AbstractNumberWidget
+ * @see AbstractRssWidget
+ * More information can be found in the documentation.
+ * @TODO: Add link to documentation
  */
 abstract class AbstractWidget implements WidgetInterface
 {
@@ -41,16 +49,6 @@ abstract class AbstractWidget implements WidgetInterface
     protected $iconIdentifier = '';
 
     /**
-     * @var array
-     */
-    protected $cssFiles = [];
-
-    /**
-     * @var array
-     */
-    protected $jsFiles = [];
-
-    /**
      * @var string
      */
     protected $templateName = 'Widget';
@@ -67,30 +65,47 @@ abstract class AbstractWidget implements WidgetInterface
 
     protected $additionalClasses = '';
 
-    /**
-     * @var string
-     */
-    protected $publicResourcesPath;
-
-    /**
-     * @var array
-     */
-    protected $eventData = [];
-
-    protected $languagePrefix = 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:';
-
-    /**
-     * AbstractWidget constructor.
-     */
     public function __construct()
     {
-        $this->publicResourcesPath =
-            PathUtility::getAbsoluteWebPath(ExtensionManagementUtility::extPath('dashboard')) . 'Resources/Public/';
+        $this->initializeView();
     }
 
-    /**
-     * Sets up the Fluid View.
-     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    public function getIconIdentifier(): string
+    {
+        return $this->iconIdentifier;
+    }
+
+    public function getHeight(): int
+    {
+        return $this->height;
+    }
+
+    public function getWidth(): int
+    {
+        return $this->width;
+    }
+
+    public function renderWidgetContent(): string
+    {
+        $this->view->assign('title', $this->title);
+        return $this->view->render();
+    }
+
+    public function getAdditionalClasses(): string
+    {
+        return $this->additionalClasses;
+    }
+
     protected function initializeView(): void
     {
         $this->view = GeneralUtility::makeInstance(StandaloneView::class);
@@ -101,93 +116,6 @@ abstract class AbstractWidget implements WidgetInterface
         }
     }
 
-    /**
-     * @return string
-     */
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    /**
-     * @return string
-     */
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    /**
-     * @return string
-     */
-    public function getIconIdentifier(): string
-    {
-        return $this->iconIdentifier;
-    }
-
-    /**
-     * @return int  Returns height of widget in rows (1-4)
-     */
-    public function getHeight(): int
-    {
-        return $this->height;
-    }
-
-    /**
-     * @return int  Returns width of widget in columns (1-4)
-     */
-    public function getWidth(): int
-    {
-        return $this->width;
-    }
-
-    /**
-     * @return string
-     */
-    public function renderWidgetContent(): string
-    {
-        $this->initializeView();
-        $this->prepareData();
-
-        $this->view->assign('title', $this->title);
-
-        return $this->view->render();
-    }
-
-    /**
-     * @return array
-     */
-    public function getEventData(): array
-    {
-        return $this->eventData;
-    }
-
-    /**
-     * @return array
-     */
-    public function getCssFiles(): array
-    {
-        return $this->cssFiles;
-    }
-
-    /**
-     * @return array
-     */
-    public function getJsFiles(): array
-    {
-        return $this->jsFiles;
-    }
-
-    public function getAdditionalClasses(): string
-    {
-        return $this->additionalClasses;
-    }
-
-    /**
-     * Returns the LanguageService
-     *
-     * @return LanguageService
-     */
     protected function getLanguageService(): LanguageService
     {
         return $GLOBALS['LANG'];

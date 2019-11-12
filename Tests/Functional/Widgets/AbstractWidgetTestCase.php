@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace FriendsOfTYPO3\Dashboard\Tests\Functional\Widgets;
 
 use FriendsOfTYPO3\Dashboard\Widgets\AbstractWidget;
+use FriendsOfTYPO3\Dashboard\Widgets\Interfaces\AdditionalCssInterface;
+use FriendsOfTYPO3\Dashboard\Widgets\Interfaces\AdditionalJavaScriptInterface;
+use FriendsOfTYPO3\Dashboard\Widgets\Interfaces\RequireJsModuleInterface;
 use Prophecy\Argument;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -56,6 +59,11 @@ class AbstractWidgetTestCase extends FunctionalTestCase
      * @var array
      */
     protected $expectedJsFiles = [];
+
+    /**
+     * @var array
+     */
+    protected $expectedRequireJsModules = [];
 
     /**
      * @var string
@@ -123,7 +131,12 @@ class AbstractWidgetTestCase extends FunctionalTestCase
      */
     public function getCssFilesReturnsExpectedArray(): void
     {
-        $this->assertSame($this->expectedCssFiles, $this->widget->getCssFiles());
+        if ($this->widget instanceof AdditionalCssInterface) {
+            $this->assertSame($this->expectedCssFiles, $this->widget->getCssFiles());
+        } else {
+            // Widget not implements AdditionalCssInterface::class
+            $this->assertTrue(true);
+        }
     }
 
     /**
@@ -131,7 +144,25 @@ class AbstractWidgetTestCase extends FunctionalTestCase
      */
     public function getJsFilesReturnsExpectedArray(): void
     {
-        $this->assertSame($this->expectedJsFiles, $this->widget->getJsFiles());
+        if ($this->widget instanceof AdditionalJavaScriptInterface) {
+            $this->assertSame($this->expectedJsFiles, $this->widget->getJsFiles());
+        } else {
+            // Widget not implements AdditionalJavaScriptInterface::class
+            $this->assertTrue(true);
+        }
+    }
+
+    /**
+     * @test
+     */
+    public function getRequireJsModulesReturnsExpectedArray(): void
+    {
+        if ($this->widget instanceof RequireJsModuleInterface) {
+            $this->assertSame($this->expectedRequireJsModules, $this->widget->getRequireJsModules());
+        } else {
+            // Widget not implements RequireJsModuleInterface::class
+            $this->assertTrue(true);
+        }
     }
 
     /**

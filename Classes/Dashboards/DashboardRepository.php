@@ -6,7 +6,7 @@ namespace FriendsOfTYPO3\Dashboard\Dashboards;
 use FriendsOfTYPO3\Dashboard\Configuration\Dashboard;
 use FriendsOfTYPO3\Dashboard\Configuration\Widget;
 use FriendsOfTYPO3\Dashboard\DashboardConfiguration;
-use FriendsOfTYPO3\Dashboard\Widgets\WidgetInterface;
+use FriendsOfTYPO3\Dashboard\Widgets\Interfaces\WidgetInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;

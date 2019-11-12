@@ -3,11 +3,12 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Dashboard\Widgets;
 
-use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use TYPO3\CMS\Core\Utility\PathUtility;
-
 /**
- * Class AbstractLineChartWidget
+ * The AbstractDoughnutChartWidget class is the basic widget class for doughnut charts.
+ * Is it possible to extends this class for own widgets.
+ * In your class you have to set $this->chartData with the data to display
+ * More information can be found in the documentation.
+ * @TODO: Add link to documentation
  */
 abstract class AbstractDoughnutChartWidget extends AbstractChartWidget
 {
@@ -23,14 +24,17 @@ abstract class AbstractDoughnutChartWidget extends AbstractChartWidget
         'cutoutPercentage' => 60
     ];
 
-    /**
-     * @var string
-     */
     protected $templateName = 'DoughnutChartWidget';
 
-    public function __construct()
+    /**
+     * This method returns an array with paths to required CSS files.
+     * e.g. ['EXT:myext/Resources/Public/Css/my_widget.css']
+     * @return array
+     */
+    public function getCssFiles(): array
     {
-        $publicResourcesPath = PathUtility::getAbsoluteWebPath(ExtensionManagementUtility::extPath('dashboard')) . 'Resources/Public/';
-        $this->cssFiles[] = $publicResourcesPath . 'CSS/doughnutChartWidget.min.css';
+        $cssFiles = parent::getCssFiles();
+        $cssFiles[] = 'EXT:dashboard/Resources/Public/CSS/doughnutChartWidget.min.css';
+        return $cssFiles;
     }
 }

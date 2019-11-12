@@ -15,22 +15,17 @@ class Widget3 extends AbstractDoughnutChartWidget
     protected $score = 0;
     protected $lastCheck = 0;
 
-    protected function prepareChartData(): void
-    {
-        parent::prepareChartData();
-        $this->chartData = $this->getChartData();
-    }
-
     public function renderWidgetContent(): string
     {
-        $this->prepareData();
-        $this->initializeView();
-
         $this->view->assign('title', $this->title);
         $this->view->assign('value', $this->score);
         $this->view->assign('lastCheck', $this->lastCheck);
-
         return $this->view->render();
+    }
+
+    protected function prepareChartData(): void
+    {
+        $this->chartData = $this->getChartData();
     }
 
     protected function getChartData(): array
@@ -47,10 +42,5 @@ class Widget3 extends AbstractDoughnutChartWidget
                 ]
             ],
         ];
-    }
-
-    public function prepareData(): void
-    {
-        // TODO: Implement prepareData() method.
     }
 }

@@ -16,7 +16,11 @@ class Widget3Test extends AbstractWidgetTestCase
     protected $expectedHeight = 4;
     protected $expectedWidth = 2;
     protected $expectedAdditionalClasses = 'dashboard-item--chart';
-    protected $expectedCssFiles = ['typo3conf/ext/dashboard/Resources/Public/CSS/doughnutChartWidget.min.css'];
+    protected $expectedCssFiles = [
+        'EXT:dashboard/Resources/Public/CSS/Dist/Chart.min.css',
+        'EXT:dashboard/Resources/Public/CSS/doughnutChartWidget.min.css'
+    ];
+    protected $expectedRequireJsModules = ['TYPO3/CMS/Dashboard/ChartInitializer'];
 
     /**
      * @test

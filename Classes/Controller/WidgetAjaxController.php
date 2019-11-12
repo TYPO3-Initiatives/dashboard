@@ -6,7 +6,8 @@ namespace FriendsOfTYPO3\Dashboard\Controller;
 use FriendsOfTYPO3\Dashboard\Configuration\Widget;
 use FriendsOfTYPO3\Dashboard\DashboardConfiguration;
 use FriendsOfTYPO3\Dashboard\Dashboards\DashboardRepository;
-use FriendsOfTYPO3\Dashboard\Widgets\WidgetInterface;
+use FriendsOfTYPO3\Dashboard\Widgets\Interfaces\EventDataInterface;
+use FriendsOfTYPO3\Dashboard\Widgets\Interfaces\WidgetInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Http\JsonResponse;
@@ -47,11 +48,12 @@ class WidgetAjaxController extends AbstractController
         $data = [];
         if ($widgetConfiguration instanceof Widget) {
             $widgetObject = GeneralUtility::makeInstance($widgetConfiguration->getClassname());
+            $eventData = $widgetObject instanceof EventDataInterface ? $widgetObject->getEventData() : [];
             if ($widgetObject instanceof WidgetInterface) {
                 $data = [
                     'widget' => $queryParams['widget'],
                     'content' => $widgetObject->renderWidgetContent(),
-                    'eventdata' => $widgetObject->getEventData()
+                    'eventdata' => $eventData,
                 ];
             }
         }
