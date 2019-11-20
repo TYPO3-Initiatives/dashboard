@@ -18,34 +18,52 @@
     </div>
 </div>
 
-<div class="dashboard-grid">
-    <f:for each="{widgetsOnCurrentDashboard}" as="widget" iteration="widgetIterator" key="widgetHash">
-        <div class="dashboard-item dashboard-item--w{widget.width} dashboard-item--h{widget.height} {widget.additionalClasses}" data-widget-id="{widget.id}" data-widget-hash="{widgetHash}" data-widget-key="{widget.identifier}" data-widget-config="{widget.config -> f:format.json()}">
-            <div class="dashboard-item-content">
-                <div class="widget">
-                    <div class="widget-waiting">
-                        <core:icon identifier="spinner-circle" size="large"/>
-                    </div>
-                    <div class="widget-content hide"></div>
-                    <div class="widget-actions">
-                        <div class="widget-move">
-                            <core:icon identifier="dashboard-action-dragdrop" alternativeMarkupIdentifier="inline"/>
+<f:if condition="{widgetsOnCurrentDashboard}">
+    <f:then>
+        <div class="dashboard-grid">
+            <f:for each="{widgetsOnCurrentDashboard}" as="widget" iteration="widgetIterator" key="widgetHash">
+                <div class="dashboard-item dashboard-item--w{widget.width} dashboard-item--h{widget.height} {widget.additionalClasses}" data-widget-id="{widget.id}" data-widget-hash="{widgetHash}" data-widget-key="{widget.identifier}" data-widget-config="{widget.config -> f:format.json()}">
+                    <div class="dashboard-item-content">
+                        <div class="widget">
+                            <div class="widget-waiting">
+                                <core:icon identifier="spinner-circle" size="large"/>
+                            </div>
+                            <div class="widget-content hide"></div>
+                            <div class="widget-actions">
+                                <div class="widget-move">
+                                    <core:icon identifier="dashboard-action-dragdrop" alternativeMarkupIdentifier="inline"/>
+                                </div>
+                                <f:be.link class="widget-remove" route="dashboard" parameters="{action: 'removeWidget', widgetHash: widgetHash}" data="{title: '{f:translate(key: \'widget.remove.confirm.title\', extensionName: \'dashboard\')}', message: '{f:translate(key: \'widget.remove.confirm.message\', extensionName: \'dashboard\')}', button-ok-text: '{f:translate(key: \'widget.remove.button.ok\', extensionName: \'dashboard\')}', button-close-text: '{f:translate(key: \'widget.remove.button.close\', extensionName: \'dashboard\')}'}">
+                                    <core:icon identifier="dashboard-action-close" alternativeMarkupIdentifier="inline"/>
+                                </f:be.link>
+                            </div>
                         </div>
-                        <f:be.link class="widget-remove" route="dashboard" parameters="{action: 'removeWidget', widgetHash: widgetHash}" data="{title: '{f:translate(key: \'widget.remove.confirm.title\', extensionName: \'dashboard\')}', message: '{f:translate(key: \'widget.remove.confirm.message\', extensionName: \'dashboard\')}', button-ok-text: '{f:translate(key: \'widget.remove.button.ok\', extensionName: \'dashboard\')}', button-close-text: '{f:translate(key: \'widget.remove.button.close\', extensionName: \'dashboard\')}'}">
-                            <core:icon identifier="dashboard-action-close" alternativeMarkupIdentifier="inline"/>
-                        </f:be.link>
                     </div>
                 </div>
+            </f:for>
+        </div>
+    </f:then>
+    <f:else>
+        <div class="dashboard-empty">
+            <div class="dashboard-empty-content">
+                <h3><f:translate key="dashboard.empty.title" extensionName="dashboard" /></h3>
+                <p><f:translate key="dashboard.empty.description" extensionName="dashboard" /></p>
+                <p>
+                    <a href="{addWidgetUri}" class="js-dashboard-addWidget dashBoardButton-addItem" data-modal-title="{f:translate(key: 'widget.add', extensionName: 'dashboard')}" data-button-close-text="{f:translate(key: 'widget.add.button.close', extensionName: 'dashboard')}" data-button-ok-text="{f:translate(key: 'widget.add.button.ok', extensionName: 'dashboard')}">
+                        <core:icon identifier="actions-add" alternativeMarkupIdentifier="inline" /> <f:translate key="dashboard.empty.button" extensionName="dashboard" />
+                    </a>
+                </p>
             </div>
         </div>
-    </f:for>
-</div>
+    </f:else>
+</f:if>
 
 <div class="dashboard-add-item">
     <a href="{addWidgetUri}" class="js-dashboard-addWidget dashBoardButton-addItem" data-modal-title="{f:translate(key: 'widget.add', extensionName: 'dashboard')}" data-button-close-text="{f:translate(key: 'widget.add.button.close', extensionName: 'dashboard')}" data-button-ok-text="{f:translate(key: 'widget.add.button.ok', extensionName: 'dashboard')}">
         <core:icon identifier="actions-add" alternativeMarkupIdentifier="inline" /><span class="sr-only"><f:translate key="widget.add" extensionName="dashboard"/></span>
     </a>
 </div>
+
 <div id="widgetSelector" class="hide">
     <div role="tabpanel">
         <ul class="nav nav-tabs t3js-tabs" id="widget-selector" role="tablist">
