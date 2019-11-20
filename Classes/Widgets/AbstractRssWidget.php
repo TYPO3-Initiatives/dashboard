@@ -59,8 +59,7 @@ abstract class AbstractRssWidget extends AbstractListWidget implements Additiona
     protected function loadRssFeed(): void
     {
         $cacheHash = md5($this->rssFile);
-        if ($this->cache->has($cacheHash)) {
-            $this->items = $this->cache->get($cacheHash);
+        if ($this->items = $this->cache->get($cacheHash)) {
             return;
         }
 
