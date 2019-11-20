@@ -14,34 +14,38 @@ class SysLogErrorsWidget extends AbstractBarChartWidget
 
     protected $height = 4;
 
-    protected $labels = [];
-
-    protected $data = [];
-
     protected function prepareChartData(): void
     {
+        $this->chartData = $this->getChartData();
+    }
+
+    protected function getChartData(): array
+    {
         $period = 'lastMonth';
+
+        $labels = [];
+        $data = [];
 
         // @TODO: the next block is not reached yet.
         // @TODO: this block is prepared for having a configuration option with two periods
         // @codeCoverageIgnoreStart
         if ($period === 'lastWeek') {
-            $this->calculateDataForLastDays(7);
+            $data = $this->calculateDataForLastDays(7);
         }
         // @codeCoverageIgnoreEnd
 
         if ($period === 'lastMonth') {
-            $this->calculateDataForLastDays(31);
+            $data = $this->calculateDataForLastDays(31);
         }
 
-        $this->chartData = [
-            'labels' => $this->labels,
+        return [
+            'labels' => $labels,
             'datasets' => [
                 [
                     'label' => $this->getLanguageService()->sL('LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widgets.sysLogErrors.chart.dataSet.0'),
                     'backgroundColor' => $this->chartColors[0],
                     'border' => 0,
-                    'data' => $this->data
+                    'data' => $data
                 ]
             ]
         ];
@@ -62,14 +66,16 @@ class SysLogErrorsWidget extends AbstractBarChartWidget
             ->rowCount();
     }
 
-    protected function calculateDataForLastDays(int $days): void
+    protected function calculateDataForLastDays(int $days): array
     {
+        $data = [];
         for ($daysBefore=$days; $daysBefore--; $daysBefore>0) {
-            $this->labels[] = date('d-m-Y', strtotime('-' . $daysBefore . ' day'));
+            $labels[] = date('d-m-Y', strtotime('-' . $daysBefore . ' day'));
             $startPeriod = strtotime('-' . $daysBefore . ' day 0:00:00');
             $endPeriod =  strtotime('-' . $daysBefore . ' day 23:59:59');
 
-            $this->data[] = $this->getNumberOfErrorsInPeriod($startPeriod, $endPeriod);
+            $data[] = $this->getNumberOfErrorsInPeriod($startPeriod, $endPeriod);
         }
+        return $data;
     }
 }
