@@ -1,4 +1,9 @@
 .dashboard-modal {
+	.modal-body {
+		padding: 0;
+		background-color: #fafafa;
+	}
+
 	.modal-content {
 		background-color: $background-color;
 	}

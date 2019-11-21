@@ -1,12 +1,12 @@
 Dashboard:
   Dashboards:
     - { identifier: 'dashboard-default',
-        iconIdentifier: 'dashboard-dashboard',
+        iconIdentifier: 'dashboard-default',
         label: 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default',
         description: 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default.description',
         widgets: ['t3News', 'documentation', 'numberOfBackendUsers', 'numberOfAdminBackendUsers', 'lastLogins', 'pagesWithoutDescription', 'sysLogErrors'] }
     - { identifier: 'dashboard-empty',
-        iconIdentifier: 'dashboard-dashboard',
+        iconIdentifier: 'dashboard-empty',
         label: 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.empty',
         description: 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.empty.description' }
   WidgetGroups:

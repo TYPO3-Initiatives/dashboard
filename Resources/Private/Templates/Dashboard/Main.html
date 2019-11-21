@@ -75,21 +75,21 @@
         </ul>
         <div class="tab-content">
             <f:for each="{groupConfigurations}" as="groupConfiguration" iteration="iterator">
-                <div class="tab-pane widgetSelector-widgets {f:if(condition: '{iterator.isFirst}', then: 'active')}" id="{groupConfiguration.identifier}" role="tabpanel" aria-labelledby="{groupConfiguration.identifier}-tab">
+                <div class="tab-pane dashboard-modal-items {f:if(condition: '{iterator.isFirst}', then: 'active')}" id="{groupConfiguration.identifier}" role="tabpanel" aria-labelledby="{groupConfiguration.identifier}-tab">
                     <f:for each="{groupConfiguration.widgets}" as="widgetConfiguration" key="widgetIdentifier">
-                        <div class="widgetSelector-widget">
-                            <f:be.link class="widgetSelector-widget-block" route="dashboard" target="list_frame" parameters="{action: 'addWidget', widget: widgetIdentifier}">
+                        <div class="dashboardModal-item">
+                            <f:be.link class="dashboardModal-item-block" route="dashboard" target="list_frame" parameters="{action: 'addWidget', widget: widgetIdentifier}">
                                 <f:if condition="{widgetConfiguration.iconIdentifier}">
-                                    <div class="widgetSelector-widget-icon">
+                                    <div class="dashboardModal-item-icon">
                                         <core:icon size="default" alternativeMarkupIdentifier="inline" identifier="{widgetConfiguration.iconIdentifier}"/>
                                     </div>
                                 </f:if>
-                                <div class="widgetSelector-widget-details">
-                                    <div class="widgetSelector-widget-title">
+                                <div class="dashboardModal-item-details">
+                                    <div class="dashboardModal-item-title">
                                         <f:translate key="{widgetConfiguration.title}" default="{widgetConfiguration.title}"/>
                                     </div>
                                     <f:if condition="{widgetConfiguration.description}">
-                                        <div class="widgetSelector-widget-description">
+                                        <div class="dashboardModal-item-description">
                                             <f:translate key="{widgetConfiguration.description}" default="{widgetConfiguration.description}"/>
                                         </div>
                                     </f:if>
@@ -104,22 +104,22 @@
 </div>
 
 <div id="dashboardSelector" class="hide">
-    <div class="dashboardSelector-dashboards">
+    <div class="dashboard-modal-items">
         <f:for each="{dashboardConfigurations}" as="availableDashboardConfig" key="availableDashboardKey">
             <f:if condition="!{availableDashboardConfig.excludeFromWizard}">
-                <div class="dashboardSelector-dashboard">
-                    <f:be.link class="dashboardSelector-dashboard-block" route="dashboard" target="list_frame" parameters="{action: 'addDashboard', dashboard: availableDashboardKey}">
+                <div class="dashboardModal-item">
+                    <f:be.link class="dashboardModal-item-block" route="dashboard" target="list_frame" parameters="{action: 'addDashboard', dashboard: availableDashboardKey}">
                         <f:if condition="{availableDashboardConfig.iconIdentifier}">
-                            <div class="dashboardSelector-dashboard-icon">
+                            <div class="dashboardModal-item-icon">
                                 <core:icon size="default" alternativeMarkupIdentifier="inline" identifier="{availableDashboardConfig.iconIdentifier}"/>
                             </div>
                         </f:if>
-                        <div class="dashboardSelector-dashboard-details">
-                            <div class="dashboardSelector-dashboard-title">
+                        <div class="dashboardModal-item-details">
+                            <div class="dashboardModal-item-title">
                                 <f:translate key="{availableDashboardConfig.label}" default="{availableDashboardConfig.label}"/>
                             </div>
                             <f:if condition="{availableDashboardConfig.description}">
-                                <div class="dashboardSelector-dashboard-description">
+                                <div class="dashboardModal-item-description">
                                     <f:translate key="{availableDashboardConfig.description}" default="{availableDashboardConfig.description}"/>
                                 </div>
                             </f:if>
