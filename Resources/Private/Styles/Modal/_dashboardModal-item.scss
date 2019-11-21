@@ -1,25 +1,20 @@
 .dashboard-modal {
-	.modal-body {
-		background-color: #fafafa;
-		padding: 0;
-	}
-
-	.widgetSelector-widgets {
+	.dashboard-modal-items {
 		display: flex;
 		flex-flow: row wrap;
 		margin: 0 ($column-gutter / 2);
 	}
 
-	.widgetSelector-widget {
+	.dashboardModal-item {
 		width: 100%;
-		padding: 0 ($column-gutter / 2) ($column-gutter);
+		padding: $column-gutter $column-gutter / 2 0 $column-gutter / 2;
 
 		@media screen and (min-width: 768px) {
 			width: 50%;
 		}
 	}
 
-	.widgetSelector-widget-block {
+	.dashboardModal-item-block {
 		display: flex;
 		align-items: center;
 		height: 100%;
@@ -28,16 +23,16 @@
 		box-shadow: $shadow;
 	}
 
-	.widgetSelector-widget-icon {
+	.dashboardModal-item-icon {
 		margin-right: $block-gutter / 2;
 	}
 
-	.widgetSelector-widget-title {
+	.dashboardModal-item-title {
 		font-weight: 800;
 		font-size: 14px;
 	}
 
-	.widgetSelector-widget-description {
+	.dashboardModal-item-description {
 		margin-top: 5px;
 	}
 }

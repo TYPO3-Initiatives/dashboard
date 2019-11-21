@@ -1,9 +1,6 @@
 .widget-cta {
-  display: -webkit-box;
   display: flex;
-  -webkit-box-pack: center;
   justify-content: center;
-  -webkit-box-align: center;
   align-items: center;
   padding: 1.5rem;
   background-color: #f49702;

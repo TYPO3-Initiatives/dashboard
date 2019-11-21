@@ -1,151 +1,37 @@
+.dashboard-modal .modal-body {
+  padding: 0;
+  background-color: #fafafa; }
+
 .dashboard-modal .modal-content {
   background-color: #f8f8f8; }
 
-.dashboard-modal .dashboardSelector-dashboards {
-  display: -webkit-box;
+.dashboard-modal .dashboard-modal-items {
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  flex-flow: row wrap;
-  margin: 0 -1.1rem; }
-
-.dashboard-modal .dashboardSelector-dashboard {
-  width: 100%;
-  padding: 0 1.1rem 2.2rem; }
-  @media screen and (min-width: 768px) {
-    .dashboard-modal .dashboardSelector-dashboard {
-      width: 50%; } }
-
-.dashboard-modal .dashboardSelector-dashboard-block {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  height: 100%;
-  padding: 1.5rem;
-  background-color: #fff;
-  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05); }
-
-.dashboard-modal .dashboardSelector-dashboard-icon {
-  margin-right: 1.5rem; }
-
-.dashboard-modal .dashboardSelector-dashboard-title {
-  font-weight: 800;
-  font-size: 1.4rem; }
-
-.dashboard-modal .dashboardSelector-dashboard-description {
-  margin-top: 0.5rem; }
-
-.dashboard-modal .modal-body {
-  background-color: #fafafa;
-  padding: 0; }
-
-.dashboard-modal .widgetSelector-widgets {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
   flex-flow: row wrap;
   margin: 0 1.1rem; }
 
-.dashboard-modal .widgetSelector-widget {
+.dashboard-modal .dashboardModal-item {
   width: 100%;
-  padding: 0 1.1rem 2.2rem; }
+  padding: 2.2rem 1.1rem 0 1.1rem; }
   @media screen and (min-width: 768px) {
-    .dashboard-modal .widgetSelector-widget {
+    .dashboard-modal .dashboardModal-item {
       width: 50%; } }
 
-.dashboard-modal .widgetSelector-widget-block {
-  display: -webkit-box;
+.dashboard-modal .dashboardModal-item-block {
   display: flex;
-  -webkit-box-align: center;
   align-items: center;
   height: 100%;
   padding: 1.5rem;
   background-color: #fff;
   box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05); }
 
-.dashboard-modal .widgetSelector-widget-icon {
+.dashboard-modal .dashboardModal-item-icon {
   margin-right: 1.5rem; }
 
-.dashboard-modal .widgetSelector-widget-title {
+.dashboard-modal .dashboardModal-item-title {
   font-weight: 800;
   font-size: 1.4rem; }
 
-.dashboard-modal .widgetSelector-widget-description {
-  margin-top: 0.5rem; }
-/*# sourceMappingURL=style.css.map */
-
-.dashboard-modal .modal-content {
-  background-color: #f8f8f8; }
-
-.dashboard-modal .dashboardSelector-dashboards {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  flex-flow: row wrap;
-  margin: 0 -1.1rem; }
-
-.dashboard-modal .dashboardSelector-dashboard {
-  width: 100%;
-  padding: 0 1.1rem 2.2rem; }
-  @media screen and (min-width: 768px) {
-    .dashboard-modal .dashboardSelector-dashboard {
-      width: 50%; } }
-
-.dashboard-modal .dashboardSelector-dashboard-block {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  height: 100%;
-  padding: 1.5rem;
-  background-color: #fff;
-  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05); }
-
-.dashboard-modal .dashboardSelector-dashboard-icon {
-  margin-right: 1.5rem; }
-
-.dashboard-modal .dashboardSelector-dashboard-title {
-  font-weight: 800;
-  font-size: 1.4rem; }
-
-.dashboard-modal .dashboardSelector-dashboard-description {
-  margin-top: 0.5rem; }
-
-.dashboard-modal .widgetSelector-widgets {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  flex-flow: row wrap;
-  margin: 0 -1.1rem; }
-
-.dashboard-modal .widgetSelector-widget {
-  width: 100%;
-  padding: 0 1.1rem 2.2rem; }
-  @media screen and (min-width: 768px) {
-    .dashboard-modal .widgetSelector-widget {
-      width: 50%; } }
-
-.dashboard-modal .widgetSelector-widget-block {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  height: 100%;
-  padding: 1.5rem;
-  background-color: #fff;
-  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.05); }
-
-.dashboard-modal .widgetSelector-widget-icon {
-  margin-right: 1.5rem; }
-
-.dashboard-modal .widgetSelector-widget-title {
-  font-weight: 800;
-  font-size: 1.4rem; }
-
-.dashboard-modal .widgetSelector-widget-description {
+.dashboard-modal .dashboardModal-item-description {
   margin-top: 0.5rem; }
 /*# sourceMappingURL=style.css.map */
