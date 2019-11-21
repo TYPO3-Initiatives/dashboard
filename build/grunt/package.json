@@ -18,7 +18,6 @@
     "grunt-postcss": "^0.9.0",
     "grunt-sass": "^3.0.2",
     "grunt-sass-globbing": "^1.5.1",
-    "grunt-sass-lint": "^0.2.4",
     "jit-grunt": "^0.10.0",
     "node-sass": "^4.12.0",
     "postcss-pxtorem": "^4.0.1"

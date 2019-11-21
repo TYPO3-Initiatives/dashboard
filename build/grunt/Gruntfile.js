@@ -82,6 +82,5 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('default', ['sass_globbing:generate', 'sass:dev', 'postcss:dev', 'watch']);
-    grunt.registerTask('lint', ['sasslint:dev']);
-    grunt.registerTask('build', ['sasslint:build', 'sass_globbing:generate', 'sass:build', 'postcss:build', 'cssmin:build']);
+    grunt.registerTask('build', ['sass_globbing:generate', 'sass:build', 'postcss:build', 'cssmin:build']);
 };
