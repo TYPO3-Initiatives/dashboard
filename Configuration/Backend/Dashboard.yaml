@@ -10,8 +10,8 @@ Dashboard:
         label: 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.empty',
         description: 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.empty.description' }
   WidgetGroups:
-    - { identifier: 'widgetGroup-default',
-        label: 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widget_group.default' }
+    - { identifier: 'widgetGroup-community',
+        label: 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widget_group.community' }
     - { identifier: 'widgetGroup-system',
         label: 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widget_group.system' }
   Widgets:
@@ -32,7 +32,7 @@ Dashboard:
         groups: ['widgetGroup-system'] }
     - { identifier: 't3News',
         className: FriendsOfTYPO3\Dashboard\Widgets\T3NewsWidget,
-        groups: ['widgetGroup-default'] }
+        groups: ['widgetGroup-community'] }
     - { identifier: 'documentation',
         className: FriendsOfTYPO3\Dashboard\Widgets\DocumentationWidget,
-        groups: ['widgetGroup-default'] }
+        groups: ['widgetGroup-community'] }

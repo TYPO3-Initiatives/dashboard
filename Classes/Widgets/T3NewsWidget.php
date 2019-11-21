@@ -7,6 +7,7 @@ class T3NewsWidget extends AbstractRssWidget
 {
     protected $rssFile = 'https://typo3.org/?type=100';
     protected $lifeTime = 43200; // 12 hours cache
-    protected $title = 'TYPO3 News';
+    protected $title = 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widgets.t3news.title';
+    protected $description = 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widgets.t3news.description';
     protected $iconIdentifier = 'dashboard-typo3';
 }

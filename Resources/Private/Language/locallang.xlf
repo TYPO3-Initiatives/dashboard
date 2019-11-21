@@ -34,13 +34,13 @@
 				<source>Default</source>
 			</trans-unit>
 			<trans-unit id="dashboard.default.description" xml:space="preserve">
-				<source>This is the dashboard</source>
+				<source>Create a new dashboard based on the default dashboard</source>
 			</trans-unit>
 			<trans-unit id="dashboard.empty" xml:space="preserve">
 				<source>Empty Dashboard</source>
 			</trans-unit>
 			<trans-unit id="dashboard.empty.description" xml:space="preserve">
-				<source>This is an empty dashboard</source>
+				<source>Create a new empty dashboard</source>
 			</trans-unit>
 			<trans-unit id="dashboard.add" xml:space="preserve">
 				<source>Add dashboard</source>
@@ -94,24 +94,34 @@
 			<trans-unit id="widgets.documentation.title" xml:space="preserve">
 				<source>TYPO3 documentation</source>
  			</trans-unit>
-			<trans-unit id="widgets.documentation.label" xml:space="preserve">
+			<trans-unit id="widgets.documentation.description" xml:space="preserve">
+				<source>Add a button with a link to the main TYPO3 documentation</source>
+ 			</trans-unit>
+			<trans-unit id="widgets.documentation.content.label" xml:space="preserve">
 				<source>Check TYPO3 documentation</source>
  			</trans-unit>
 
-			<trans-unit id="widget_group.default" xml:space="preserve">
-				<source>Default</source>
+			<trans-unit id="widgets.t3news.title" xml:space="preserve">
+				<source>TYPO3 news</source>
+			</trans-unit>
+			<trans-unit id="widgets.t3news.description" xml:space="preserve">
+				<source>Add a list of news items from the TYPO3 project</source>
+			</trans-unit>
+
+			<trans-unit id="widget_group.community" xml:space="preserve">
+				<source>Community</source>
  			</trans-unit>
 			<trans-unit id="widget_group.system" xml:space="preserve">
 				<source>System</source>
  			</trans-unit>
 
-			<trans-unit id="dashboard.empty.title" xml:space="preserve">
+			<trans-unit id="dashboard.empty.content.title" xml:space="preserve">
 				<source>No widgets on this dashboard :(</source>
  			</trans-unit>
-			<trans-unit id="dashboard.empty.description" xml:space="preserve">
+			<trans-unit id="dashboard.empty.content.description" xml:space="preserve">
 				<source>Dashboards are pretty cool, aren't they? But they are way cooler with a widget.</source>
  			</trans-unit>
-			<trans-unit id="dashboard.empty.button" xml:space="preserve">
+			<trans-unit id="dashboard.empty.content.button" xml:space="preserve">
 				<source>Add a widget</source>
  			</trans-unit>
 		</body>
