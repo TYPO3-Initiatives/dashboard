@@ -5,7 +5,7 @@ namespace FriendsOfTYPO3\Dashboard\Configuration;
 
 class AbstractConfiguration
 {
-    public function __construct(array $properties)
+    public function __construct(array $properties = [])
     {
         foreach ($properties as $property => $value) {
             if (property_exists($this, $property)) {

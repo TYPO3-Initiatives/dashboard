@@ -62,6 +62,13 @@ class DashboardConfiguration implements SingletonInterface
      */
     protected $packageManager;
 
+    /**
+     * Array of all registered dashboards
+     *
+     * @var array
+     */
+    protected $dashboards = [];
+
     public function __construct(PackageManager $packageManager = null)
     {
         $this->packageManager = $packageManager ?? GeneralUtility::makeInstance(PackageManager::class);
@@ -105,13 +112,20 @@ class DashboardConfiguration implements SingletonInterface
      */
     protected function resolveAllExistingDashboards(bool $useCache = true): array
     {
-        $dashboards = [];
         $dashboardConfiguration = $this->getAllDashboardConfigurationFromFiles($useCache);
         foreach ($dashboardConfiguration['Dashboard']['Dashboards'] ?? [] as $configuration) {
-            $dashboards[$configuration['identifier']] = GeneralUtility::makeInstance(Dashboard::class, $configuration);
+            $this->dashboards[$configuration['identifier']] = GeneralUtility::makeInstance(Dashboard::class, $configuration);
         }
-        $this->firstLevelCacheDashboards = $dashboards;
-        return $dashboards;
+        $this->firstLevelCacheDashboards = $this->dashboards;
+        return $this->dashboards;
+    }
+
+    /**
+     * @param Dashboard $dashboardObject
+     */
+    public function registerDashboard(Dashboard $dashboardObject): void
+    {
+        $this->dashboards[$dashboardObject->getIdentifier()] = $dashboardObject;
     }
 
     /**
