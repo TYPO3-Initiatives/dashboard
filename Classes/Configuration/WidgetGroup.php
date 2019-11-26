@@ -25,8 +25,24 @@ class WidgetGroup extends AbstractConfiguration
         return $this->identifier;
     }
 
+    /**
+     * @param string $identifier
+     */
+    public function setIdentifier(string $identifier): void
+    {
+        $this->identifier = $identifier;
+    }
+
     public function getLabel(): string
     {
         return $this->label;
+    }
+
+    /**
+     * @param string $label
+     */
+    public function setLabel(string $label): void
+    {
+        $this->label = $label;
     }
 }

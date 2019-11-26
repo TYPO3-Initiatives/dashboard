@@ -30,9 +30,25 @@ class Widget extends AbstractConfiguration
         return $this->identifier;
     }
 
+    /**
+     * @param string $identifier
+     */
+    public function setIdentifier(string $identifier): void
+    {
+        $this->identifier = $identifier;
+    }
+
     public function getClassname(): string
     {
         return $this->className;
+    }
+
+    /**
+     * @param string $className
+     */
+    public function setClassName(string $className): void
+    {
+        $this->className = $className;
     }
 
     /**
@@ -41,5 +57,13 @@ class Widget extends AbstractConfiguration
     public function getGroups(): array
     {
         return $this->groups;
+    }
+
+    /**
+     * @param string[] $groups
+     */
+    public function setGroups(array $groups): void
+    {
+        $this->groups = $groups;
     }
 }

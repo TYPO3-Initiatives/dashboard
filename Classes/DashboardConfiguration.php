@@ -69,6 +69,10 @@ class DashboardConfiguration implements SingletonInterface
      */
     protected $dashboards = [];
 
+    protected $widgetGroups = [];
+
+    protected $widgets = [];
+
     public function __construct(PackageManager $packageManager = null)
     {
         $this->packageManager = $packageManager ?? GeneralUtility::makeInstance(PackageManager::class);
@@ -105,7 +109,7 @@ class DashboardConfiguration implements SingletonInterface
     }
 
     /**
-     * Resolve all dashboard objects which have been found in the filesystem.
+     * Resolve all dashboard objects which have been found in the filesystem and registered by the API
      *
      * @param bool $useCache
      * @return Dashboard[]
@@ -121,11 +125,11 @@ class DashboardConfiguration implements SingletonInterface
     }
 
     /**
-     * @param Dashboard $dashboardObject
+     * @param Dashboard $dashboardConfiguration
      */
-    public function registerDashboard(Dashboard $dashboardObject): void
+    public function registerDashboard(Dashboard $dashboardConfiguration): void
     {
-        $this->dashboards[$dashboardObject->getIdentifier()] = $dashboardObject;
+        $this->dashboards[$dashboardConfiguration->getIdentifier()] = $dashboardConfiguration;
     }
 
     /**
@@ -136,30 +140,44 @@ class DashboardConfiguration implements SingletonInterface
      */
     protected function resolveAllExistingWidgets(bool $useCache = true): array
     {
-        $widgets = [];
         $dashboardConfiguration = $this->getAllDashboardConfigurationFromFiles($useCache);
         foreach ($dashboardConfiguration['Dashboard']['Widgets'] ?? [] as $configuration) {
-            $widgets[$configuration['identifier']] = GeneralUtility::makeInstance(Widget::class, $configuration);
+            $this->widgets[$configuration['identifier']] = GeneralUtility::makeInstance(Widget::class, $configuration);
         }
-        $this->firstLevelCacheWidgets = $widgets;
-        return $widgets;
+        $this->firstLevelCacheWidgets = $this->widgets;
+        return $this->widgets;
     }
 
     /**
-     * Resolve all widget groups objects which have been found in the filesystem.
+     * @param Widget $widgetConfiguration
+     */
+    public function registerWidget(Widget $widgetConfiguration): void
+    {
+        $this->widgets[$widgetConfiguration->getIdentifier()] = $widgetConfiguration;
+    }
+
+    /**
+     * Resolve all widget groups objects which have been found in the filesystem and registered by the API
      *
      * @param bool $useCache
-     * @return Widget[]
+     * @return WidgetGroup[]
      */
     protected function resolveAllExistingWidgetGroups(bool $useCache = true): array
     {
-        $widgetsGroups = [];
         $dashboardConfiguration = $this->getAllDashboardConfigurationFromFiles($useCache);
         foreach ($dashboardConfiguration['Dashboard']['WidgetGroups'] ?? [] as $configuration) {
-            $widgetsGroups[$configuration['identifier']] = GeneralUtility::makeInstance(WidgetGroup::class, $configuration);
+            $this->widgetGroups[$configuration['identifier']] = GeneralUtility::makeInstance(WidgetGroup::class, $configuration);
         }
-        $this->firstLevelCacheWidgetGroups = $widgetsGroups;
-        return $widgetsGroups;
+        $this->firstLevelCacheWidgetGroups = $this->widgetGroups;
+        return $this->widgetGroups;
+    }
+
+    /**
+     * @param WidgetGroup $widgetGroupConfiguration
+     */
+    public function registerWidgetGroup(WidgetGroup $widgetGroupConfiguration): void
+    {
+        $this->widgetGroups[$widgetGroupConfiguration->getIdentifier()] = $widgetGroupConfiguration;
     }
 
     /**
