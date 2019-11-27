@@ -46,7 +46,7 @@ class DashboardTest extends FunctionalTestCase
     public function getIconIdentifierReturnsAValidString(): void
     {
         $dashboard = $this->dashboardConfiguration->getDashboards()['dashboard-default'];
-        $this->assertSame('dashboard-dashboard', $dashboard->getIconIdentifier());
+        $this->assertSame('dashboard-default', $dashboard->getIconIdentifier());
     }
 
     /**
