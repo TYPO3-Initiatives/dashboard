@@ -60,7 +60,7 @@ class DashboardConfigurationTestExtendedTest extends AbstractDashboardConfigurat
     public function getWidgetGroupsDataProvider(): array
     {
         return [
-            'widgetGroup-community' => ['widgetGroup-default', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widget_group.community'],
+            'widgetGroup-community' => ['widgetGroup-community', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widget_group.community'],
             'demo_widget_group_1' => ['demo_widget_group_1', 'LLL:EXT:demo/Resources/Private/Language/locallang_be.xlf:demo.group.title'],
         ];
     }
