@@ -30,8 +30,8 @@ class DashboardConfigurationTestExtendedTest extends AbstractDashboardConfigurat
     public function getDashboardsDataProvider(): array
     {
         return [
-            'dashboard-default' => ['dashboard-default', false, 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default.description', 'dashboard-dashboard', 7],
-            'dashboard-empty' => ['dashboard-empty', false, 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.empty', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.empty.description', 'dashboard-dashboard', 0],
+            'dashboard-default' => ['dashboard-default', false, 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default.description', 'dashboard-default', 7],
+            'dashboard-empty' => ['dashboard-empty', false, 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.empty', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.empty.description', 'dashboard-empty', 0],
             'demo-dashboard' => ['demo-dashboard', false, 'LLL:EXT:demo/Resources/Private/Language/locallang_be.xlf:demo.title', 'LLL:EXT:demo/Resources/Private/Language/locallang_be.xlf:demo.description', 'demo-dashboard', 2],
         ];
     }
@@ -60,7 +60,7 @@ class DashboardConfigurationTestExtendedTest extends AbstractDashboardConfigurat
     public function getWidgetGroupsDataProvider(): array
     {
         return [
-            'widgetGroup-default' => ['widgetGroup-default', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widget_group.default'],
+            'widgetGroup-community' => ['widgetGroup-default', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widget_group.community'],
             'demo_widget_group_1' => ['demo_widget_group_1', 'LLL:EXT:demo/Resources/Private/Language/locallang_be.xlf:demo.group.title'],
         ];
     }

@@ -41,7 +41,7 @@
     "bin-dir": ".build/bin"
   },
   "require": {
-    "typo3/cms-core": "^9.5 || 10.*@dev",
+    "typo3/cms-core": "dev-master",
     "psr/http-message": "^1.0",
     "symfony/finder": "^4.3",
     "typo3fluid/fluid": "^2.5"

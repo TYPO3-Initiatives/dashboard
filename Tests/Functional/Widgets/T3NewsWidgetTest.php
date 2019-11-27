@@ -10,7 +10,7 @@ class T3NewsWidgetTest extends AbstractWidgetTestCase
 {
     protected $widgetClassName = T3NewsWidget::class;
 
-    protected $expectedTitle = 'TYPO3 News';
+    protected $expectedTitle = 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widgets.t3news.title';
     protected $expectedIconIdentifier = 'dashboard-typo3';
     protected $expectedHeight = 6;
     protected $expectedWidth = 4;
@@ -28,7 +28,7 @@ class T3NewsWidgetTest extends AbstractWidgetTestCase
     public function renderWidgetContentContainsExpectedMarkup(): void
     {
         $markup = $this->widget->renderWidgetContent();
-        $this->assertStringContainsString('TYPO3 News', $markup);
+        $this->assertStringContainsString('TYPO3 news', $markup);
         $this->assertStringContainsString('<table class="widget-rss widget-table">', $markup);
         $this->assertStringContainsString('<a class="widget-rss-title"', $markup);
         $this->assertStringContainsString('<span class="widget-rss-date">', $markup);
