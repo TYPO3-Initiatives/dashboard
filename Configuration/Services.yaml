@@ -7,12 +7,10 @@ services:
   FriendsOfTYPO3\Dashboard\:
     resource: '../Classes/*'
 
-
   cache.dashboard_rss:
     class: TYPO3\CMS\Core\Cache\Frontend\FrontendInterface
     factory: ['@TYPO3\CMS\Core\Cache\CacheManager', 'getCache']
     arguments: ['dashboard_rss']
-
 
   FriendsOfTYPO3\Dashboard\Controller\DashboardController:
     public: true

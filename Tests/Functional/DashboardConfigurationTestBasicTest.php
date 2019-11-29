@@ -29,8 +29,8 @@ class DashboardConfigurationTestBasicTest extends AbstractDashboardConfiguration
     public function getDashboardsDataProvider(): array
     {
         return [
-            'dashboard-default' => ['dashboard-default', false, 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default.description', 'dashboard-dashboard', 7],
-            'dashboard-empty' => ['dashboard-empty', false, 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.empty', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.empty.description', 'dashboard-dashboard', 0],
+            'dashboard-default' => ['dashboard-default', false, 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default.description', 'dashboard-default', 7],
+            'dashboard-empty' => ['dashboard-empty', false, 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.empty', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.empty.description', 'dashboard-empty', 0],
         ];
     }
 
@@ -56,7 +56,7 @@ class DashboardConfigurationTestBasicTest extends AbstractDashboardConfiguration
     public function getWidgetGroupsDataProvider(): array
     {
         return [
-            'widgetGroup-default' => ['widgetGroup-default', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widget_group.default'],
+            'widgetGroup-community' => ['widgetGroup-community', 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widget_group.community'],
         ];
     }
 }

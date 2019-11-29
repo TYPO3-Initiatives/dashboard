@@ -27,8 +27,8 @@ class WidgetGroupTest extends FunctionalTestCase
      */
     public function getIdentifierReturnsAValidString(): void
     {
-        $widgetGroup = $this->dashboardConfiguration->getWidgetsGroups()['widgetGroup-default'];
-        $this->assertSame('widgetGroup-default', $widgetGroup->getIdentifier());
+        $widgetGroup = $this->dashboardConfiguration->getWidgetsGroups()['widgetGroup-community'];
+        $this->assertSame('widgetGroup-community', $widgetGroup->getIdentifier());
     }
 
     /**
@@ -36,7 +36,7 @@ class WidgetGroupTest extends FunctionalTestCase
      */
     public function getLabelReturnsAValidString(): void
     {
-        $widgetGroup = $this->dashboardConfiguration->getWidgetsGroups()['widgetGroup-default'];
-        $this->assertSame('LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widget_group.default', $widgetGroup->getLabel());
+        $widgetGroup = $this->dashboardConfiguration->getWidgetsGroups()['widgetGroup-community'];
+        $this->assertSame('LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widget_group.community', $widgetGroup->getLabel());
     }
 }

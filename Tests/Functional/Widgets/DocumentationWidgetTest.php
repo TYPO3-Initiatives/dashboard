@@ -11,6 +11,7 @@ class DocumentationWidgetTest extends AbstractWidgetTestCase
     protected $widgetClassName = DocumentationWidget::class;
 
     protected $expectedTitle = 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widgets.documentation.title';
+    protected $expectedDescription = 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widgets.documentation.description';
     protected $expectedWidth = 2;
     protected $expectedHeight = 1;
     protected $expectedIconIdentifier = 'dashboard-cta';

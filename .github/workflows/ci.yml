@@ -10,7 +10,7 @@ jobs:
       max-parallel: 6
       fail-fast: false
       matrix:
-        typo3: ['^9', '^10', 'dev-master']
+        typo3: ['^10', 'dev-master']
         php: ['7.2', '7.3']
     steps:
       - uses: actions/checkout@v1
