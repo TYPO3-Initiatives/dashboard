@@ -1,5 +1,5 @@
 Dashboard:
-  Dashboards:
+  DashboardTemplates:
     - identifier: 'dashboard-default'
       iconIdentifier: 'dashboard-default'
       label: 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:dashboard.default'

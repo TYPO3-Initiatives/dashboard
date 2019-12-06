@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Dashboard\Dashboards;
 
-use FriendsOfTYPO3\Dashboard\Configuration\Dashboard;
+use FriendsOfTYPO3\Dashboard\Configuration\DashboardTemplate;
 use FriendsOfTYPO3\Dashboard\Configuration\Widget;
 use FriendsOfTYPO3\Dashboard\DashboardConfiguration;
 use FriendsOfTYPO3\Dashboard\Widgets\Interfaces\WidgetInterface;
@@ -59,19 +59,19 @@ class DashboardRepository
         return null;
     }
 
-    public function createDashboard(Dashboard $dashboardConfiguration): AbstractDashboard
+    public function createDashboard(DashboardTemplate $dashboardTemplate): AbstractDashboard
     {
         $configuration = ['widgets' => []];
-        foreach ($dashboardConfiguration->getWidgets() as $widget) {
+        foreach ($dashboardTemplate->getWidgets() as $widget) {
             $hash = sha1($widget . '-' . time());
             $configuration['widgets'][$hash] = ['identifier' => $widget, 'config' => json_decode('[]', false)];
         }
-        $identifier = sha1($dashboardConfiguration->getIdentifier() . '-' . time());
+        $identifier = sha1($dashboardTemplate->getIdentifier() . '-' . time());
         $this->getQueryBuilder()
             ->insert(self::TABLE)
             ->values([
                 'identifier' => $identifier,
-                'label' => $dashboardConfiguration->getLabel(),
+                'label' => $dashboardTemplate->getLabel(),
                 'configuration' => json_encode($configuration)
             ])
             ->execute();

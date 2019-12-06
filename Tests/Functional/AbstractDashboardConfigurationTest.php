@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Dashboard\Tests\Functional;
 
-use FriendsOfTYPO3\Dashboard\Configuration\Dashboard;
+use FriendsOfTYPO3\Dashboard\Configuration\DashboardTemplate;
 use FriendsOfTYPO3\Dashboard\Configuration\Widget;
 use FriendsOfTYPO3\Dashboard\Configuration\WidgetGroup;
 use FriendsOfTYPO3\Dashboard\DashboardConfiguration;
@@ -34,7 +34,7 @@ abstract class AbstractDashboardConfigurationTest extends FunctionalTestCase
     public function getDashboardsReturnsDashboardConfiguration(string $identifier, bool $excludeFromWizard, string $label, string $description, string $iconIdentifier, int $amountOfWidgets): void
     {
         $dashboards = $this->subject->getDashboards();
-        $this->assertInstanceOf(Dashboard::class, $dashboards[$identifier]);
+        $this->assertInstanceOf(DashboardTemplate::class, $dashboards[$identifier]);
         $this->assertSame($identifier, $dashboards[$identifier]->getIdentifier());
         $this->assertSame($excludeFromWizard, $dashboards[$identifier]->getExcludeFromWizard());
         $this->assertSame($label, $dashboards[$identifier]->getLabel());

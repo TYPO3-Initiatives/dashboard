@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace FriendsOfTYPO3\Dashboard;
 
-use FriendsOfTYPO3\Dashboard\Configuration\Dashboard;
+use FriendsOfTYPO3\Dashboard\Configuration\DashboardTemplate;
 use FriendsOfTYPO3\Dashboard\Configuration\Widget;
 use FriendsOfTYPO3\Dashboard\Configuration\WidgetGroup;
 use Symfony\Component\Finder\Finder;
@@ -70,7 +70,7 @@ class DashboardConfiguration implements SingletonInterface
     /**
      * Return all dashboard objects which have been found in the filesystem.
      *
-     * @return Dashboard[]
+     * @return DashboardTemplate[]
      */
     public function getDashboards(): array
     {
@@ -101,14 +101,14 @@ class DashboardConfiguration implements SingletonInterface
      * Resolve all dashboard objects which have been found in the filesystem.
      *
      * @param bool $useCache
-     * @return Dashboard[]
+     * @return DashboardTemplate[]
      */
     protected function resolveAllExistingDashboards(bool $useCache = true): array
     {
         $dashboards = [];
         $dashboardConfiguration = $this->getAllDashboardConfigurationFromFiles($useCache);
-        foreach ($dashboardConfiguration['Dashboard']['Dashboards'] ?? [] as $configuration) {
-            $dashboards[$configuration['identifier']] = GeneralUtility::makeInstance(Dashboard::class, $configuration);
+        foreach ($dashboardConfiguration['Dashboard']['DashboardTemplates'] ?? [] as $configuration) {
+            $dashboards[$configuration['identifier']] = GeneralUtility::makeInstance(DashboardTemplate::class, $configuration);
         }
         $this->firstLevelCacheDashboards = $dashboards;
         return $dashboards;

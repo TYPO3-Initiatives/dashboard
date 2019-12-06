@@ -8,7 +8,7 @@ namespace FriendsOfTYPO3\Dashboard\Configuration;
  * This class represents the definition of an available dashboard.
  * The scope of this class is only the configuration not a representation of a concrete dashboard instance.
  */
-class Dashboard extends AbstractConfiguration
+class DashboardTemplate extends AbstractConfiguration
 {
     /**
      * @var string

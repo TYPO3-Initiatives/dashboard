@@ -4,7 +4,7 @@ root: # root is always required (note no prefix here)
     Dashboard:
       _type: array
       _children:
-        Dashboards:
+        DashboardTemplates:
           _required: true
           _type: array
           _children:
