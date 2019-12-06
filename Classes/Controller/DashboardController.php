@@ -183,15 +183,16 @@ class DashboardController extends AbstractController
     /**
      * @param ServerRequestInterface $request
      * @return ResponseInterface
+     * @throws RouteNotFoundExceptionAlias
      */
     public function addDashboardAction(ServerRequestInterface $request): ResponseInterface
     {
-        $parameters = $request->getQueryParams();
+        $parameters = $request->getParsedBody();
         $dashboardIdentifier = $parameters['dashboard'] ?? '';
 
-        $route = $this->uriBuilder->buildUriFromRoute('dashboard', ['action' => 'main']);
+        $route = $this->uriBuilder->buildUriFromRoute('dashboard', ['action' => 'main'], UriBuilder::ABSOLUTE_URL);
         if ($dashboardIdentifier !== '') {
-            $dashboard = $this->dashboardRepository->createDashboard($this->dashboardConfiguration->getDashboards()[$dashboardIdentifier]);
+            $dashboard = $this->dashboardRepository->createDashboard($this->dashboardConfiguration->getDashboards()[$dashboardIdentifier], $parameters['dashboard-title']);
             $route = $this->uriBuilder->buildUriFromRoute('dashboard', ['action' => 'setActiveDashboard', 'currentDashboard' => $dashboard->getIdentifier()]);
         }
 

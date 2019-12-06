@@ -59,9 +59,16 @@ class DashboardRepository
         return null;
     }
 
-    public function createDashboard(Dashboard $dashboardConfiguration): AbstractDashboard
+    /**
+     * @param Dashboard $dashboardConfiguration
+     * @param string $title
+     * @return AbstractDashboard
+     */
+    public function createDashboard(Dashboard $dashboardConfiguration, string $title): AbstractDashboard
     {
         $configuration = ['widgets' => []];
+        $label = $title ?: $dashboardConfiguration->getLabel();
+
         foreach ($dashboardConfiguration->getWidgets() as $widget) {
             $hash = sha1($widget . '-' . time());
             $configuration['widgets'][$hash] = ['identifier' => $widget, 'config' => json_decode('[]', false)];
@@ -71,7 +78,7 @@ class DashboardRepository
             ->insert(self::TABLE)
             ->values([
                 'identifier' => $identifier,
-                'label' => $dashboardConfiguration->getLabel(),
+                'label' => $label,
                 'configuration' => json_encode($configuration)
             ])
             ->execute();

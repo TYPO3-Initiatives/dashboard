@@ -1,13 +1,12 @@
 .dashboard-modal {
-	.dashboard-modal-items {
+	.dashboardModal-items {
 		display: flex;
 		flex-flow: row wrap;
-		margin: 0 ($column-gutter / 2);
 	}
 
 	.dashboardModal-item {
 		width: 100%;
-		padding: $column-gutter $column-gutter / 2 0 $column-gutter / 2;
+		padding: $column-gutter / 2;
 
 		@media screen and (min-width: 768px) {
 			width: 50%;
@@ -17,6 +16,7 @@
 	.dashboardModal-item-block {
 		display: flex;
 		align-items: center;
+		margin-bottom: $column-gutter / 2;
 		height: 100%;
 		padding: $block-gutter / 2;
 		background-color: #fff;
