@@ -1,5 +1,5 @@
 Dashboard:
-  Dashboards:
+  DashboardTemplates:
     - identifier: 'demo-dashboard'
       iconIdentifier: 'demo-dashboard'
       label: 'LLL:EXT:demo/Resources/Private/Language/locallang_be.xlf:demo.title'
