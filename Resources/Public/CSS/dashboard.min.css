@@ -23,7 +23,9 @@
     color: #fff; }
 
 .dashboardHeader {
+  display: -webkit-box;
   display: flex;
+  -webkit-box-align: center;
   align-items: center; }
 
 .dashboard-item {
@@ -159,6 +161,7 @@
   left: 50%;
   line-height: 300px;
   margin-right: -50%;
+  -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%); }
 
 .widget-id {
@@ -175,6 +178,7 @@
   position: absolute;
   top: 2rem;
   right: 3rem;
+  display: -webkit-box;
   display: flex; }
 
 .widget-remove,
@@ -200,7 +204,10 @@
   cursor: grab; }
 
 .widget-content {
+  display: -webkit-box;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
   flex-direction: column;
   height: 100%; }
 
@@ -242,5 +249,6 @@
     color: #f49702; }
 
 .u-flex {
+  display: -webkit-box;
   display: flex; }
 /*# sourceMappingURL=dashboard.min.css.map */

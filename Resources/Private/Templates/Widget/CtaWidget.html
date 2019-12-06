@@ -3,6 +3,11 @@
 
 <f:section name="main">
     <f:link.external uri="{link}" target="_blank" class="widget-cta">
+        <f:if condition="{icon}">
+            <div class="widget-cta-icon">
+                <core:icon identifier="{icon}" size="large" alternativeMarkupIdentifier="inline" />
+            </div>
+        </f:if>
         <f:translate key="{label}" default="{label}"/>
     </f:link.external>
 </f:section>

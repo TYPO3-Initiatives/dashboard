@@ -19,6 +19,7 @@ call_user_func(function () {
             'dashboard-chartline' => 'dashboard-chartline.svg',
             'dashboard-cta' => 'dashboard-cta.svg',
             'dashboard-default' => 'dashboard-default.svg',
+            'dashboard-documentation' => 'dashboard-documentation.svg',
             'dashboard-empty' => 'dashboard-empty.svg',
             'dashboard-hashtag' => 'dashboard-hashtag.svg',
             'dashboard-pie' => 'dashboard-pie.svg',

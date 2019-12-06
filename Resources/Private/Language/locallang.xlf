@@ -98,7 +98,7 @@
 				<source>Add a button with a link to the main TYPO3 documentation</source>
  			</trans-unit>
 			<trans-unit id="widgets.documentation.content.label" xml:space="preserve">
-				<source>Check TYPO3 documentation</source>
+				<source>TYPO3 documentation</source>
  			</trans-unit>
 
 			<trans-unit id="widgets.t3news.title" xml:space="preserve">

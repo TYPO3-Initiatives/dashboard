@@ -1,12 +1,8 @@
-.dashboard-modal .modal-body {
-  padding: 0;
-  background-color: #fafafa; }
-
-.dashboard-modal .modal-content {
-  background-color: #f8f8f8; }
-
 .dashboard-modal .dashboard-modal-items {
+  display: -webkit-box;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
   flex-flow: row wrap;
   margin: 0 1.1rem; }
 
@@ -18,7 +14,9 @@
       width: 50%; } }
 
 .dashboard-modal .dashboardModal-item-block {
+  display: -webkit-box;
   display: flex;
+  -webkit-box-align: center;
   align-items: center;
   height: 100%;
   padding: 1.5rem;
@@ -34,4 +32,11 @@
 
 .dashboard-modal .dashboardModal-item-description {
   margin-top: 0.5rem; }
+
+.dashboard-modal .modal-body {
+  padding: 0;
+  background-color: #fafafa; }
+
+.dashboard-modal .modal-content {
+  background-color: #f8f8f8; }
 /*# sourceMappingURL=style.css.map */

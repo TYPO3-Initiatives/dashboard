@@ -1,14 +1,21 @@
 .dashboard-widget-number--icon {
+  display: -webkit-box;
   display: flex;
+  -webkit-box-pack: center;
   justify-content: center;
+  -webkit-box-align: center;
   align-items: center;
   width: 4.2rem;
   margin-right: 2rem;
   color: #000; }
 
 .dashboard-widget-number--content {
+  display: -webkit-box;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
   flex-direction: column;
+  -webkit-box-pack: center;
   justify-content: center; }
 
 .dashboard-widget-number--title {
