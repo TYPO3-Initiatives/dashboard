@@ -1,25 +1,24 @@
 define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity'], function ($, Modal, Severity) {
     'use strict';
 
-    var DashboardConfigurator = {
-        triggerSelector: '.js-dashboard-configureDashboard'
+    var DashboardModal = {
+        triggerSelector: '.js-dashboard-modal'
     };
 
-    DashboardConfigurator.initialize = function() {
-        $(document).on('click', DashboardConfigurator.triggerSelector, function(e) {
+    DashboardModal.initialize = function() {
+        $(document).on('click', DashboardModal.triggerSelector, function(e) {
             e.preventDefault();
-            var $element = $(this);
-
-            console.log('test');
+            var $element = $(this),
+                identifier = $element.data("modal-identifier");
 
             Modal.advanced({
                 type: Modal.types.default,
                 title: $element.data('modal-title'),
-                content: $($('#dashboardConfigurator').html()),
+                content: $($('#dashboardModal-' + identifier).html()),
                 severity: Severity.notice,
                 size: 'medium',
                 callback: function(currentModal) {
-                    currentModal.find('a.dashboardConfigurator-dashboard-block').on('click', function(e) {
+                    currentModal.find('a.dashboardModal-' + identifier).on('click', function(e) {
                         currentModal.trigger('modal-dismiss');
                     });
                 },
@@ -30,6 +29,6 @@ define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity'], func
         });
     };
 
-    DashboardConfigurator.initialize();
-    return DashboardConfigurator;
+    DashboardModal.initialize();
+    return DashboardModal;
 });

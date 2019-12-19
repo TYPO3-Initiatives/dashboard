@@ -275,8 +275,7 @@ class DashboardController extends AbstractController
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/Grid');
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/WidgetContentCollector');
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/WidgetSelector');
-        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/DashboardSelector');
-        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/DashboardConfigurator');
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/DashboardModal');
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/WidgetRemover');
         $pageRenderer->addCssFile($publicResourcesPath . 'CSS/dashboard.min.css');
     }
