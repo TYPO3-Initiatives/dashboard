@@ -82,9 +82,9 @@
                 </li>
             </f:for>
         </ul>
-        <div class="tab-content">
+        <div class="widgetSelector-content tab-content">
             <f:for each="{groupConfigurations}" as="groupConfiguration" iteration="iterator">
-                <div class="tab-pane dashboard-modal-items {f:if(condition: '{iterator.isFirst}', then: 'active')}" id="{groupConfiguration.identifier}" role="tabpanel" aria-labelledby="{groupConfiguration.identifier}-tab">
+                <div class="tab-pane dashboardModal-items {f:if(condition: '{iterator.isFirst}', then: 'active')}" id="{groupConfiguration.identifier}" role="tabpanel" aria-labelledby="{groupConfiguration.identifier}-tab">
                     <f:for each="{groupConfiguration.widgets}" as="widgetConfiguration" key="widgetIdentifier">
                         <div class="dashboardModal-item">
                             <f:be.link class="dashboardModal-item-block" route="dashboard" target="list_frame" parameters="{action: 'addWidget', widget: widgetIdentifier}">
