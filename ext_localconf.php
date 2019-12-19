@@ -12,6 +12,7 @@ call_user_func(function () {
         $icons = [
             'dashboard-action-dragdrop' => 'dashboard-action-dragdrop.svg',
             'dashboard-action-close' => 'dashboard-action-close.svg',
+            'dashboard-action-configure' => 'dashboard-action-configure.svg',
             'dashboard-admin' => 'dashboard-admin.svg',
             'dashboard-bars' => 'dashboard-bars.svg',
             'dashboard-chartbars' => 'dashboard-chartbars.svg',

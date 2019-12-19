@@ -131,6 +131,10 @@ class DashboardController extends AbstractController
                 'widget' => '@widget',
                 'action' => 'addDashboard'
             ]),
+            'configureDashboardUri' => (string)$this->uriBuilder->buildUriFromRoute('dashboard', [
+                'widget' => '@widget',
+                'action' => 'configureDashboard'
+            ]),
         ]);
     }
 
@@ -212,6 +216,24 @@ class DashboardController extends AbstractController
     }
 
     /**
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     * @throws RouteNotFoundExceptionAlias
+     */
+    public function configureDashboardAction(ServerRequestInterface $request): ResponseInterface
+    {
+        $parameters = $request->getParsedBody();
+        $currentDashboard = $parameters['currentDashboard'] ?? '';
+        $route = $this->uriBuilder->buildUriFromRoute('dashboard', ['action' => 'main'], UriBuilder::ABSOLUTE_URL);
+
+        if ($currentDashboard !== '' && isset($parameters['dashboard'])) {
+            $this->dashboardRepository->updateDashboardSettings($currentDashboard, $parameters['dashboard']);
+        }
+
+        return new RedirectResponse($route);
+    }
+
+    /**
      * Sets up the Fluid View.
      *
      * @param string $templateName
@@ -254,6 +276,7 @@ class DashboardController extends AbstractController
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/WidgetContentCollector');
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/WidgetSelector');
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/DashboardSelector');
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/DashboardConfigurator');
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/WidgetRemover');
         $pageRenderer->addCssFile($publicResourcesPath . 'CSS/dashboard.min.css');
     }

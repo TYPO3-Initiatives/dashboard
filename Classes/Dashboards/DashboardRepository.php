@@ -18,6 +18,11 @@ class DashboardRepository
     /** @var DashboardConfiguration */
     protected $dashboardConfiguration;
 
+    /**
+     * @var array
+     */
+    protected $allowedFields = ['label'];
+
     public function __construct(DashboardConfiguration $dashboardConfiguration = null)
     {
         $this->dashboardConfiguration = $dashboardConfiguration ?? GeneralUtility::makeInstance(DashboardConfiguration::class);
@@ -83,6 +88,31 @@ class DashboardRepository
             ])
             ->execute();
         return $this->getDashboardByIdentifier($identifier);
+    }
+
+    /**
+     * @param string $identifier
+     * @param array $values
+     * @return \Doctrine\DBAL\Driver\Statement|int
+     */
+    public function updateDashboardSettings(string $identifier, array $values)
+    {
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->update(self::TABLE)
+            ->where(
+                $queryBuilder->expr()->eq(
+                    'identifier',
+                    $queryBuilder->createNamedParameter($identifier)
+                )
+            );
+
+        foreach ($values as $field => $value) {
+            if (in_array($field, $this->allowedFields)) {
+                $queryBuilder->set($field, $value);
+            }
+        }
+
+        return $queryBuilder->execute();
     }
 
     /**

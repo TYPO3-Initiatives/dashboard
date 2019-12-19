@@ -16,6 +16,12 @@
             <core:icon identifier="actions-add" alternativeMarkupIdentifier="inline" /><span class="sr-only"><f:translate key="dashboard.add" extensionName="dashboard"/></span>
         </a>
     </div>
+
+    <div class="dashboardConfiguration">
+        <a href="{configureDashboardUri}" class="js-dashboard-configureDashboard" data-modal-title="{f:translate(key: 'dashboard.configure', extensionName: 'dashboard')}" data-button-close-text="{f:translate(key: 'dashboard.add.button.close', extensionName: 'dashboard')}" data-button-ok-text="{f:translate(key: 'dashboard.add.button.ok', extensionName: 'dashboard')}">
+            <core:icon identifier="dashboard-action-configure" alternativeMarkupIdentifier="inline" /><span class="sr-only"><f:translate key="dashboard.add" extensionName="dashboard"/></span>
+        </a>
+    </div>
 </div>
 
 <f:if condition="{widgetsOnCurrentDashboard}">
@@ -145,6 +151,22 @@
                 <f:form.submit value="Create Dashboard" class="dashboardModal-button"/>
             </div>
 
+        </f:form>
+    </div>
+</div>
+
+<div id="dashboardConfigurator" class="hide">
+    <div class="dashboard-modal-items">
+        <f:form actionUri="{configureDashboardUri}" class="dashboardModal-form" target="list_frame">
+            <f:form.hidden name="currentDashboard" value="{currentDashboard}" />
+            <div class="dashboardModal-input form-group">
+                <label for="dashboardModal-title">Dashboard Title</label>
+                <f:form.textfield name="dashboard[label]"  id="dashboardModal-title" class="form-control" />
+            </div>
+
+            <div class="dashboardModal-submit">
+                <f:form.submit value="Save Dashboard" class="dashboardModal-button"/>
+            </div>
         </f:form>
     </div>
 </div>
