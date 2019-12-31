@@ -109,6 +109,23 @@ class DashboardRepositoryTest extends FunctionalTestCase
     }
 
     /**
+     * @throws \TYPO3\TestingFramework\Core\Exception
+     * @test
+     */
+    public function updateDashboardSettingsChangesDashboardLabel(): void
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/sys_dashboards_one_dashboard.xml');
+
+        $this->subject->updateDashboardSettings(
+            'a8a9ad23c27c51640738fcae687563243af5a58f',
+            ['label' => 'Renamed Dashboard']
+        );
+        $dashboard = $this->subject->getDashboardByIdentifier('a8a9ad23c27c51640738fcae687563243af5a58f');
+
+        $this->assertEquals('Renamed Dashboard', $dashboard->getLabel());
+    }
+
+    /**
      * @test
      */
     public function createWidgetRepresentationReturnsEmptyArrayForUnknownConfiguration(): void
