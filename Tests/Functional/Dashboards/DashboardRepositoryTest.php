@@ -100,7 +100,10 @@ class DashboardRepositoryTest extends FunctionalTestCase
     public function createDashboardCreatesANewDashboardInDatabase(): void
     {
         $this->assertCount(0, $this->subject->getAllDashboards());
-        $dashboard = $this->subject->createDashboard(GeneralUtility::makeInstance(DashboardConfiguration::class)->getDashboards()['dashboard-default']);
+        $dashboard = $this->subject->createDashboard(
+            GeneralUtility::makeInstance(DashboardConfiguration::class)->getDashboards()['dashboard-default'],
+            'default'
+        );
         $this->assertInstanceOf(AbstractDashboard::class, $dashboard);
         $this->assertCount(1, $this->subject->getAllDashboards());
     }
