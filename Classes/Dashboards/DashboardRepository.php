@@ -93,10 +93,16 @@ class DashboardRepository
     /**
      * @param string $identifier
      * @param array $values
-     * @return \Doctrine\DBAL\Driver\Statement|int
+     * @return \Doctrine\DBAL\Driver\Statement|null
      */
     public function updateDashboardSettings(string $identifier, array $values)
     {
+        $checkedValues = $this->checkAllowedFields($values);
+
+        if (empty($checkedValues)) {
+            return null;
+        }
+
         $queryBuilder = $this->getQueryBuilder();
         $queryBuilder->update(self::TABLE)
             ->where(
@@ -106,10 +112,8 @@ class DashboardRepository
                 )
             );
 
-        foreach ($values as $field => $value) {
-            if (in_array($field, $this->allowedFields)) {
-                $queryBuilder->set($field, $value);
-            }
+        foreach ($checkedValues as $field => $value) {
+            $queryBuilder->set($field, $value);
         }
 
         return $queryBuilder->execute();
@@ -160,11 +164,34 @@ class DashboardRepository
             ->execute();
     }
 
+    /**
+     * @param $values
+     * @return array
+     */
+    protected function checkAllowedFields($values): array
+    {
+        $allowedFields = [];
+        foreach ($values as $field => $value) {
+            if (in_array($field, $this->allowedFields)) {
+                $allowedFields[$field] = $value;
+            }
+        }
+
+        return $allowedFields;
+    }
+
+    /**
+     * @param array $row
+     * @return AbstractDashboard
+     */
     protected function createFromRow(array $row): AbstractDashboard
     {
         return GeneralUtility::makeInstance(DefaultDashboard::class, $row['identifier'], $row['label'], json_decode($row['configuration'], true));
     }
 
+    /**
+     * @return QueryBuilder
+     */
     protected function getQueryBuilder(): QueryBuilder
     {
         return GeneralUtility::makeInstance(ConnectionPool::class)
