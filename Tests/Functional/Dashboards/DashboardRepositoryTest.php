@@ -115,14 +115,34 @@ class DashboardRepositoryTest extends FunctionalTestCase
     public function updateDashboardSettingsChangesDashboardLabel(): void
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/sys_dashboards_one_dashboard.xml');
+        $dashboardLabel = 'Renamed Dashboard';
 
         $this->subject->updateDashboardSettings(
             'a8a9ad23c27c51640738fcae687563243af5a58f',
-            ['label' => 'Renamed Dashboard']
+            ['label' => $dashboardLabel]
         );
         $dashboard = $this->subject->getDashboardByIdentifier('a8a9ad23c27c51640738fcae687563243af5a58f');
 
-        $this->assertEquals('Renamed Dashboard', $dashboard->getLabel());
+        $this->assertEquals($dashboardLabel, $dashboard->getLabel());
+    }
+
+    /**
+     * @throws \TYPO3\TestingFramework\Core\Exception
+     * @test
+     */
+    public function updateDashboardSettingsDoesNotChangeIdentifier(): void
+    {
+        $this->importDataSet(__DIR__ . '/../Fixtures/sys_dashboards_one_dashboard.xml');
+        $identifier = 'unknownidentifier';
+
+        $this->subject->updateDashboardSettings(
+            'a8a9ad23c27c51640738fcae687563243af5a58f',
+            ['identifier' => $identifier]
+        );
+
+        $dashboard = $this->subject->getDashboardByIdentifier($identifier);
+
+        $this->assertNull($dashboard);
     }
 
     /**
