@@ -9,4 +9,5 @@ class DocumentationWidget extends AbstractCtaButtonWidget
     protected $description = 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widgets.documentation.description';
     protected $label = 'LLL:EXT:dashboard/Resources/Private/Language/locallang.xlf:widgets.documentation.content.label';
     protected $link = 'https://docs.typo3.org';
+    protected $icon = 'dashboard-documentation';
 }

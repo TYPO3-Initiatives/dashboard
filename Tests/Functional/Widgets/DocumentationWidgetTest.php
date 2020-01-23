@@ -24,7 +24,6 @@ class DocumentationWidgetTest extends AbstractWidgetTestCase
     {
         $markup = $this->widget->renderWidgetContent();
         $this->assertStringContainsString('TYPO3 documentation', $markup);
-        $this->assertStringContainsString('Check TYPO3 documentation', $markup);
         $this->assertStringContainsString('<a class="widget-cta" target="_blank" href="https://docs.typo3.org">', $markup);
     }
 }
