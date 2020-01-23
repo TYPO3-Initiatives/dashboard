@@ -16,6 +16,7 @@ abstract class AbstractCtaButtonWidget extends AbstractWidget implements Additio
 {
     protected $link = 'https://www.typo3.org';
     protected $label = 'TYPO3';
+    protected $icon;
     protected $iconIdentifier = 'dashboard-cta';
     protected $templateName = 'CtaWidget';
 
@@ -23,8 +24,12 @@ abstract class AbstractCtaButtonWidget extends AbstractWidget implements Additio
     {
         parent::__construct();
         $this->height = 1;
-        $this->view->assign('link', $this->link);
-        $this->view->assign('label', $this->label);
+
+        $this->view->assignMultiple([
+            'link' => $this->link,
+            'label' => $this->label,
+            'icon' => $this->icon
+        ]);
     }
 
     /**
