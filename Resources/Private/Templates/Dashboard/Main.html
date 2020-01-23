@@ -11,7 +11,7 @@
                     <f:translate key="{dashboardConfig.label}" default="{dashboardConfig.label}"/>
                 </f:be.link>
                 <f:if condition="{dashboardKey} == {currentDashboard}">
-                    <f:variable name="currentDashboardName" value="{dashboardConfig.label}" />
+                    <f:variable name="currentDashboardName" value="{f:translate(key: '{dashboardConfig.label}', default: '{dashboardConfig.label}')}" />
                 </f:if>
             </f:for>
         </f:if>
