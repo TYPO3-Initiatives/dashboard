@@ -1,13 +1,14 @@
 .dashboard-modal {
-	.dashboard-modal-items {
+	.dashboardModal-items {
 		display: flex;
 		flex-flow: row wrap;
-		margin: 0 ($column-gutter / 2);
+		margin: 0 ($column-gutter / -2) ($column-gutter / 2);
 	}
 
 	.dashboardModal-item {
+		position: relative;
 		width: 100%;
-		padding: $column-gutter $column-gutter / 2 0 $column-gutter / 2;
+		padding: $column-gutter / 2;
 
 		@media screen and (min-width: 768px) {
 			width: 50%;
@@ -19,8 +20,23 @@
 		align-items: center;
 		height: 100%;
 		padding: $block-gutter / 2;
+		border: 1px solid transparent;
+		margin-bottom: $column-gutter / 2;
 		background-color: #fff;
 		box-shadow: $shadow;
+		cursor: pointer;
+	}
+
+	.dashboardModal-item-checkBox {
+		position: absolute;
+		width: 0;
+		height: 0;
+		opacity: 0;
+		cursor: pointer;
+
+		&:checked ~ .dashboardModal-item-block {
+			border-color: $primary-color;
+		}
 	}
 
 	.dashboardModal-item-icon {

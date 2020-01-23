@@ -12,6 +12,7 @@ call_user_func(function () {
         $icons = [
             'dashboard-action-dragdrop' => 'dashboard-action-dragdrop.svg',
             'dashboard-action-close' => 'dashboard-action-close.svg',
+            'dashboard-action-configure' => 'dashboard-action-configure.svg',
             'dashboard-admin' => 'dashboard-admin.svg',
             'dashboard-bars' => 'dashboard-bars.svg',
             'dashboard-chartbars' => 'dashboard-chartbars.svg',
@@ -19,6 +20,7 @@ call_user_func(function () {
             'dashboard-chartline' => 'dashboard-chartline.svg',
             'dashboard-cta' => 'dashboard-cta.svg',
             'dashboard-default' => 'dashboard-default.svg',
+            'dashboard-documentation' => 'dashboard-documentation.svg',
             'dashboard-empty' => 'dashboard-empty.svg',
             'dashboard-hashtag' => 'dashboard-hashtag.svg',
             'dashboard-pie' => 'dashboard-pie.svg',

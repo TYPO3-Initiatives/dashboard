@@ -1,12 +1,1 @@
-.widget-cta {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.5rem;
-  background-color: #f49702;
-  font-weight: 600;
-  font-size: 1.4rem;
-  color: #000; }
-  .widget-cta:hover, .widget-cta:focus {
-    background-color: #fbb037; }
-/*# sourceMappingURL=ctaWidget.min.css.map */
+.widget-cta{display:-webkit-box;display:flex;-webkit-box-pack:center;justify-content:center;-webkit-box-align:center;align-items:center;padding:1.5rem;background-color:#f49702;font-weight:600;font-size:1.4rem;color:#000}.widget-cta:focus,.widget-cta:hover{background-color:#fbb037}.widget-cta-icon{display:-webkit-box;display:flex;-webkit-box-pack:center;justify-content:center;-webkit-box-align:center;align-items:center;width:1.8rem;height:1.8rem;margin-right:1.2rem;color:#000}

@@ -1,0 +1,14 @@
+.dashboardModal-button {
+	display: inline-block;
+	padding: 10px 13px;
+	margin: 0 2px 20px 0;
+	background-color: $secondary-color;
+	font-size: 14px;
+	color: #fff;
+
+	&:hover,
+	&:focus {
+		background-color: $primary-color;
+		color: #fff;
+	}
+}

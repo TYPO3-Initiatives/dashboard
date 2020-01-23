@@ -131,6 +131,10 @@ class DashboardController extends AbstractController
                 'widget' => '@widget',
                 'action' => 'addDashboard'
             ]),
+            'configureDashboardUri' => (string)$this->uriBuilder->buildUriFromRoute('dashboard', [
+                'widget' => '@widget',
+                'action' => 'configureDashboard'
+            ]),
         ]);
     }
 
@@ -183,15 +187,16 @@ class DashboardController extends AbstractController
     /**
      * @param ServerRequestInterface $request
      * @return ResponseInterface
+     * @throws RouteNotFoundExceptionAlias
      */
     public function addDashboardAction(ServerRequestInterface $request): ResponseInterface
     {
-        $parameters = $request->getQueryParams();
+        $parameters = $request->getParsedBody();
         $dashboardIdentifier = $parameters['dashboard'] ?? '';
 
-        $route = $this->uriBuilder->buildUriFromRoute('dashboard', ['action' => 'main']);
+        $route = $this->uriBuilder->buildUriFromRoute('dashboard', ['action' => 'main'], UriBuilder::ABSOLUTE_URL);
         if ($dashboardIdentifier !== '') {
-            $dashboard = $this->dashboardRepository->createDashboard($this->dashboardConfiguration->getDashboards()[$dashboardIdentifier]);
+            $dashboard = $this->dashboardRepository->createDashboard($this->dashboardConfiguration->getDashboards()[$dashboardIdentifier], $parameters['dashboard-title']);
             $route = $this->uriBuilder->buildUriFromRoute('dashboard', ['action' => 'setActiveDashboard', 'currentDashboard' => $dashboard->getIdentifier()]);
         }
 
@@ -207,6 +212,24 @@ class DashboardController extends AbstractController
     {
         $this->setCurrentDashboard($request->getQueryParams()['currentDashboard']);
         $route = $this->uriBuilder->buildUriFromRoute('dashboard', ['action' => 'main']);
+        return new RedirectResponse($route);
+    }
+
+    /**
+     * @param ServerRequestInterface $request
+     * @return ResponseInterface
+     * @throws RouteNotFoundExceptionAlias
+     */
+    public function configureDashboardAction(ServerRequestInterface $request): ResponseInterface
+    {
+        $parameters = $request->getParsedBody();
+        $currentDashboard = $parameters['currentDashboard'] ?? '';
+        $route = $this->uriBuilder->buildUriFromRoute('dashboard', ['action' => 'main'], UriBuilder::ABSOLUTE_URL);
+
+        if ($currentDashboard !== '' && isset($parameters['dashboard'])) {
+            $this->dashboardRepository->updateDashboardSettings($currentDashboard, $parameters['dashboard']);
+        }
+
         return new RedirectResponse($route);
     }
 
@@ -252,7 +275,7 @@ class DashboardController extends AbstractController
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/Grid');
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/WidgetContentCollector');
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/WidgetSelector');
-        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/DashboardSelector');
+        $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/DashboardModal');
         $pageRenderer->loadRequireJsModule('TYPO3/CMS/Dashboard/WidgetRemover');
         $pageRenderer->addCssFile($publicResourcesPath . 'CSS/dashboard.min.css');
     }

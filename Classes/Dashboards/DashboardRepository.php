@@ -18,6 +18,11 @@ class DashboardRepository
     /** @var DashboardConfiguration */
     protected $dashboardConfiguration;
 
+    /**
+     * @var array
+     */
+    protected $allowedFields = ['label'];
+
     public function __construct(DashboardConfiguration $dashboardConfiguration = null)
     {
         $this->dashboardConfiguration = $dashboardConfiguration ?? GeneralUtility::makeInstance(DashboardConfiguration::class);
@@ -59,9 +64,16 @@ class DashboardRepository
         return null;
     }
 
-    public function createDashboard(DashboardTemplate $dashboardTemplate): AbstractDashboard
+    /**
+     * @param DashboardTemplate $dashboardTemplate
+     * @param string $title
+     * @return AbstractDashboard
+     */
+    public function createDashboard(DashboardTemplate $dashboardTemplate, string $title): AbstractDashboard
     {
         $configuration = ['widgets' => []];
+        $label = $title ?: $dashboardTemplate->getLabel();
+
         foreach ($dashboardTemplate->getWidgets() as $widget) {
             $hash = sha1($widget . '-' . time());
             $configuration['widgets'][$hash] = ['identifier' => $widget, 'config' => json_decode('[]', false)];
@@ -71,11 +83,40 @@ class DashboardRepository
             ->insert(self::TABLE)
             ->values([
                 'identifier' => $identifier,
-                'label' => $dashboardTemplate->getLabel(),
+                'label' => $label,
                 'configuration' => json_encode($configuration)
             ])
             ->execute();
         return $this->getDashboardByIdentifier($identifier);
+    }
+
+    /**
+     * @param string $identifier
+     * @param array $values
+     * @return \Doctrine\DBAL\Driver\Statement|null
+     */
+    public function updateDashboardSettings(string $identifier, array $values)
+    {
+        $checkedValues = $this->checkAllowedFields($values);
+
+        if (empty($checkedValues)) {
+            return null;
+        }
+
+        $queryBuilder = $this->getQueryBuilder();
+        $queryBuilder->update(self::TABLE)
+            ->where(
+                $queryBuilder->expr()->eq(
+                    'identifier',
+                    $queryBuilder->createNamedParameter($identifier)
+                )
+            );
+
+        foreach ($checkedValues as $field => $value) {
+            $queryBuilder->set($field, $value);
+        }
+
+        return $queryBuilder->execute();
     }
 
     /**
@@ -123,11 +164,34 @@ class DashboardRepository
             ->execute();
     }
 
+    /**
+     * @param $values
+     * @return array
+     */
+    protected function checkAllowedFields($values): array
+    {
+        $allowedFields = [];
+        foreach ($values as $field => $value) {
+            if (in_array($field, $this->allowedFields)) {
+                $allowedFields[$field] = $value;
+            }
+        }
+
+        return $allowedFields;
+    }
+
+    /**
+     * @param array $row
+     * @return AbstractDashboard
+     */
     protected function createFromRow(array $row): AbstractDashboard
     {
         return GeneralUtility::makeInstance(DefaultDashboard::class, $row['identifier'], $row['label'], json_decode($row['configuration'], true));
     }
 
+    /**
+     * @return QueryBuilder
+     */
     protected function getQueryBuilder(): QueryBuilder
     {
         return GeneralUtility::makeInstance(ConnectionPool::class)
