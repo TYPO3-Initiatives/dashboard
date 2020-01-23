@@ -22,7 +22,7 @@
 
     <div class="dashboardConfiguration">
         <a href="{configureDashboardUri}" class="js-dashboard-modal" data-modal-identifier="configure" data-modal-title="{f:translate(key: 'dashboard.configure', extensionName: 'dashboard')}" data-button-close-text="{f:translate(key: 'dashboard.add.button.close', extensionName: 'dashboard')}" data-button-ok-text="{f:translate(key: 'dashboard.add.button.ok', extensionName: 'dashboard')}">
-            <core:icon identifier="dashboard-action-configure" alternativeMarkupIdentifier="inline" /><span class="sr-only"><f:translate key="dashboard.add" extensionName="dashboard"/></span>
+            <core:icon identifier="dashboard-action-configure" alternativeMarkupIdentifier="inline" /><span class="sr-only"><f:translate key="dashboard.configure" extensionName="dashboard"/></span>
         </a>
     </div>
 </div>
@@ -115,8 +115,8 @@
 <div id="dashboardModal-add" class="hide">
     <f:form actionUri="{addDashboardUri}" class="dashboardModal-form" target="list_frame">
             <div class="dashboardModal-formInput form-group">
-                <label for="dashboardModal-title">Dashboard Title</label>
-                <f:form.textfield name="dashboard-title"  id="dashboardModal-title" class="form-control" />
+                <label for="dashboardModal-title"><f:translate key="dashboard.title" extensionName="dashboard" /></label>
+                <f:form.textfield name="dashboard-title"  id="dashboardModal-title" class="form-control" required="required" />
             </div>
 
             <div class="dashboardModal-items">
@@ -147,7 +147,7 @@
             </div>
 
             <div class="dashboardModal-submit">
-                <f:form.submit value="Create Dashboard" class="dashboardModal-button"/>
+                <f:form.submit value="{f:translate(key: 'dashboard.create', extensionName: 'dashboard')}" class="dashboardModal-button"/>
             </div>
 
         </f:form>
@@ -158,12 +158,12 @@
         <f:form actionUri="{configureDashboardUri}" class="dashboardModal-form" target="list_frame">
             <f:form.hidden name="currentDashboard" value="{currentDashboard}" />
             <div class="dashboardModal-formInput form-group">
-                <label for="dashboardModal-title">Dashboard Title</label>
-                <f:form.textfield name="dashboard[label]"  id="dashboardModal-title" class="form-control" value="{currentDashboardName}" />
+                <label for="dashboardModal-title"><f:translate key="dashboard.title" extensionName="dashboard" /></label>
+                <f:form.textfield name="dashboard[label]"  id="dashboardModal-title" class="form-control" value="{currentDashboardName}" required="required" />
             </div>
 
             <div class="dashboardModal-submit">
-                <f:form.submit value="Save Dashboard" class="dashboardModal-button"/>
+                <f:form.submit value="{f:translate(key: 'dashboard.save', extensionName: 'dashboard')}" class="dashboardModal-button"/>
             </div>
         </f:form>
     </div>

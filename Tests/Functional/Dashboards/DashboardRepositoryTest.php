@@ -116,12 +116,13 @@ class DashboardRepositoryTest extends FunctionalTestCase
     {
         $this->importDataSet(__DIR__ . '/../Fixtures/sys_dashboards_one_dashboard.xml');
         $dashboardLabel = 'Renamed Dashboard';
+        $dashboardIdentifier = 'a8a9ad23c27c51640738fcae687563243af5a58f';
 
         $this->subject->updateDashboardSettings(
-            'a8a9ad23c27c51640738fcae687563243af5a58f',
+            $dashboardIdentifier,
             ['label' => $dashboardLabel]
         );
-        $dashboard = $this->subject->getDashboardByIdentifier('a8a9ad23c27c51640738fcae687563243af5a58f');
+        $dashboard = $this->subject->getDashboardByIdentifier($dashboardIdentifier);
 
         $this->assertEquals($dashboardLabel, $dashboard->getLabel());
     }

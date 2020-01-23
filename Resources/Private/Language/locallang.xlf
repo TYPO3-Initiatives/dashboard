@@ -51,6 +51,18 @@
 			<trans-unit id="dashboard.add.button.ok" xml:space="preserve">
 				<source>Add Dashboard</source>
 			</trans-unit>
+			<trans-unit id="dashboard.configure" xml:space="preserve">
+				<source>Configure dashboard</source>
+			</trans-unit>
+			<trans-unit id="dashboard.title" xml:space="preserve">
+				<source>Title of dashboard</source>
+			</trans-unit>
+			<trans-unit id="dashboard.create" xml:space="preserve">
+				<source>Create new dashboard</source>
+			</trans-unit>
+			<trans-unit id="dashboard.save" xml:space="preserve">
+				<source>Save dashboard</source>
+			</trans-unit>
 
 			<trans-unit id="widgets.pagesWithoutDescription.title" xml:space="preserve">
 				<source>Pages without a meta description</source>
