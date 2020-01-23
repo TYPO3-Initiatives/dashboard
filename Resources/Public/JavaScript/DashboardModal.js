@@ -1,23 +1,24 @@
 define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity'], function ($, Modal, Severity) {
     'use strict';
 
-    var DashboardSelector = {
-        triggerSelector: '.js-dashboard-addDashboard'
+    var DashboardModal = {
+        triggerSelector: '.js-dashboard-modal'
     };
 
-    DashboardSelector.initialize = function() {
-        $(document).on('click', DashboardSelector.triggerSelector, function(e) {
+    DashboardModal.initialize = function() {
+        $(document).on('click', DashboardModal.triggerSelector, function(e) {
             e.preventDefault();
-            var $element = $(this);
+            var $element = $(this),
+                identifier = $element.data("modal-identifier");
 
             Modal.advanced({
                 type: Modal.types.default,
                 title: $element.data('modal-title'),
-                content: $($('#dashboardSelector').html()),
+                content: $($('#dashboardModal-' + identifier).html()),
                 severity: Severity.notice,
                 size: 'medium',
                 callback: function(currentModal) {
-                    currentModal.find('a.dashboardSelector-dashboard-block').on('click', function(e) {
+                    currentModal.find('a.dashboardModal-' + identifier).on('click', function(e) {
                         currentModal.trigger('modal-dismiss');
                     });
                 },
@@ -28,6 +29,6 @@ define(['jquery', 'TYPO3/CMS/Backend/Modal', 'TYPO3/CMS/Backend/Severity'], func
         });
     };
 
-    DashboardSelector.initialize();
-    return DashboardSelector;
+    DashboardModal.initialize();
+    return DashboardModal;
 });
